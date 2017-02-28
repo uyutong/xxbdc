@@ -377,10 +377,16 @@ function InitIonic($rootScope, $ionicModal, $ionicPopup, $ionicLoading, $http, $
 		v.addEventListener('ended', function() {
 			obj.attr("src", "img/xiaoxue_cut_07.png");
 		}, false);
+		
+		v.addEventListener('error', function(e) {
+			if(e) {
+				v.src = $rootScope.siteUrl + "/upload/exercise/mp3/" + audio;
+				v.play();
+			}
+		}, false)
 		v.play();
 		obj.attr("src", "img/play_gif.gif");
 	}
-
 };
 //#endregion
 
