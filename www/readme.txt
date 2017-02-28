@@ -41,24 +41,3 @@ cordova plugin add cordova-plugin-app-version
 cordova plugin add cordova-plugin-file-opener2
 
 
-
-СѧӢ��ͬ�����ʹ淶�����¿α��˽̰棨���꼶�ϣ���https://item.taobao.com/item.htm?id=545367120038                           
-СѧӢ��ͬ�����ʹ淶�����¿α��˽̰棨���꼶�£���https://item.taobao.com/item.htm?id=545413754786                         
-СѧӢ��ͬ�����ʹ淶�����¿α��˽̰棨���꼶�ϣ���https://item.taobao.com/item.htm?id=545368256111                           
-СѧӢ��ͬ�����ʹ淶�����¿α��˽̰棨���꼶�£���https://item.taobao.com/item.htm?id=545413946666                         
-СѧӢ��ͬ�����ʹ淶�����¿α��˽̰棨���꼶�ϣ���https://item.taobao.com/item.htm?id=545399957499                            
-СѧӢ��ͬ�����ʹ淶�����¿α��˽̰棨���꼶�£���https://item.taobao.com/item.htm?id=545368564103                                   
-СѧӢ��ͬ�����ʹ淶�����¿α��˽̰棨���꼶�ϣ���https://item.taobao.com/item.htm?id=545431059513                               
-СѧӢ��ͬ�����ʹ淶�����¿α��˽̰棨���꼶�£���https://item.taobao.com/item.htm?id=545400365286       
-
-
-
-
-���� https://item.taobao.com/item.htm?id=545405570153                    
-���� https://item.taobao.com/item.htm?id=545424347226
-���� https://item.taobao.com/item.htm?id=545393585518                         
-���� https://item.taobao.com/item.htm?id=545393749318
-���� https://item.taobao.com/item.htm?id=545393713488
-���� https://item.taobao.com/item.htm?id=545394101029                       
-���� https://item.taobao.com/item.htm?id=545407690977
-���� https://item.taobao.com/item.htm?id=545424687376
