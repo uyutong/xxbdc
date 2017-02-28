@@ -1,0 +1,48 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <script type="text/javascript" src="admin/js/jquery.bundle.js"></script>
+    <script type="text/javascript">
+        function ajaxTest()
+        {
+            $.ajax({
+                type: "POST",
+                url: "/index.php/api/versions",
+                data: JSON.stringify({ platform: "ios" }),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                beforeSend: function (xhr) {
+                    // //发送ajax请求之前向http的head里面加入验证信息
+                    xhr.setRequestHeader("token", "AAAABBBCCC"); // 请求发起前在头部附加token
+                },
+                success: function (data, status) {
+                    if (data.statuscode == "401") {
+                        alert(data.msg);
+                    }
+                    else
+                    {
+                        alert(JSON.stringify(data))
+                    }
+                },
+                //error: function (XMLHttpRequest, textStatus, errorThrown) {
+                // alert(XMLHttpRequest.status);
+                // alert(XMLHttpRequest.readyState);
+                // alert(textStatus);
+                //},
+                complete: function () {
+                }
+            });
+        }
+    </script>
+</head>
+<body>
+    <form method="post" enctype="multipart/form-data" action="/index.php/api/stt" target="_blank">
+        <p>audio:<input type="file" name="audio" size="20" />* 只支持 wav 单声道 音频文件</p>
+        <p>text:<input type="text" name="text" /></p>
+        <p><input type="submit" /></p>
+    </form>
+
+    <input type="button" onclick="ajaxTest()" />
+</body>
+</html>

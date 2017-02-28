@@ -1,0 +1,14 @@
+﻿<div class="bar bar-header dy-word-common-top">
+	<span class="s1">APP下载</span><br>
+	<img class="s3" src="img/arrow_right.png" ng-click="goBack()">
+</div>
+
+<ion-content class="has-header backgroud-light">
+	<div class="list">
+		<a class="item item-avatar" ng-click="downloadApk($index)" ng-repeat="app in apps">
+			<img src="{{siteUrl}}/upload/book/{{app.photo}}" style="border-radius: 2px;">
+			<h2>{{app.grade}}{{app.name}}{{app.semester}}</h2>
+			<p>{{app.publisher}}</p>
+		</a>
+	</div>
+</ion-content>

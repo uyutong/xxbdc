@@ -1,0 +1,32 @@
+﻿<ion-view class="background-yx">
+
+	<div class="yx-home-top">
+		<span class="s1" ng-click="gameTop10()">游戏排名&nbsp;&nbsp;&nbsp;{{sort_order}}</span>
+		<span class="s2" ng-click="scoreInfo()">积分:{{game_completed_total}}</span>
+	</div>
+
+	<div class="yx-home-feichuan">
+		<img src="img/feichuan_03.png" />
+	</div>
+
+	<div class="yx-home-unit">
+		<span class="out-div" ng-click="startGame(unit.id,unit.game_completed_total,$index)" ng-repeat="unit in units">
+	    	<span class="in1">
+	    		Unit
+	    	</span>
+		<br>
+		<span class="in2">
+	    		{{$index+1}}
+	    </span>
+		<br>
+		
+		<span class="in3">
+	    		{{unit.game_completed_total}}/{{unit.word_total}}
+	    </span>
+		<span class="zhezhao" ng-if="$index>0&&!userinfo.active"></span>
+		<img class="suo" ng-if="$index>0&&!userinfo.active" src="img/lock_03.png">
+		</span>
+
+	</div>
+
+</ion-view>

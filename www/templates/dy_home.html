@@ -1,0 +1,39 @@
+﻿<ion-view class="backgroud-light">
+
+	<div class="dy-home-top">
+		<span class="s1" ng-show="!ifsearch">{{mybook.grade}}英语 {{mybook.semester}}</span><br>
+		<span class="s2" ng-show="!ifsearch">{{mybook.publisher}}</span>
+		<span class="s3" ng-show="!ifsearch" ng-click="ifsearch=!ifsearch"><img src="img/xiaoxue_cut_34.png" >词典</span>
+		<img width="40px" style="position: absolute; left:20px;top:5px;" src="img/saomiao_03.png" ng-click="scancode()" alt="扫一下" />
+		<span width="40px" style="position: absolute; left:20px;bottom:5px;font-size:14px;color: white">扫一下</span>
+		<input ng-show="ifsearch" type="text" maxlength="20" id="word_seach" style="">
+		<span ng-show="ifsearch" class="search" ng-click="wordSearch()">搜&nbsp;&nbsp;索</span>
+	</div>
+
+	<div class="text-center" style="margin-top: 10px;"> <span>本书共{{units.length}}个单元，词汇{{wordSum}}个，已学{{learned}}个</span></div>
+
+	<div class="dy-home-list">
+
+		<div class="out_div"  ng-repeat="unit in units">
+
+			<span class="sp dy-home-sp-color1" ng-click="unitSelect(unit.id,$index)">
+				<span class="sub_sp1" style="overflow:hidden;display: inline-block;height: 35px;">{{unit.name}}</span>
+			<span class="sub_sp2">{{unit.word_completed_total}}/{{unit.word_total}}</span>
+			</span>
+			<img class="dy-home-img-boder1" src="upload/unit/{{unit.photo}}" />
+
+			<span ng-if="$index>0&&!userinfo.active"
+				 style="position: absolute;
+				 width:100%;left:0%;top:0%;
+				 border:30px solid rgba(0, 0, 0, .45);
+				 border-radius:40px;
+				 margin-top: 5px;" ng-click="unitSelect(unit.id,$index)">
+		    </span>
+		    
+		    <img ng-if="$index>0&&!userinfo.active" style="position: absolute;
+				 width:25px;height: 25px; left:50%;top:50%;transform: translate(-50%, -50%);" src="img/lock_03.png">
+		</div>
+	</div>
+
+
+</ion-view>

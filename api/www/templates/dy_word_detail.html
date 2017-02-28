@@ -1,0 +1,22 @@
+﻿<ion-view class="backgroud-tiaowen">
+    <!--<div class="dy-word-common-top">
+        <span class="s1">小学英语同步背单词</span>
+    </div>-->
+    <div class="dy-word-test-explain">
+        <span class="s1" >{{word.en}}</span><br>
+        <span class="s2">{{word.zh}}</span><br>
+    </div>
+
+    <div class="dy-word-test-audio">
+        <span>男声&nbsp;&nbsp;</span><img id="detail_paly_1" src="img/xiaoxue_cut_07.png" ng-click="playDetailWord1(word.audio_1)" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <span>女声&nbsp;&nbsp;</span><img id="detail_paly_0" src="img/xiaoxue_cut_07.png" ng-click="playDetailWord0(word.audio_0)" />
+        <audio id="myaudio"></audio>
+    </div>
+
+    <div style="text-align: center;margin-top: 40px;">
+        <div style="font-size: 20px;margin: 10px;">手势语学习</div>
+        <div class="padding video-box">
+            <video type="video/mp4" poster="img/transparent.png" webkit-playsinline style="width: 100%; height: 100%;  background-image:url({{$root.siteUrl}}/upload/word/img/{{word.photo}});"></video>
+        </div>
+    </div>
+</ion-view>

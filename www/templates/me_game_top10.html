@@ -1,0 +1,46 @@
+﻿<ion-view class="background-common">
+
+	<div class="dy-word-common-top">
+		<span class="s1">游戏排名</span><br>
+		<img class="s3" src="img/arrow_right.png" ng-click="goBack()">
+
+	</div>
+
+	<div class="me-home-list">
+
+		<div class="row row-center" ng-click="">
+
+			<span class="col col-50">昵称</span>
+
+			<span class="col col-25" style="text-align: center;">学习词汇</span>
+
+			<span class="col col-25" style="text-align: center;">排名</span>
+
+		</div>
+
+		<div class="row row-center" style="padding-top:5px;margin-top:0px;border-bottom: 1px dotted wheat;" ng-click="" ng-repeat="order in order_list">
+
+			<span class="col-10"><img src="{{order.headimgurl}}" width="34px"></span>
+
+			<span class="col-40" >&nbsp;&nbsp;{{order.nickname}}</span>
+
+			<span class="col-25" style="text-align: center;">{{order.game_completed_total}}</span>
+
+			<span ng-if="$index==0" class="col-25" style="text-align: center;">
+				<img height="30px" style="display: inline-block;vertical-align: middle;" src="img/top1.png" >
+			</span>
+			<span ng-if="$index==1" class="col-25" style="text-align: center;">
+				<img height="30px" style="display: inline-block;vertical-align: middle;" src="img/top2.png" >
+			</span>
+			<span ng-if="$index==2" class="col-25" style="text-align: center;">
+				<img height="30px" style="display: inline-block;vertical-align: middle;" src="img/top3.png" >
+			</span>
+			<span ng-if="$index>2" class="col-25" style="text-align: center;padding-right: 10px;">	
+			    {{$index+1}}
+			</span>
+
+		</div>
+
+	</div>
+
+</ion-view>

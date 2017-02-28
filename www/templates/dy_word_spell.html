@@ -1,0 +1,50 @@
+﻿<div class="bar bar-header dy-word-common-top">
+	<span class="s1">趣味练习</span><br>
+	<span class="s2"> {{index+1}}/{{words.length}}</span>
+	<img class="s3" src="img/arrow_right.png" ng-click="goBack()">
+	<span class="s4" ng-click="goWordList()">单词列表</span>
+</div>
+
+
+<ion-content class="has-header backgroud-light">
+	<div style="margin-bottom: 100px;">
+
+		<div style="background: white;padding-top:5px;padding-bottom: 10px;margin-top: 10px;">
+			<div class="dy-word-test-explain">
+				<span id={{"spellw_"+$index}} ng-class="{'s1':word.en.length<10,'smaller-font':word.en.length>=10}" ng-repeat="item in questions track by $index">
+			<span  class="sub" ng-if="item=='#'">&#12288;</span>
+				<span ng-if="item==' '&& word.en.length>=10"><br></span>
+				<span ng-if="item==' '&& word.en.length<10">&#12288;</span>
+				<span ng-if="item!='#'&&item!=' '">{{item}}</span>
+				</span>
+				<br>
+				<span class="s2">{{word.zh}}</span><br>
+				<img class="star_img" src="img/star_1.png" ng-if="scoreobj.ifget" ng-repeat="scoreobj in scoreObjArr">
+				<img class="star_img" src="img/star_2.png" ng-if="!scoreobj.ifget" ng-repeat="scoreobj in scoreObjArr">
+			</div>
+
+			<div class="dy-word-spell-option">
+				<button ng-repeat="item in letters"  ng-click="chooseAnswer({{$index}})">{{item}}</button>
+			</div>
+			<div class="dy-word-spell-reminder">
+				<img src="img/xiaoxue_cut_64.png" ng-click="showWord()" /><span ng-show="word_show">{{word.en}}</span>
+			</div>
+
+			<div class="dy-word-test-radio">
+				<img src="img/xiaoxue_cut_07.png" id="spell_play" ng-click="playSpellWord(word.audio_0)"><br>
+			</div>
+
+		</div>
+
+			<div style="height: 8px;"></div>
+
+		<div class="dy-word-test2-title" style="background: white;text-align: left;padding: 10px;color: darkgrey;">
+			<div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;单词一次拼写正确得三星，拼写错误一次得两星，拼写错误两次及以上得一星。</div>
+		</div>
+
+		<!--<div class="text-center" style="margin-top: 30px;">
+		<button style="background:white;min-width: 100px;height: 35px;border-radius: 5px;color: grey;border-style: none; //无边框outline: none;" ng-click="reSpell()">清&nbsp;&nbsp;空</button>
+	</div>-->
+	</div>
+</ion-content>
+<div class="dy-word-test-bottom" ng-click="nextTest()">继续</div>

@@ -1,0 +1,49 @@
+﻿<div class="bar bar-header dy-word-common-top3">
+	<span class="s1_3" style="color: green;" ng-if="type=='0'">课前预习</span>
+	<span class="s1_3" style="color: green;" ng-if="type=='1'">课后复习</span>
+	<span class="s1_1">{{book.grade}}{{book.semester}}</span>
+	<span class="s1_2">{{book.publisher}}</span>
+</div>
+
+<ion-content class="has-header backgroud-light">
+	<div>
+		<div style="padding: 5px 10px 5px 10px;font-size: 17px;background: white;">
+			{{unit.name}}
+		</div>
+		<div style="background: white;border-radius:5px;margin: 8px 10px 4px 10px;padding: 5px;" ng-repeat="word in word_list">
+
+			<div class="dy-word-test-explain cow" style="margin-top: 0px;text-align: left;" ng-click="ifShow($index)">
+				<span class="s1">{{word.en}}</span>
+				<span class="s2">{{word.zh}}</span>
+			</div>
+
+			<div ng-class="{'h0':!word.show}">
+
+				<div class="dy-word-test-audio" style="text-align: left;">
+					<span>男</span><img id="detail_paly_1_{{$index}}" src="img/xiaoxue_cut_07.png" style="width: 25px;" ng-click="playDetailWord1(word.audio_1,{{$index}})" />&nbsp;&nbsp;
+					<span>女</span><img id="detail_paly_0_{{$index}}" src="img/xiaoxue_cut_07.png" style="width: 25px;" ng-click="playDetailWord0(word.audio_0,{{$index}})" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<audio id="myaudio"></audio>
+				</div>
+
+				<div style="text-align: center;">
+					<img width="240" ng-click="ifShow($index)" src="{{siteUrl}}/upload/word/img/{{word.photo}}" />
+				</div>
+
+				<div style="text-align: center;margin-top: 10px;" ng-show="word.video">
+					<button class="bt_ssyxx" ng-click="word.showvideo=undefined?false:!word.showvideo">手势语学习</button>
+
+					<button class="qwlx" ng-show="type=='1'" ng-click="doExercise(word.en)">趣味练习</button>
+
+					<div ng-show="word.showvideo" class="padding video-box{{$index}}" style="width: 90%; background: black;border-radius:5px ;margin: auto;overflow: hidden;">
+						<video type="video/mp4" poster="img/transparent.png" webkit-playsinline style="width: 100%; height: 100%;  background-image:url({{$root.siteUrl}}/upload/word/img/{{word.photo}});overflow: hidden;"></video>
+					</div>
+				</div>
+
+				<!--<div class="text-center" style="margin-top: 10px;margin-bottom:10px;" ng-if="type=='1'">
+				<button style="background:#ffc343;min-width: 100px;height: 35px;border-radius: 5px;color:white;border-style: none; //无边框outline: none;" ng-click="doExercise(word.en)">趣味练习</button>
+			</div>-->
+
+			</div>
+		</div>
+	</div>
+</ion-content>

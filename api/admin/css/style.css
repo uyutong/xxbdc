@@ -1,0 +1,477 @@
+body, h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+  font-family: "Helvetica Neue","Luxi Sans","DejaVu Sans",Tahoma,"Hiragino Sans GB",STHeiti,"Microsoft YaHei";
+  
+}
+body ,input{
+  font-size: 12px;
+  font-weight:normal;
+  	padding:0;
+	margin:0;
+}
+
+ul,dl{margin:0;padding:0;list-style-type:none}
+li,dd{margin:0;padding:0;list-style-type:none}
+a:hover{color:#00a2ca;text-decoration:none}
+a{color:#444;text-decoration:none}
+img{margin:0;padding:0;border:0}
+a,area{blr:expression(this.onFocus=this.blur())}
+a:focus{-moz-outline-style:none}
+a:focus{outline:0}
+a img{border:0}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  background-color: transparent;
+  width: 100%;
+}
+.table {
+  background: #fff none repeat scroll 0 0;
+  border: 1px solid #e1e6eb;
+  font-size: 12px;
+  margin-top: 8px;
+}
+.table thead tr th {
+  background-color: #F5F5F5;
+
+  color: #000;
+  font-weight: normal;
+  padding: 8px;
+
+}
+.table tbody tr td {
+  border-bottom: 1px solid #e1e6eb;
+  border-top: 0 none;
+  padding: 10px 8px;
+  vertical-align: middle;
+}
+.table tbody tr:hover{
+	background:#F5F5F5;
+}
+.table tbody tr td.set {
+	
+	text-align:center;
+}
+.table tbody tr td.set i{
+	padding:0 5px;
+	
+}
+.table tbody tr td.set i.edit{
+	
+	font-size:14px;
+}
+
+.calendar{
+float:right;
+width:45%;	
+}
+.calendar table{
+
+	border:1px solid #e1e6eb;
+}
+.calendar table th{
+  background: #f5f5f5 none repeat scroll 0 0;
+  height: 27px;
+  line-height: 27px;
+  	font-weight:normal;
+
+}
+.calendar table tr td {
+  background: #fff none repeat scroll 0 0;
+  font-size: 12px;
+  height: 34px;
+  padding:0;
+  text-align: center;
+  	border:1px solid #e1e6eb;
+}
+.calendar table tr td strong{
+	display:block;
+	background:#293038;
+	height:34px;
+	line-height:34px;
+	font-weight:normal;
+	color:#FFF;
+	
+}
+
+
+ .wp75 {
+  width: 75%;
+  text-align:left;
+  
+}
+ .wp60 {
+  width: 60%;
+}
+.login {
+  border: 1px solid #ccc;
+  box-shadow: 0 3px 3px #ccc;
+  margin: 100px auto;
+  padding: 50px;
+  width: 330px;
+}
+.login ul li{
+	margin-bottom:15px;
+}
+.login  label{
+padding:0 10px;	
+width:90px;
+display:inline-block;
+}
+
+.login input {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  height: 25px;
+  padding-left: 10px;
+  width: 200px;
+}
+.login input[type="submit"]{
+	width:100px;
+	padding:0;
+	border:none;
+	height:28px;
+	border-radius:5px;
+	display:block;
+	background:#00A2CA;
+	cursor:pointer;
+
+}
+
+.topbar {
+  background: #09c none repeat scroll 0 0;
+  height: 50px;
+  position: fixed;
+  width: 100%;
+  z-index: 101;
+}
+.topbar a{float:left;color:#FFF;}
+.topbar .logo{
+display:inline-block;
+height:50px;
+width:50px;
+line-height:50px;
+text-align:center;
+background:#0087B4;
+	
+}
+.topbar .logo .iconfont{
+font-size:28px;
+color:#FFF;
+}
+
+.topbar .name{
+	border-right:1px solid #0087B4;
+	display:inline-block;
+	height:50px;
+width:129px;
+line-height:50px;
+text-align:center;
+}
+.topbar .user{
+float:right;
+height:50px;
+padding:0 15px;
+line-height:50px;	
+font-size:14px;
+}
+.topbar .login-out{
+	float:right;
+	display:inline-block;
+height:50px;
+width:50px;
+line-height:50px;
+text-align:center;
+
+}
+
+
+.view-body {
+ 
+  bottom: 0;
+  position: absolute;
+  top: 50px;
+  width: 100%;
+  z-index: 100;
+}
+.sidebar {
+  background-color: #293038;
+  bottom: 0;
+  overflow-x: hidden;
+  position: fixed;
+  top: 50px;
+  width: 50px;
+  z-index: 102;
+}
+.sidebar .menus {
+  background: #37424f none repeat scroll 0 0;
+  height: 20px;
+  line-height: 20px;
+  text-align: center;
+}
+.sidebar ul li{
+	height:
+	
+}
+.sidebar ul li a {
+  color: #fff;
+  display: block;
+  height: 50px;
+  line-height: 50px;
+
+  text-align: center;
+  transition-duration: 50ms;
+  transition-timing-function: cubic-bezier(0.17, 0.5, 0.44, 0.36);
+
+}
+.sidebar ul li a:hover,.sidebar ul li a.on{
+	
+	background:#37424F;
+}
+.sidebar ul li a.on i.iconfont
+{
+	color:#FFF;
+}
+.sidebar ul li a i.iconfont{
+		font-size:30px;
+
+		color:#666;
+		
+}
+.sidebar ul li a:hover i.iconfont{
+	color:#FFF;
+}
+
+
+.view-body .contents {
+  bottom: 0;
+  left: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  position: absolute;
+  right: 0;
+  top: 0;
+  left:50px;
+  transition: all 0.2s ease 0s;
+  width: auto;
+  padding:10px;
+}
+
+.view-body  .contents dl{
+ width:50%;
+ float:left; 
+border:1px solid #e1e6eb
+}
+.view-body  .contents dl dt{
+height:35px;
+line-height:35px;
+padding-left:10px;
+background:#F5F5F5;
+}
+.view-body  .contents dl dd{
+padding-left:10px;	
+height:35px;
+line-height:35px;
+}
+.contents h1 {
+  background: #f5f5f5 none repeat scroll 0 0;
+  border-left: 1px solid #0099cc;
+  font-size: 14px;
+  font-weight: normal;
+  height: 30px;
+  line-height: 30px;
+  padding: 10px;
+}
+.contents h1 form{
+	float:right;
+}
+.contents h1 form input[type="submit"]{
+margin-left:0;
+height:28px;
+}
+.contents h1 form select{
+width:105px;
+	
+}
+.contents h1 a{
+	color:#0099CC;
+}
+
+
+.contents  .section{
+
+	
+}
+.contents  .article  .table  input{
+ margin-left:0;
+}
+.contents  .article  .table  select{
+	width:100px;
+}
+.create-cate, .create-article{
+ margin:20px 0;	
+}
+.create-cate li{
+height:60px;
+line-height:60px;	
+}
+.create-article li{
+	margin-bottom:20px;
+}
+label {
+  display: block;
+  float: left;
+  text-align: center;
+  width: 80px;
+}
+ input[type="text"], select , textarea ,.create-cate  input[type="password"]{
+  border: 1px solid #cbcbcb;
+  border-radius: 3px;
+  box-shadow: 0 2px 3px #eee;
+  height: 25px;
+  padding-left: 10px;
+  width: 200px;
+}
+option{
+	 height: 25px;
+	 line-height:25px;
+}
+
+
+input[type="submit"],input[type="button"] {
+  background: #0099cc;
+  border: medium none;
+  border-radius: 5px;
+  color: #fff;
+  height: 30px;
+  margin-left: 90px;
+  width: 80px;
+  cursor:pointer;
+  transition:all 0.8s ease 0s;
+}
+input.on[type="submit"] {
+  background: #ccc none repeat scroll 0 0;
+  color: #666;
+  cursor:not-allowed;
+  transition:all 0.8s ease 0s;
+}
+
+.create-article  input[type="text"] {
+	  width: 450px;
+}
+.create-article textarea{
+ height:180px;
+ width:970px; 
+ padding:5px;
+	
+}
+
+#editor{
+margin-left:78px;	
+}
+
+
+
+.formTips-mod {
+margin:50px auto;
+width:380px;
+}
+.formTips-mod  h3{
+	color:#f00;	
+}
+.formTips-mod  h3,.formTips-mod  p{
+	text-align:center;
+	margin:15px;
+	font-size:14px;
+	font-weight:normal;
+
+}
+
+ul.pagination {
+  display: inline-block;
+  height: 30px;
+  line-height: 30px;
+  text-align: center;
+  width: 100%;
+}
+ul.pagination li{
+		display:inline-block;
+}
+ul.pagination li a{
+	display:inline-block;
+	height:30px;
+	width:30px;
+	
+}
+ul.pagination li.active{
+	background:#0099CC;
+	border-radius:3px;
+}
+ul.pagination li.active a{
+	
+color:#FFF;
+} 
+
+.iconfont{
+    font-family:"Ionicons" !important;
+    font-size:16px;font-style:normal;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-stroke-width: 0.2px;
+    -moz-osx-font-smoothing: grayscale;
+	}
+
+.error{text-align:center; color:red; margin-bottom:20px;}
+.error2{margin-left:20px; color:red; margin-top:20px;}
+.dropped{width:460px;}
+
+.editor{margin-left:78px; max-width:980px; min-height:300px;}
+
+#pic_box .dropped{width:100px; float:left;}
+#pic_box .dropper-dropzone{padding:38px 25px;}
+
+.pic_item{width:100px; height:100px; float:left; position:relative; margin-left:10px;}
+.pic_item img{width:100px; height:100px;}
+.pic_item a{position:absolute; right:0px; bottom:0px; background-color:#000; color:#FFF; padding:0 2px;}
+
+#audio_box .dropped{width:60px; float:left;}
+#audio_box .dropper-dropzone{padding:20px;}
+
+.mark-link{ color:#00a2ca;}
+
+.sortable-placeholder {
+    opacity: 0.3;
+  }
+
+.ui-autocomplete{z-index:100; width:296px; overflow:hidden; border:1px solid #CCC; background-color:#FFF;}
+.ui-menu-item-wrapper{height:72px; line-height:24px; padding:0px 5px; cursor:pointer; font-size:14px; overflow:hidden;}
+.ui-state-active{background-color:#09c; color:#FFF;}
+.ui-menu-item{border-bottom:1px solid #eee;}
+.ui-menu-item i{color:#999; font-size:12px;}
+
+
+.ui-datepicker{border:1px solid #CCC; background-color:#FFF;}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

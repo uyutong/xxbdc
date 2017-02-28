@@ -1,0 +1,20 @@
+﻿<ion-view class="background-light">
+
+	<div class="text-center">
+		<img style="width: 85%; border-radius: 5px;margin: 5%;" src="img/book_pic.jpg" />
+		<!--		<div style="margin-bottom: 5px;font-size: 18px;font-weight: bold;">小学英语 同步背单词</div>
+-->
+    
+
+		<div style="position: fixed;bottom: 30px;left: 0px;width: 100%;text-align: center;">
+			<div style="margin-bottom: 5px;font-size: 21px;font-weight: bold;">{{bookName}}</div>
+			<div style="margin-bottom: 5px;font-size: 18px;">{{bookPublish}}</div>
+			<button ng-if="!iflogin" style="background-color:#3eb94e;min-width: 120px;height: 40px;border-radius: 5px;color: white;border-style: none; //无边框outline: none;" ng-click="wxLogin()">微信登录
+            </button>
+		</div>
+		<!--<div class="text-center" style="width:100%;position: fixed;left: 0px;bottom: 5px;height: 40px;">
+			<img style="width: 40px;display:inline-block;vertical-align:middle;" src="img/youyu_logo.png" />
+			<span>移动互联 趣学英语</span>
+		</div>-->
+	</div>
+</ion-view>

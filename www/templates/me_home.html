@@ -1,0 +1,82 @@
+﻿<ion-view class="backgroud-light">
+
+	<ion-scroll style="width:100%; height: 95%">
+		<div>
+
+			<div class="me-home-top">
+				<span class="s1" ng-click="showPointTips()">积分:{{point}}</span>
+				<img src="{{userinfo.headimgurl}}" />
+				<span class="s2">{{userinfo.nickname}}</span>
+			</div>
+
+
+			<div class="me-home-list">
+
+				<div class="out row row-center" ng-click="appVcode()">
+
+					<span class="col col-60">APP激活</span>
+
+					<span class="col col-30" style="text-align: right;"></span>
+
+					<div class="col col-10" style="text-align: right;"><img height="25px" style="display: inline-block;vertical-align: middle;" src="img/arrow11_04.png"></div>
+
+				</div>
+
+				<div class="out row row-center" ng-click="openTaobao('https://item.taobao.com/item.htm?id=545367120038')">
+					<span class="col col-60"> 烤鱿鱼 图书专营店 </span>
+
+					<span class="col col-30" style="text-align: right;font-size:10px;color: gray;">淘宝店铺号4625947</span>
+
+					<div class="col col-10" style="text-align: right;"><img height="25px" style="display: inline-block;vertical-align: middle;" src="img/arrow11_04.png"></div>
+				</div>
+
+				<div class="out row row-center" ng-click="moreApp()">
+
+					<span class="col col-60">相关APP下载</span>
+
+					<span class="col col-30" style="text-align: right;"></span>
+
+					<div class="col col-10" style="text-align: right;"><img height="25px" style="display: inline-block;vertical-align: middle;" src="img/arrow11_04.png"></div>
+
+				</div>
+				
+				
+				<div class="out row row-center" ng-click="wechatShareApk()">
+					
+					<span class="col col-60">分享给好友</span>
+					
+					<span class="col col-30" style="text-align: right;"></span>
+					
+					<div class="col col-10" style="text-align: right;"><img height="25px" style="display: inline-block;vertical-align: middle;" src="img/arrow11_04.png"></div>
+				
+				</div>
+
+				<div class="out row row-center" ng-click="aboutUs()">
+
+					<span class="col col-60">关于我们 </span>
+
+					<span class="col col-30" style="text-align: right;"></span>
+
+					<div class="col col-10" style="text-align: right;"><img height="25px" style="display: inline-block;vertical-align: middle;" src="img/arrow11_04.png"></div>
+
+				</div>
+
+				<div class="text-center" style="margin-top:20px ;" on-hold="saveVcode()" ng-click="wechatShare()">
+					<img width="100px" src="img/gongzhonghao.jpg">
+				</div>
+				<div class="text-center">
+					分享官方微信公众号‘‘新课标同步背单词’’
+				</div>
+			</div>
+
+			<div class="text-center" style="margin-top: 50px;margin-bottom:60px;">
+				<button style="background:none;min-width: 100px;height: 35px;border-radius: 5px;color: gray;border-style: none; //无边框outline: none;" ng-click="logout()">注&nbsp;&nbsp;&nbsp;&nbsp;销</button>
+			</div>
+			
+			<div class="text-center" style="margin-bottom: 30px;">版本  {{app.version}}</div>
+			
+		</div>
+
+	</ion-scroll>
+
+</ion-view>

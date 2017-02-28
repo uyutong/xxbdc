@@ -1,0 +1,18 @@
+﻿<ion-content class="backgroud-light">
+
+	<div class="book-select-top">
+		<div class="d1">The book you learn?</div>
+		<div class="d2">你学的哪本书</div>
+	</div>
+	
+	<div style="text-align: center;">
+	<div class="book-list">
+
+		<div class="book-col" ng-repeat="book in books" ng-click="goHome(book)"><img src="{{siteUrl}}/upload/book/{{book.photo}}">
+			<p>{{book.grade}} {{book.semester}} {{book.publisher}} </p>
+		</div>
+	
+	</div>
+	
+	</div>
+</ion-content>

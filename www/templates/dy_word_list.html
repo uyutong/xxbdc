@@ -1,0 +1,93 @@
+﻿<div class="bar bar-header dy-word-common-top">
+	<span class="s1">Unit {{index}}</span><br>
+	<span class="s4" ng-click="showCup()">奖杯攻略</span>
+	<img class="s3" src="img/arrow_right.png" ng-click="goDyHome()">
+</div>
+
+<ion-content class="has-header backgroud-light">
+
+	<div class="dy-word-list-list" style="margin-top:40px;margin-bottom:100px;">
+		<!--        <div ng-class="{'dc-item':true,'dc-item-round':true,'dc-item-correct':op.k==cs.key[0] && cs.submited,'dc-item-error':op.k!=cs.key[0]&&op.k==cs.myanswer&& cs.submited}" ng-click="chooseAnswer(op.k);">
+-->
+		<div ng-class="{'out_div':true, 'row':true, 'row-center':true,'activated':$index==is_reading_num}" ng-click="goTest($index)" ng-repeat="word in words">
+			<div class="col col-80">{{ word.en}}&nbsp;&nbsp;&nbsp;<span style="display: inline-block;color: gray;font-size:15px;">{{word.zh}}</span></div>
+			<div class="col col-20 " style="text-align: center;">
+				<!--<img src="img/cup_isdo.png" ng-show="word.if_do">
+				<img src="img/cup_undo.png" ng-show="!word.if_do">
+				<img src="img/cup_isfinish.png" ng-show="word.if_finish">
+				<img src="img/cup_unfinish.png" ng-show="!word.if_finish">-->
+				<img src="img/trophy-gold.png" ng-show="word.if_do">
+				<img src="img/trophy-gray.png" ng-show="!word.if_do">
+				<img src="img/trophy-pattern.png" ng-show="word.if_finish">
+				<img src="img/trophy-gray.png" ng-show="!word.if_finish">
+			</div>
+			<!--			<img class="level" src="img/xiaoxue_cut_19.png" ng-show="word.task1==1&&word.task2==1&&word.task3==1">
+--></div>
+		<!--<div class="out_div row row-center" ng-click="goTest()">
+			<div class="col col-80">hello 你好好哈哈 hello </div>
+			<div class="col col-20 " style="text-align: center;">
+				<img src="img/xiaoxue_cut_12.png">
+				<img src="img/xiaoxue_cut_12.png">
+				<img src="img/xiaoxue_cut_14.png">
+			</div>
+			<img class="level" src="img/xiaoxue_cut_19.png" ng-show="word.task1==1&&word.task2==1&&word.task3==1">
+		</div>-->
+
+		<!--<div class="out_div row row-center" ng-click="goTest()">
+			<div class="col col-80">hello 你好好哈哈 hello </div>
+			<div class="col col-20 " style="text-align: center;">
+				<img src="img/xiaoxue_cut_14.png">
+				<img src="img/xiaoxue_cut_14.png">
+				<img src="img/xiaoxue_cut_14.png">
+			</div>
+			<img class="record" src="img/word_record.png">
+		</div>-->
+	</div>
+
+</ion-content>
+
+<img ng-show="recording" style="position: absolute;top:50%;left: 50%;transform: translate(-50%, -50%);" width="70px" src="img/record_gif.gif">
+
+<img ng-show="playing" style="position: absolute;top:50%;left: 50%;transform: translate(-50%, -50%);" width="70px" src="img/play_gif.gif">
+
+<div class="row row-center" style="position: fixed;top:50px;left:0px;height:30px;background:white ;padding-left: 0px;padding-right: 0px;">
+	<div ng-class="{'col':true,'text-center':true,'word_list_tab':true,'activ':tab_num==-1}" ng-click="wordSelect(-1)">全部  {{word_list.length}}</div>
+	<div ng-class="{'col':true,'text-center':true,'word_list_tab':true,'activ':tab_num==0}" ng-click="wordSelect(0)">零奖杯 {{word_list_0.length}}</div>
+	<div ng-class="{'col':true,'text-center':true,'word_list_tab':true,'activ':tab_num==1}" ng-click="wordSelect(1)">单奖杯 {{word_list_1.length}}</div>
+	<div ng-class="{'col':true,'text-center':true,'word_list_tab':true,'activ':tab_num==2}" ng-click="wordSelect(2)">双奖杯 {{word_list_2.length}}</div>
+<!--	<div ng-class="{'col':true,'text-center':true,'word_list_tab':true}" ng-click="showCup()">奖杯攻略</div>
+--></div>
+
+<div class="row row-center text-center" style="position: fixed;bottom: 0px;background:#0c7cd6;height:45px;color: white;font-size: 18px;">
+	<div class="col" ng-click="followAudio()">{{read_button_name}}</div>
+	<div class="col" ng-click="playFollowAudio()" ng-if="is_canplay">{{play_button_name}}</div>
+	<div class="col" ng-click="goTest(0)">开始学习</div>
+</div>
+
+
+<div ng-if="isshow_cup" style="background:#000000;width: 100%;height: 100%;position: relative;">
+
+	<div style="position: absolute;top: 20%;left: 20%;width: 60%;background:white;border:2px solid gainsboro; border-radius:5px ;">
+
+		<div class="text-center" style="height: 40px;line-height: 40px;font-size: 18px;color: goldenrod;">
+			奖杯获取攻略
+		</div>
+		<div style="padding: 5px;border:1px dotted gray;border-left: none;border-right: none;">
+			<div class="row row-center" style="color: black;font-size: 16px;">
+				<img src="img/trophy-gold.gif" width="30px">功成杯
+			</div>
+			<div>单词学习的每个环节必须都学习过并且至少获得一颗星。</div>
+		</div>
+
+		<div style="padding: 5px;border:1px dotted gray;border-left: none;border-right: none;margin-top: 5px;">
+			<div class="row row-center" style="color: black;font-size: 16px;">
+				<img src="img/trophy-pattern.gif" width="30px">名就杯<br>
+			</div>
+			<div>单词学习的每个环节必须都学习过并且都获得三星。</div>
+		</div>
+		<div class="text-center">
+			<button style="background:none;min-width: 100px;height: 35px;border-radius: 5px;color: gray;border-style: none; //无边框outline: none;" ng-click="closeShowCup()">关&nbsp;&nbsp;&nbsp;&nbsp;闭</button>
+		</div>
+
+	</div>
+</div>
