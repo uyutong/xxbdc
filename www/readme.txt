@@ -1,16 +1,16 @@
-Î¢ĞÅ²å¼ş
-ÍøÖ·£ºhttps://github.com/xu-li/cordova-plugin-wechat
-°²×°£ºcordova plugin add https://github.com/xu-li/cordova-plugin-wechat --variable wechatappid=YOUR_WECHAT_APPID
+Î¢ï¿½Å²ï¿½ï¿½
+ï¿½ï¿½Ö·ï¿½ï¿½https://github.com/xu-li/cordova-plugin-wechat
+ï¿½ï¿½×°ï¿½ï¿½cordova plugin add https://github.com/xu-li/cordova-plugin-wechat --variable wechatappid=YOUR_WECHAT_APPID
 
-¼üÅÌ²å¼ş
-ÍøÖ·£ºhttps://github.com/driftyco/ionic-plugin-keyboard
-°²×°£ºcordova plugin add ionic-plugin-keyboard
+ï¿½ï¿½ï¿½Ì²ï¿½ï¿½
+ï¿½ï¿½Ö·ï¿½ï¿½https://github.com/driftyco/ionic-plugin-keyboard
+ï¿½ï¿½×°ï¿½ï¿½cordova plugin add ionic-plugin-keyboard
 
-Í¼Æ¬´æµ½Ïà²á
-ÍøÖ·£ºhttps://github.com/devgeeks/Canvas2ImagePlugin
-°²×°: cordova plugin add https://github.com/devgeeks/Canvas2ImagePlugin.git
+Í¼Æ¬ï¿½æµ½ï¿½ï¿½ï¿½
+ï¿½ï¿½Ö·ï¿½ï¿½https://github.com/devgeeks/Canvas2ImagePlugin
+ï¿½ï¿½×°: cordova plugin add https://github.com/devgeeks/Canvas2ImagePlugin.git
 
-¶şÎ¬ÂëÉ¨?
+ï¿½ï¿½Î¬ï¿½ï¿½É¨?
 https://github.com/phonegap/phonegap-plugin-barcodescanner
 
 
@@ -42,72 +42,23 @@ cordova plugin add cordova-plugin-file-opener2
 
 
 
-Ğ¡Ñ§Ó¢ÓïÍ¬²½µ¥´Ê¹æ·¶½âÎöĞÂ¿Î±êÈË½Ì°æ£¨ÈıÄê¼¶ÉÏ£©£ºhttps://item.taobao.com/item.htm?id=545367120038                           
-Ğ¡Ñ§Ó¢ÓïÍ¬²½µ¥´Ê¹æ·¶½âÎöĞÂ¿Î±êÈË½Ì°æ£¨ÈıÄê¼¶ÏÂ£©£ºhttps://item.taobao.com/item.htm?id=545413754786                         
-Ğ¡Ñ§Ó¢ÓïÍ¬²½µ¥´Ê¹æ·¶½âÎöĞÂ¿Î±êÈË½Ì°æ£¨ËÄÄê¼¶ÉÏ£©£ºhttps://item.taobao.com/item.htm?id=545368256111                           
-Ğ¡Ñ§Ó¢ÓïÍ¬²½µ¥´Ê¹æ·¶½âÎöĞÂ¿Î±êÈË½Ì°æ£¨ËÄÄê¼¶ÏÂ£©£ºhttps://item.taobao.com/item.htm?id=545413946666                         
-Ğ¡Ñ§Ó¢ÓïÍ¬²½µ¥´Ê¹æ·¶½âÎöĞÂ¿Î±êÈË½Ì°æ£¨ÎåÄê¼¶ÉÏ£©£ºhttps://item.taobao.com/item.htm?id=545399957499                            
-Ğ¡Ñ§Ó¢ÓïÍ¬²½µ¥´Ê¹æ·¶½âÎöĞÂ¿Î±êÈË½Ì°æ£¨ÎåÄê¼¶ÏÂ£©£ºhttps://item.taobao.com/item.htm?id=545368564103                                   
-Ğ¡Ñ§Ó¢ÓïÍ¬²½µ¥´Ê¹æ·¶½âÎöĞÂ¿Î±êÈË½Ì°æ£¨ÁùÄê¼¶ÉÏ£©£ºhttps://item.taobao.com/item.htm?id=545431059513                               
-Ğ¡Ñ§Ó¢ÓïÍ¬²½µ¥´Ê¹æ·¶½âÎöĞÂ¿Î±êÈË½Ì°æ£¨ÁùÄê¼¶ÏÂ£©£ºhttps://item.taobao.com/item.htm?id=545400365286       
+Ğ¡Ñ§Ó¢ï¿½ï¿½Í¬ï¿½ï¿½ï¿½ï¿½ï¿½Ê¹æ·¶ï¿½ï¿½ï¿½ï¿½ï¿½Â¿Î±ï¿½ï¿½Ë½Ì°æ£¨ï¿½ï¿½ï¿½ê¼¶ï¿½Ï£ï¿½ï¿½ï¿½https://item.taobao.com/item.htm?id=545367120038                           
+Ğ¡Ñ§Ó¢ï¿½ï¿½Í¬ï¿½ï¿½ï¿½ï¿½ï¿½Ê¹æ·¶ï¿½ï¿½ï¿½ï¿½ï¿½Â¿Î±ï¿½ï¿½Ë½Ì°æ£¨ï¿½ï¿½ï¿½ê¼¶ï¿½Â£ï¿½ï¿½ï¿½https://item.taobao.com/item.htm?id=545413754786                         
+Ğ¡Ñ§Ó¢ï¿½ï¿½Í¬ï¿½ï¿½ï¿½ï¿½ï¿½Ê¹æ·¶ï¿½ï¿½ï¿½ï¿½ï¿½Â¿Î±ï¿½ï¿½Ë½Ì°æ£¨ï¿½ï¿½ï¿½ê¼¶ï¿½Ï£ï¿½ï¿½ï¿½https://item.taobao.com/item.htm?id=545368256111                           
+Ğ¡Ñ§Ó¢ï¿½ï¿½Í¬ï¿½ï¿½ï¿½ï¿½ï¿½Ê¹æ·¶ï¿½ï¿½ï¿½ï¿½ï¿½Â¿Î±ï¿½ï¿½Ë½Ì°æ£¨ï¿½ï¿½ï¿½ê¼¶ï¿½Â£ï¿½ï¿½ï¿½https://item.taobao.com/item.htm?id=545413946666                         
+Ğ¡Ñ§Ó¢ï¿½ï¿½Í¬ï¿½ï¿½ï¿½ï¿½ï¿½Ê¹æ·¶ï¿½ï¿½ï¿½ï¿½ï¿½Â¿Î±ï¿½ï¿½Ë½Ì°æ£¨ï¿½ï¿½ï¿½ê¼¶ï¿½Ï£ï¿½ï¿½ï¿½https://item.taobao.com/item.htm?id=545399957499                            
+Ğ¡Ñ§Ó¢ï¿½ï¿½Í¬ï¿½ï¿½ï¿½ï¿½ï¿½Ê¹æ·¶ï¿½ï¿½ï¿½ï¿½ï¿½Â¿Î±ï¿½ï¿½Ë½Ì°æ£¨ï¿½ï¿½ï¿½ê¼¶ï¿½Â£ï¿½ï¿½ï¿½https://item.taobao.com/item.htm?id=545368564103                                   
+Ğ¡Ñ§Ó¢ï¿½ï¿½Í¬ï¿½ï¿½ï¿½ï¿½ï¿½Ê¹æ·¶ï¿½ï¿½ï¿½ï¿½ï¿½Â¿Î±ï¿½ï¿½Ë½Ì°æ£¨ï¿½ï¿½ï¿½ê¼¶ï¿½Ï£ï¿½ï¿½ï¿½https://item.taobao.com/item.htm?id=545431059513                               
+Ğ¡Ñ§Ó¢ï¿½ï¿½Í¬ï¿½ï¿½ï¿½ï¿½ï¿½Ê¹æ·¶ï¿½ï¿½ï¿½ï¿½ï¿½Â¿Î±ï¿½ï¿½Ë½Ì°æ£¨ï¿½ï¿½ï¿½ê¼¶ï¿½Â£ï¿½ï¿½ï¿½https://item.taobao.com/item.htm?id=545400365286       
 
 
 
 
-ÈıÉÏ https://item.taobao.com/item.htm?id=545405570153                    
-ÈıÏÂ https://item.taobao.com/item.htm?id=545424347226
-ËÄÉÏ https://item.taobao.com/item.htm?id=545393585518                         
-ËÄÏÂ https://item.taobao.com/item.htm?id=545393749318
-ÎåÉÏ https://item.taobao.com/item.htm?id=545393713488
-ÎåÏÂ https://item.taobao.com/item.htm?id=545394101029                       
-ÁùÉÏ https://item.taobao.com/item.htm?id=545407690977
-ÁùÏÂ https://item.taobao.com/item.htm?id=545424687376
-
-
-//ÈıÄê¼¶ÆğµãÈıÄê¼¶ÉÏ²á	
-$rootScope.WEIXIN = {
-		AppID: "wx83797cbb8b3ed830",
-		AppSecret: "c793bbeeb97bc2c6d0e7767b10d0dfd0"
-};
-
-//  ÈıÆğÈıÏÂ
-$rootScope.WEIXIN = {
-		AppID: "wx4e63a75ee1ed7601",
-		AppSecret: "8141d5ba15b53c2ef14914c19420c69e"
-};
-
- //ÈıÆğËÄÉÏ
-$rootScope.WEIXIN = {
-		AppID: "wxc253520414961de1",
-		AppSecret: "04c785fb5fdc6b1b27bb458f24f47aec"
-};
- //ÈıÆğËÄÏÂ
-$rootScope.WEIXIN = {
-		AppID: "wx3dae0444337f069e",
-		AppSecret: "c9f617de55a0e304e2abbf8b4406187e"
-};
-//ÈıÆğÎåÉÏ
-$rootScope.WEIXIN = {
-		AppID: "wx0869e45de2134a26",
-		AppSecret: "e6316911b5a609052fc374a903703745"
-};
-//ÈıÆğÎåÏÂ
-$rootScope.WEIXIN = {
-		AppID: "wx3dae0444337f069e",
-		AppSecret: "de2841466468b820b9256000348ef6d6"
-};
-
-
-//ÈıÆğÁùÉÏ
-$rootScope.WEIXIN = {
-		AppID: "wxed556cc180d97df4",
-		AppSecret: "8523043b961b18abf1d74bbab63dd323"
-};
-
-//ÈıÆğÁùÏÂ
-$rootScope.WEIXIN = {
-		AppID: "wxf477fd6697e3f3dd",
-		AppSecret: "a51c0f9d644e41433e5b4eac13634ba1"
-};
-
-   
+ï¿½ï¿½ï¿½ï¿½ https://item.taobao.com/item.htm?id=545405570153                    
+ï¿½ï¿½ï¿½ï¿½ https://item.taobao.com/item.htm?id=545424347226
+ï¿½ï¿½ï¿½ï¿½ https://item.taobao.com/item.htm?id=545393585518                         
+ï¿½ï¿½ï¿½ï¿½ https://item.taobao.com/item.htm?id=545393749318
+ï¿½ï¿½ï¿½ï¿½ https://item.taobao.com/item.htm?id=545393713488
+ï¿½ï¿½ï¿½ï¿½ https://item.taobao.com/item.htm?id=545394101029                       
+ï¿½ï¿½ï¿½ï¿½ https://item.taobao.com/item.htm?id=545407690977
+ï¿½ï¿½ï¿½ï¿½ https://item.taobao.com/item.htm?id=545424687376
