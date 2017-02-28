@@ -39,5 +39,6 @@ cordova plugin add cordova-plugin-vibration
 cordova plugin add cordova-plugin-crosswalk-webview
 cordova plugin add cordova-plugin-app-version
 cordova plugin add cordova-plugin-file-opener2
-
-
+asdfdsafdsaf
+asdfdsafdsaf
+asdfdsafdsaf
