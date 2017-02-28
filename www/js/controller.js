@@ -848,52 +848,6 @@ dcCtrl
 
 		}
 
-		//	$scope.playing = false;
-		//	$scope.is_reading_num = -1;
-		//	$scope.read_button_name = "带我读";
-		//	var j = 0;
-		//	var timer;
-		//	var radios = [];
-		//	$scope.followAudio = function() {
-		//		if(!$scope.playing) {
-		//			j = 0;
-		//			$scope.playing = true;
-		//			$scope.read_button_name = "停止带我读";
-		//
-		//			if(radios.length != $rootScope.words.length * 2) {
-		//				radios = [];
-		//				for(var i = 0; i < $rootScope.words.length; i++) {
-		//					radios.push({
-		//						"id": i,
-		//						"audio": $rootScope.words[i].audio_0,
-		//						"type": "0"
-		//					});
-		//					radios.push({
-		//						"id": i,
-		//						"audio": $rootScope.words[i].audio_1,
-		//						"type": "1"
-		//					});
-		//				}
-		//			}
-		//
-		//			timer = $interval(function() {
-		//				if(j == radios.length) {
-		//					$scope.read_button_name = "带我读";
-		//					$scope.is_reading_num = -1
-		//					$scope.playing = false;
-		//				} else if(j < radios.length) {
-		//					$rootScope.playWord2(radios[j].audio);
-		//					$scope.is_reading_num = radios[j].id;
-		//					j = j + 1;
-		//				}
-		//			}, 3000, radios.length + 1)
-		//		} else {
-		//			$scope.read_button_name = "带我读";
-		//			$scope.is_reading_num = -1;
-		//			$interval.cancel(timer); //停止并清除
-		//			$scope.playing = false;
-		//		}
-		//	}
 
 		$scope.goTest = function(_index) {
 			if(timer != undefined && $scope.recording) {
