@@ -135,7 +135,9 @@
 
 				<div class="droppable">
 					<div class="item" ng-repeat="item in exercise.items_formats">
-						<i ng-class="{'icon':true,'ion-ios-checkmark-empty balanced':exercise.result[$index],'ion-ios-close-empty assertive':!exercise.result[$index]}" ng-if="exercise.result"></i> {{$index+1}}. {{item.zh0}}<span ng-class="{'answer_box':true,'correct':exercise.result&&exercise.result[$index],'error':exercise.result&&!exercise.result[$index]}"></span><span style="border:1px solid #6ED6B6; border-radius:2px; margin:0 3px;" class="correct" ng-if="exercise.result&&!exercise.result[$index]">{{exercise.answer.split('^')[$index]}}</span>{{item.zh1}}<br />
+						<i ng-class="{'icon':true,'ion-ios-checkmark-empty balanced':exercise.result[$index],'ion-ios-close-empty assertive':!exercise.result[$index]}" ng-if="exercise.result"></i> {{$index+1}}. {{item.zh0}}
+						<span ng-class="{'answer_box':true,'correct':exercise.result&&exercise.result[$index],'error':exercise.result&&!exercise.result[$index]}"></span><br ng-if="exercise.result" />
+						<span style="border:1px solid #6ED6B6; border-radius:2px; margin:3px;" class="correct" ng-if="exercise.result&&!exercise.result[$index]">{{exercise.answer.split('^')[$index]}}</span>{{item.zh1}}<br />
 						<span style="background-color:yellowgreen; color:#fff; padding:0px 2px; margin-right:3px; border-top:2px solid #FFF;" ng-if="exercise.result&&item.en" onclick="$(this).next().fadeToggle();">译</span><span ng-if="exercise.result&&item.en" style="background-color:yellowgreen; color:#fff; padding:0px 2px;border-top:2px solid #FFF;" onclick="$(this).fadeOut();">{{item.en}}</span>
 					</div>
 				</div>
