@@ -2482,8 +2482,12 @@ dcCtrl
 		$scope.vcode = function() {
 			cordova.plugins.barcodeScanner.scan(
 				function(result) {
-					if(result.text.length > 30) {
-						$scope.bookActive($rootScope.userinfo.id, $rootScope.userinfo.book_id, result.text);
+					if(result.text) {
+						if(result.text.split('?vode=').length==2){
+							$scope.bookActive($rootScope.userinfo.id, $rootScope.userinfo.book_id, result.text.split('?vode=')[1]);
+						}
+					}else{
+						$rootScope.Alert("扫描出错!");
 					}
 				},
 				function(error) {
