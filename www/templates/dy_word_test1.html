@@ -97,13 +97,13 @@
 
 				<div class="dy-word-sort-kong">
 
-					<span class="sub" id={{"key_"+$index}} ng-repeat="key in exercise.keys">&#12288;</span>
+					<span class="sub" id={{"key_"+$index}} ng-repeat="key in exercise.keys track  by $index">&#12288;</span>
 
 				</div>
 
 				<div class="dy-word-spell-option" style="margin-top: 50px;">
 
-					<button ng-repeat="option in exercise.options"  ng-click="choose_3($index)">{{option}}</button>
+					<button ng-repeat="option in exercise.options track  by $index"  ng-click="choose_3($index)">{{option}}</button>
 
 				</div>
 			</div>
@@ -240,7 +240,7 @@
 	<img src="img/xiaoxue_cut_71.png " width="20% " style="position: absolute;bottom: 35%;left: 20%; transform: translate(0,0); " ng-click="studyWord()" />
 	<img src="img/xiaoxue_cut_73.png " width="20% " style="position: absolute;bottom: 35%;right: 20%; transform: translate(0,0); " ng-click="startGame() " />
 	<div style="position: absolute;top: 35%;left: 50%; transform: translate(-50%,0);">
-		<div style="text-align: center;font-size: 50px;margin: 10px;">{{jifenadd}}</div>
+		<div style="text-align: center;font-size: 20px;margin: 5px;">本单元共获得积分<br><br><font size="24" color="green">{{jifensum}}</font></div>
 	</div>
 </div>
 

@@ -1636,12 +1636,33 @@ dcCtrl
 					$scope.cupcount();
 				} else {
 					$scope.cupcount2();
+					
 					if($scope.ifShowJifen) {
-						if($rootScope.jifenadd > 0) {
-							playGood();
-						} else {
-							playJiayou();
+						var jifen_sum=0;
+						for(var i=0;i<$rootScope.words.length;i++){
+							if($rootScope.words[i].task1){
+							   jifen_sum=jifen_sum+parseInt($rootScope.words[i].task1);
+							}
+							if($rootScope.words[i].task2){
+								jifen_sum=jifen_sum+parseInt($rootScope.words[i].task2);
+							}
+							if($rootScope.words[i].task3){
+								jifen_sum=jifen_sum+parseInt($rootScope.words[i].task3);
+							}
+							if($rootScope.words[i].exercises){
+								for(var j=0;j<$rootScope.words[i].exercises.length;j++){
+									if($rootScope.words[i].exercises[j].point){
+										jifen_sum=jifen_sum+parseInt($rootScope.words[i].exercises[j].point);
+									}
+								}
+							}
 						}
+						$scope.jifensum = jifen_sum;
+//						if($rootScope.jifenadd > 0) {
+//							playGood();
+//						} else {
+//							playJiayou();
+//						}
 					}
 
 				}
