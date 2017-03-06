@@ -135,8 +135,9 @@
 
 				<div class="droppable">
 					<div class="item" ng-repeat="item in exercise.items_formats">
-						<i ng-class="{'icon':true,'ion-ios-checkmark-empty balanced':exercise.result[$index],'ion-ios-close-empty assertive':!exercise.result[$index]}" ng-if="exercise.result"></i> {{$index+1}}. {{item.zh0}}
-						<span ng-class="{'answer_box':true,'correct':exercise.result&&exercise.result[$index],'error':exercise.result&&!exercise.result[$index]}"></span><br ng-if="exercise.result" />
+						<i ng-class="{'icon':true,'ion-ios-checkmark-empty balanced':exercise.result[$index],'ion-ios-close-empty assertive':!exercise.result[$index]}" style="font-size:24px ;" ng-if="exercise.result"></i> {{$index+1}}. {{item.zh0}}
+						<br ng-if="item.zh0.length>30 || exercise.answer.split('^')[$index].length>15"/>
+						<span ng-class="{'answer_box':true,'correct':exercise.result&&exercise.result[$index],'error':exercise.result&&!exercise.result[$index]}"></span><br ng-if="exercise.answer.split('^')[$index].length>25" />
 						<span style="border:1px solid #6ED6B6; border-radius:2px; margin:3px;" class="correct" ng-if="exercise.result&&!exercise.result[$index]">{{exercise.answer.split('^')[$index]}}</span>{{item.zh1}}<br />
 						<span style="background-color:yellowgreen; color:#fff; padding:0px 2px; margin-right:3px; border-top:2px solid #FFF;" ng-if="exercise.result&&item.en" onclick="$(this).next().fadeToggle();">译</span><span ng-if="exercise.result&&item.en" style="background-color:yellowgreen; color:#fff; padding:0px 2px;border-top:2px solid #FFF;" onclick="$(this).fadeOut();">{{item.en}}</span>
 					</div>
@@ -262,7 +263,6 @@
 			<img src="img/xiaoxue_cut_73.png " width="20% " style="position: absolute;bottom: 35%;right: 20%; transform: translate(0,0); " ng-click="startGame() " />
 			<div style="position: absolute;top: 35%;left: 50%; transform: translate(-50%,0);">
 				<div style="text-align: center;font-size: 50px;margin: 10px;">{{jifenadd}}</div>
-			
 			</div>
 		</div>
 	</ion-content>
