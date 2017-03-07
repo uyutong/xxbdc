@@ -96,15 +96,11 @@
 				</div>
 
 				<div class="dy-word-sort-kong">
-
 					<span class="sub" id={{"key_"+$index}} ng-repeat="key in exercise.keys track  by $index">&#12288;</span>
-
 				</div>
 
 				<div class="dy-word-spell-option" style="margin-top: 50px;">
-
 					<button ng-repeat="option in exercise.options track  by $index"  ng-click="choose_3($index)">{{option}}</button>
-
 				</div>
 			</div>
 			<!--
@@ -136,7 +132,7 @@
 				<div class="droppable">
 					<div class="item" ng-repeat="item in exercise.items_formats">
 						<i ng-class="{'icon':true,'ion-ios-checkmark-empty balanced':exercise.result[$index],'ion-ios-close-empty assertive':!exercise.result[$index]}" style="font-size:24px ;" ng-if="exercise.result"></i> {{$index+1}}. {{item.zh0}}
-						<br ng-if="item.zh0.length>30 || exercise.answer.split('^')[$index].length>15"/>
+						<br ng-if="item.zh0.length+exercise.answer.split('^')[$index].length>20"/>
 						<span ng-class="{'answer_box':true,'correct':exercise.result&&exercise.result[$index],'error':exercise.result&&!exercise.result[$index]}"></span><br ng-if="exercise.answer.split('^')[$index].length>25" />
 						<span style="border:1px solid #6ED6B6; border-radius:2px; margin:3px;" class="correct" ng-if="exercise.result&&!exercise.result[$index]">{{exercise.answer.split('^')[$index]}}</span>{{item.zh1}}<br />
 						<span style="background-color:yellowgreen; color:#fff; padding:0px 2px; margin-right:3px; border-top:2px solid #FFF;" ng-if="exercise.result&&item.en" onclick="$(this).next().fadeToggle();">译</span><span ng-if="exercise.result&&item.en" style="background-color:yellowgreen; color:#fff; padding:0px 2px;border-top:2px solid #FFF;" onclick="$(this).fadeOut();">{{item.en}}</span>

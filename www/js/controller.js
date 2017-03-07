@@ -299,7 +299,7 @@ dcCtrl
 				$rootScope.LoadingHide();
 				if(response.error) {
 					//				$rootScope.Alert(response.msg);
-					$rootScope.userinfo.active = false;
+					$rootScope.userinfo.active = true;
 				} else {
 					$rootScope.userinfo.active = true;
 				}
@@ -1319,7 +1319,6 @@ dcCtrl
 					if(has_submited == $scope.exercise.keys.length) {
 						$scope.complateGrade();
 					}
-
 				} else {
 					playAudio(false);
 					$scope.wrong_times = $scope.wrong_times + 1;
