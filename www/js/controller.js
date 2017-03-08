@@ -1,28 +1,28 @@
 ﻿var dcCtrl = angular.module('dachutimes.controllers', []);
 dcCtrl
 	.controller('loginCtrl', function($rootScope, $scope, $state, $http, $ionicActionSheet) {
-//				var info = {
-//					"id": "21",
-//					"subscribe": null,
-//					"openid": "oGh6gwCNOQpRsvnNf3pVJ1rK5N4k",
-//					"nickname": "\u6d77\u9614\u5929\u7a7a",
-//					"sex": "1",
-//					"language": "zh_CN",
-//					"city": "",
-//					"province": "",
-//					"country": "",
-//					"headimgurl": "http:\/\/wx.qlogo.cn\/mmopen\/Q3auHgzwzM4I8ibXxonibqKs6AJmcToqka34cUoDiaClPbmN8Jh6ic3pIvt72F2oxrib0EficcT2o2VdOrS7KGYZ1F7Q\/0",
-//					"subscribe_time": null,
-//					"unionid": "ocffVt6ZE2o_Ybzs1_NbVTVsn5v4",
-//					"remark": null,
-//					"groupid": null,
-//					"register_time": "2016-12-20 10:21:00",
-//					"status": "7",
-//					"book_id": "0"
-//				};
+		//				var info = {
+		//					"id": "21",
+		//					"subscribe": null,
+		//					"openid": "oGh6gwCNOQpRsvnNf3pVJ1rK5N4k",
+		//					"nickname": "\u6d77\u9614\u5929\u7a7a",
+		//					"sex": "1",
+		//					"language": "zh_CN",
+		//					"city": "",
+		//					"province": "",
+		//					"country": "",
+		//					"headimgurl": "http:\/\/wx.qlogo.cn\/mmopen\/Q3auHgzwzM4I8ibXxonibqKs6AJmcToqka34cUoDiaClPbmN8Jh6ic3pIvt72F2oxrib0EficcT2o2VdOrS7KGYZ1F7Q\/0",
+		//					"subscribe_time": null,
+		//					"unionid": "ocffVt6ZE2o_Ybzs1_NbVTVsn5v4",
+		//					"remark": null,
+		//					"groupid": null,
+		//					"register_time": "2016-12-20 10:21:00",
+		//					"status": "7",
+		//					"book_id": "0"
+		//				};
 
 		$scope.iflogin = false;
-//		setStorage("userinfo", info);
+		//		setStorage("userinfo", info);
 		var userinfo = getStorage("userinfo");
 		if(userinfo && userinfo.id) {
 			$scope.iflogin = true;
@@ -299,7 +299,7 @@ dcCtrl
 				$rootScope.LoadingHide();
 				if(response.error) {
 					//				$rootScope.Alert(response.msg);
-					$rootScope.userinfo.active = true;
+					$rootScope.userinfo.active = false;
 				} else {
 					$rootScope.userinfo.active = true;
 				}
@@ -493,7 +493,7 @@ dcCtrl
 					//				$rootScope.Alert(response.msg);
 				} else {
 					$rootScope.app = response;
-					
+
 					//此页面不设置缓存点击就刷新了 避免提示升级次数过多 暂设定为一天一次 只看date.getDate 不一样就提示升级
 					var date = new Date();
 					if(getStorage("gxdate", true) === date.getDate() + "") {} else {
@@ -704,7 +704,7 @@ dcCtrl
 		});
 
 		$scope.wordSelect = function(num) {
-			
+
 			if(timer != undefined && $scope.recording) {
 				$interval.cancel(timer); //停止并清除
 				mediaRec.stopRecord();
@@ -713,7 +713,7 @@ dcCtrl
 				$interval.cancel(timer2); //停止并清除
 				mediaRec.stop();
 			}
-			
+
 			if(num == -1) {
 				$scope.tab_num = num;
 				$rootScope.words = $scope.word_list;
@@ -847,7 +847,6 @@ dcCtrl
 			}
 
 		}
-
 
 		$scope.goTest = function(_index) {
 			if(timer != undefined && $scope.recording) {
@@ -1260,12 +1259,10 @@ dcCtrl
 		//#region 看图选择
 		$scope.choose_1 = function(i, exerciseIndex, item) {
 
-			$(".type_1_html").html(item.question_en.replace('______', '<span class="green">' + item.items.split('\n')[i] + '</span>'));
+			$(".type_1_html").html(item.question_en.replace('______', '<span class="green">' + item.items.split('\n')[i] + '</span>').replace(/[\r\n]/g, ""));
 
 			item.myanswer = i;
-
 			item.answered = true;
-
 			if(item.myanswer == item.answer) {
 				//正确
 				playAudio(true);
@@ -1288,7 +1285,7 @@ dcCtrl
 		//听录音选图片
 		$scope.choose_2 = function(i, exerciseIndex, item) {
 
-			$(".type_2_html").html(item.question_en.replace('______', '<span class="green">' + item.answer_word + '</span>'));
+			$(".type_2_html").html(item.question_en.replace('______', '<span class="green">' + item.answer_word + '</span>').replace(/[\r\n]/g, ""));
 			item.myanswer = i;
 			item.answered = true;
 			if(item.myanswer == item.answer_index) {
@@ -1319,6 +1316,7 @@ dcCtrl
 					if(has_submited == $scope.exercise.keys.length) {
 						$scope.complateGrade();
 					}
+
 				} else {
 					playAudio(false);
 					$scope.wrong_times = $scope.wrong_times + 1;
@@ -1617,6 +1615,14 @@ dcCtrl
 
 		$scope.nextTest = function() {
 			$scope.wrong_times = 0;
+			
+			//解决多个排序题内容不刷新问题
+			if($scope.exercise.type == 3) {
+				$('span[id^="key_"]').each(function(){
+				    $(this).html("&#12288;");
+				});
+				$scope.$apply();
+			}
 
 			if($scope.now_page < $scope.word.exercises.length - 1) {
 				has_submited = 0;
@@ -1635,33 +1641,33 @@ dcCtrl
 					$scope.cupcount();
 				} else {
 					$scope.cupcount2();
-					
+
 					if($scope.ifShowJifen) {
-						var jifen_sum=0;
-						for(var i=0;i<$rootScope.words.length;i++){
-							if($rootScope.words[i].task1){
-							   jifen_sum=jifen_sum+parseInt($rootScope.words[i].task1);
+						var jifen_sum = 0;
+						for(var i = 0; i < $rootScope.words.length; i++) {
+							if($rootScope.words[i].task1) {
+								jifen_sum = jifen_sum + parseInt($rootScope.words[i].task1);
 							}
-							if($rootScope.words[i].task2){
-								jifen_sum=jifen_sum+parseInt($rootScope.words[i].task2);
+							if($rootScope.words[i].task2) {
+								jifen_sum = jifen_sum + parseInt($rootScope.words[i].task2);
 							}
-							if($rootScope.words[i].task3){
-								jifen_sum=jifen_sum+parseInt($rootScope.words[i].task3);
+							if($rootScope.words[i].task3) {
+								jifen_sum = jifen_sum + parseInt($rootScope.words[i].task3);
 							}
-							if($rootScope.words[i].exercises){
-								for(var j=0;j<$rootScope.words[i].exercises.length;j++){
-									if($rootScope.words[i].exercises[j].point){
-										jifen_sum=jifen_sum+parseInt($rootScope.words[i].exercises[j].point);
+							if($rootScope.words[i].exercises) {
+								for(var j = 0; j < $rootScope.words[i].exercises.length; j++) {
+									if($rootScope.words[i].exercises[j].point) {
+										jifen_sum = jifen_sum + parseInt($rootScope.words[i].exercises[j].point);
 									}
 								}
 							}
 						}
 						$scope.jifensum = jifen_sum;
-//						if($rootScope.jifenadd > 0) {
-//							playGood();
-//						} else {
-//							playJiayou();
-//						}
+						//						if($rootScope.jifenadd > 0) {
+						//							playGood();
+						//						} else {
+						//							playJiayou();
+						//						}
 					}
 
 				}
@@ -1773,6 +1779,7 @@ dcCtrl
 		var src = "audio.amr";
 		$scope.clicked = false;
 		$scope.recordAudio = function() {
+			$scope.if_low_show = false;
 
 			if(!$scope.clicked) {
 				$scope.recorded = false;
@@ -1820,6 +1827,9 @@ dcCtrl
 		//
 
 		$scope.uploadAudio = function(word) {  
+
+			$scope.if_low_show = false;
+
 			$rootScope.LoadingShow();
 			var fileURL = cordova.file.externalRootDirectory + "audio.amr";   
 			var options = new FileUploadOptions();  
@@ -1842,15 +1852,17 @@ dcCtrl
 				}
 
 				if($scope.score < 60) {
-					$rootScope.Confirm("您的发音不是很标准哦 或者 没有录好!", "继续发音练习", "下一练习", function() {
+					$scope.if_low_show = true;
 
-						$scope.recordAudio();
-
-					}, function() {
-						$state.go("word_spell", {
-							'_index': $scope.index
-						})
-					})
+					//					$rootScope.Confirm("您的发音不是很标准哦 或者 没有录好!", "继续发音练习", "下一练习", function() {
+					//
+					//						$scope.recordAudio();
+					//
+					//					}, function() {
+					//						$state.go("word_spell", {
+					//							'_index': $scope.index
+					//						})
+					//					})
 				} else {
 					if($scope.score >= 90 && $scope.word.task2 < 3) {
 						$rootScope.jifenadd = $rootScope.jifenadd + (3 - $scope.word.task2);
@@ -2503,10 +2515,10 @@ dcCtrl
 			cordova.plugins.barcodeScanner.scan(
 				function(result) {
 					if(result.text) {
-						if(result.text.split('?code=').length==2){
+						if(result.text.split('?code=').length == 2) {
 							$scope.bookActive($rootScope.userinfo.id, $rootScope.userinfo.book_id, result.text.split('?code=')[1]);
 						}
-					}else{
+					} else {
 						$rootScope.Alert("扫描出错!");
 					}
 				},

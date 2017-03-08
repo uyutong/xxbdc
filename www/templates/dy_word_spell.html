@@ -12,7 +12,7 @@
 		<div style="background: white;padding-top:5px;padding-bottom: 10px;margin-top: 10px;">
 			<div class="dy-word-test-explain">
 				<span id={{"spellw_"+$index}} ng-class="{'s1':word.en.length<10,'smaller-font':word.en.length>=10}" ng-repeat="item in questions track by $index">
-			<span  class="sub" ng-if="item=='#'">&#12288;</span>
+			    <span  class="sub" ng-if="item=='#'">&#12288;</span>
 				<span ng-if="item==' '&& word.en.length>=10"><br></span>
 				<span ng-if="item==' '&& word.en.length<10">&#12288;</span>
 				<span ng-if="item!='#'&&item!=' '">{{item}}</span>
