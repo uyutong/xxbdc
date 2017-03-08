@@ -1621,7 +1621,6 @@ dcCtrl
 				$('span[id^="key_"]').each(function(){
 				    $(this).html("&#12288;");
 				});
-				$scope.$apply();
 			}
 
 			if($scope.now_page < $scope.word.exercises.length - 1) {
@@ -1889,7 +1888,7 @@ dcCtrl
 
 			}, function(error) {     
 				$rootScope.LoadingHide();
-				alert("上传失败! Code = " + error.code);  
+				alert("上传失败!请稍后再试 ");  
 			}, options);   
 
 		}
