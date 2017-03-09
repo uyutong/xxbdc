@@ -895,6 +895,15 @@ dcCtrl
 
 		$rootScope.if_do = $scope.word.if_do;
 		$rootScope.if_finish = $scope.word.if_finish;
+		
+		
+
+		if($scope.word.zh.split('/').length - 1 == 2 && $scope.word.zh.indexOf('/')>10) {
+
+           setTimeout(function() {
+           	     $('#explain_word').html($scope.word.zh.replace('/','<br>/'));     	
+           }, 100);
+		}
 
 		$scope.initGrade = function() {
 			if($scope.word.task1 != null) {
@@ -1615,11 +1624,11 @@ dcCtrl
 
 		$scope.nextTest = function() {
 			$scope.wrong_times = 0;
-			
+
 			//解决多个排序题内容不刷新问题
 			if($scope.exercise.type == 3) {
-				$('span[id^="key_"]').each(function(){
-				    $(this).html("&#12288;");
+				$('span[id^="key_"]').each(function() {
+					$(this).html("&#12288;");
 				});
 			}
 
@@ -1756,6 +1765,14 @@ dcCtrl
 		}
 
 		$scope.initGrade();
+
+        if($scope.word.zh.split('/').length - 1 == 2 && $scope.word.zh.indexOf('/')>10) {
+
+           setTimeout(function() {
+           	     $('#explain_word1').html($scope.word.zh.replace('/','<br>/'));     	
+           }, 100);
+		}
+
 
 		$scope.nextTest = function(str) {
 
@@ -2010,6 +2027,14 @@ dcCtrl
 		}
 
 		$scope.initData();
+		
+		 if($scope.word.zh.split('/').length - 1 == 2 && $scope.word.zh.indexOf('/')>10) {
+
+           setTimeout(function() {
+           	     $('#explain_word2').html($scope.word.zh.replace('/','<br>/'));     	
+           }, 100);
+		}
+		
 
 		$scope.reSpell = function() {
 			$scope.initData();

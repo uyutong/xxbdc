@@ -13,7 +13,7 @@
 			<div class="dy-word-test-explain">
 				<span ng-class="{'s1':word.en.length<14,'smaller-font':word.en.length>=14}">{{word.en}}</span><br>
 				<span style="font-size: 20px;">{{word.phonetic}}</span><br>
-				<span class="s2">{{word.zh}}</span><br>
+				<span class="s2" id="explain_word1">{{word.zh}}</span><br>
 				<img class="star_img" src="img/star_1.png" ng-if="scoreobj.ifget" ng-repeat="scoreobj in scoreObjArr">
 				<img class="star_img" src="img/star_2.png" ng-if="!scoreobj.ifget" ng-repeat="scoreobj in scoreObjArr">
 			</div>

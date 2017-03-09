@@ -18,7 +18,7 @@
 				<span ng-if="item!='#'&&item!=' '">{{item}}</span>
 				</span>
 				<br>
-				<span class="s2">{{word.zh}}</span><br>
+				<span class="s2" id="explain_word2">{{word.zh}}</span><br>
 				<img class="star_img" src="img/star_1.png" ng-if="scoreobj.ifget" ng-repeat="scoreobj in scoreObjArr">
 				<img class="star_img" src="img/star_2.png" ng-if="!scoreobj.ifget" ng-repeat="scoreobj in scoreObjArr">
 			</div>
