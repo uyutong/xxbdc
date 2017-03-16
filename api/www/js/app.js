@@ -42,6 +42,14 @@
         controller: 'word_listCtrl'
     })
 
+    //#region
+	.state('more_apps', {
+		url: '/more_apps',
+		templateUrl: 'templates/more_apps.html',
+		controller: 'more_appsCtrl'
+	})
+	//#endregion	
+
     //$urlRouterProvider.otherwise('/grade');
 });
 

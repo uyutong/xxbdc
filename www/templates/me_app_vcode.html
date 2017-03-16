@@ -14,7 +14,7 @@
 
 			<div class="text-left padding">购买新课标小学英语同步单词规范释析{{mybook.publisher}}{{mybook.grade}}{{mybook.semester}}</div>
 			<div class="text-center" style="padding: 5px;">
-				<button class="app_vcode_button" ng-click="openTaobao('https://item.taobao.com/item.htm?id=545367120038')">
+				<button class="app_vcode_button" ng-click="openTaobao(mybook.book_url)">
 				购买图书
 			    </button>
 			</div>
@@ -43,7 +43,7 @@
 			<div class="text-left padding">购买新课标小学英语同步单词规范释析{{mybook.publisher}}{{mybook.grade}}{{mybook.semester}}对应的验证码</div>
 
 			<div class="text-center" style="padding: 5px;">
-				<button class="app_vcode_button" ng-click="openTaobao('https://item.taobao.com/item.htm?id=545405570153')">
+				<button class="app_vcode_button" ng-click="openTaobao(mybook.code_url)">
 				 购买验证码
 			    </button>
 			</div>

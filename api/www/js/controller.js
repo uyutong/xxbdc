@@ -694,7 +694,7 @@ dcCtrl
 			$rootScope.LoadingShow();
 			var url = $rootScope.rootUrl + "/words";
 			var data = {
-				"user_id": 3,
+				"user_id": 21,
 				"unit_id": unit_id
 			};
 			$http.post(url, data).success(function(response) {
@@ -714,7 +714,7 @@ dcCtrl
 			});
 		}
 
-		$scope.getBook(3);
+		$scope.getBook(21);
 
 		$scope.playDetailWord1 = function(audio, index) {
 			$rootScope.playWord(audio, $("#detail_paly_1_" + index));
@@ -731,4 +731,51 @@ dcCtrl
         $scope.ifShow=function(index){
         	$scope.word_list[index].show = undefined ? false:!$scope.word_list[index].show;
         }
+	})
+	.controller('more_appsCtrl', function($rootScope, $ionicModal, $scope, $state, $http, $ionicActionSheet) {
+		/**
+		 * 获取更多相关app
+		 * @param {Object} platform
+		 */
+		$scope.versions = function(platform) {
+			$rootScope.LoadingShow();
+			var url = $rootScope.rootUrl + "/versions";
+			var data = {
+				"platform": platform,
+			};
+			$http.post(url, data).success(function(response) {
+				$rootScope.LoadingHide();
+				if(response.error) {
+					$rootScope.Alert(response.msg);
+				} else {
+					$scope.apps = response;
+					
+//					http://xx.kaouyu.com/upload/apk/3q5x.apk
+
+					
+					
+				}
+			}).error(function(response, status) {
+				$rootScope.LoadingHide();
+				$rootScope.Alert('连接失败！[' + response + status + ']');
+				return;
+			});
+		}
+//		$scope.versions(device.platform)
+		$scope.versions("android")
+
+		$scope.downloadApk = function(index) {
+			if(device.platform === 'iOS') {
+				window.open($scope.apps[index].url, '_blank');
+			} else if(device.platform === 'Android') {
+				var success = function(message) {
+					alert("success = " + message);
+				};
+				var fail = function(message) {
+					alert("fail = " + message);
+				};
+				cordova.exec(success, fail, "OpenLink", "url", [$scope.apps[index].url]);
+			}
+		}
+
 	})
