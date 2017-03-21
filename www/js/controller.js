@@ -1172,7 +1172,7 @@ dcCtrl
 							$(this).find(".answer_box").text(ui.draggable.text()).parent().one("click", function() {
 								if($scope.exercise.myanswer == -1) {
 									var txt = $(this).find(".answer_box").text()
-
+									
 									$(".question_type_" + $scope.exercise.id + " .draggable label").each(function() {
 										if($(this).text() == txt) {
 											$(this).css("visibility", "visible");
@@ -2558,6 +2558,15 @@ dcCtrl
 				}
 			);
 		}
+
+         $scope.vcodeByText=function(){
+         	
+         	if($('#vcode_text').val().length > 0) {
+                $scope.bookActive($rootScope.userinfo.id, $rootScope.userinfo.book_id, $.trim($('#vcode_text').val()));
+         	}
+         	
+         }
+
 
 		/**
 		 * 激活教材使用权
