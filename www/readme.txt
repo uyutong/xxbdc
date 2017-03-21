@@ -15,7 +15,7 @@ https://github.com/phonegap/phonegap-plugin-barcodescanner
 
 
 
-
+cccc
 cordova plugin add ionic-plugin-keyboard
 cordova plugin add phonegap-plugin-barcodescanner
 cordova plugin add cordova-plugin-whitelist
