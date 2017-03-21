@@ -13,7 +13,7 @@
 ��ά��ɨ?
 https://github.com/phonegap/phonegap-plugin-barcodescanner
 
-
+test
 
 cccc
 cordova plugin add ionic-plugin-keyboard
