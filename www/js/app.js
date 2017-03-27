@@ -2,18 +2,6 @@
 
 	.run(function($ionicPlatform, $http, $state, $rootScope, $ionicModal, $ionicPopup, $ionicLoading, $ionicActionSheet) {
 
-		//一年级起点
-		//	$rootScope.WEIXIN = {
-		//		AppID: "wx46450f2f3f14b4d0",
-		//		AppSecret: "c72cb4331d1a04cf67b81e09c81a0469"
-		//	};
-
-		//三年级起点三年级上册	
-		$rootScope.WEIXIN = {
-			AppID: "wx83797cbb8b3ed830",
-			AppSecret: "c793bbeeb97bc2c6d0e7767b10d0dfd0"
-		};
-
 		//$rootScope.siteUrl = "http://kuyxxword.ourapp.site:666";
 		$rootScope.siteUrl = "http://xx.kaouyu.com";
 		//$rootScope.rootUrl = "http://kuyxxword.ourapp.site:666/index.php/api";
@@ -26,9 +14,9 @@
 		$ionicPlatform.ready(function() {
 			initCordova();
 		});
-
+		
 		InitIonic($rootScope, $ionicModal, $ionicPopup, $ionicLoading, $http, $state);
-
+		
 		/**
 		 * 更新用户学习
 		 * @param {Object} user_id
@@ -41,6 +29,7 @@
 		 */
 
 		$rootScope.userCompletedTask = function(user_id, book_id, unit_id, word_id, task1, task2, task3) {
+			
 			$rootScope.LoadingShow();
 			var url = $rootScope.rootUrl + "/user_completed_task";
 			var data = {
@@ -52,15 +41,14 @@
 				"task2": task2,
 				"task3": task3,
 			};
-
+			
 			$http.post(url, data).success(function(response) {
 				$rootScope.LoadingHide();
 				if(response.error) {
 					$rootScope.Alert(response.msg);
 				} else {
-
+					
 				}
-
 			}).error(function(response, status) {
 				$rootScope.LoadingHide();
 				$rootScope.Alert('连接失败！[' + response + status + ']');
@@ -87,7 +75,6 @@
 				"word_id": word_id,
 				"exercise_id": exercise_id,
 				"point": point
-
 			};
 
 			$http.post(url, data).success(function(response) {
@@ -101,14 +88,14 @@
 				return;
 			});
 		}
-
+		
 		$rootScope.goWordList = function() {
 			$state.go("word_list", {
 				'unit_id': $rootScope.list_unit_id,
 				'index': $rootScope.list_index
 			})
 		}
-
+		
 	})
 
 	.config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider) {
@@ -146,7 +133,8 @@
 				cache: false,
 
 			})
-			//#endregion4
+			//#endregion
+			
 			//#region tab
 			.state('tab', {
 				url: "/tab",
@@ -154,6 +142,7 @@
 				templateUrl: "templates/tab.html"
 			})
 			//#endregion
+			
 			//#region 
 			.state('tab.dy_home', {
 				cache: false,
@@ -166,6 +155,7 @@
 				}
 			})
 			//#endregion
+			
 			//#region 
 			.state('tab.yx_home', {
 				cache: false,
@@ -275,8 +265,25 @@
 				templateUrl: 'templates/more_apps.html',
 				controller: 'more_appsCtrl'
 			})
-		//#endregion	
-
+		   //#endregion	
+		   
+		   //#region
+			.state('my_order', {
+				url: '/my_order',
+				templateUrl: 'templates/my_order.html',
+				controller: 'my_orderCtrl'
+			})
+		   //#endregion	
+		   
+		   //#region
+			.state('my_vcode', {
+				url: '/my_vcode',
+				templateUrl: 'templates/my_vcode.html',
+				controller: 'my_vcodeCtrl'
+			})
+		   //#endregion	
+		   
+		   
 		$urlRouterProvider.otherwise('/login');
 
 	});
@@ -290,7 +297,6 @@ function initCordova() {
 	if(window.StatusBar) {
 		StatusBar.styleDefault();
 	};
-
 	if(window.cordova && window.cordova.InAppBrowser) {
 		window.open = window.cordova.InAppBrowser.open;
 	}

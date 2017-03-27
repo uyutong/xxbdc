@@ -1,0 +1,17 @@
+﻿<div class="bar bar-header dy-word-common-top">
+	<span class="s1">我的验证码</span><br>
+	<img class="s3" src="img/arrow_right.png" ng-click="goBack()">
+</div>
+
+<ion-content class="has-header backgroud-light">
+	<div class="list">
+		<a class="item" ng-click="" ng-repeat="book in dataList">
+			<h2>{{book.code}}</h2>
+			<p>{{book.name}}</p>
+			<div class="text-center"><button class=" button button-small  button-balanced" ng-click="wechatShareCode(book.code)">&#12288;分享给好友&#12288;</button>
+            </div>
+		</a>
+	</div>
+		<div class="text-center" style="color: red;">注：每个验证码最多两人使用！</div>
+
+</ion-content>

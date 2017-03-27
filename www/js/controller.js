@@ -1,51 +1,144 @@
 ﻿var dcCtrl = angular.module('dachutimes.controllers', []);
 dcCtrl
 	.controller('loginCtrl', function($rootScope, $scope, $state, $http, $ionicActionSheet) {
-//						var info = {
-//							"id": "21",
-//							"subscribe": null,
-//							"openid": "oGh6gwCNOQpRsvnNf3pVJ1rK5N4k",
-//							"nickname": "\u6d77\u9614\u5929\u7a7a",
-//							"sex": "1",
-//							"language": "zh_CN",
-//							"city": "",
-//							"province": "",
-//							"country": "",
-//							"headimgurl": "http:\/\/wx.qlogo.cn\/mmopen\/Q3auHgzwzM4I8ibXxonibqKs6AJmcToqka34cUoDiaClPbmN8Jh6ic3pIvt72F2oxrib0EficcT2o2VdOrS7KGYZ1F7Q\/0",
-//							"subscribe_time": null,
-//							"unionid": "ocffVt6ZE2o_Ybzs1_NbVTVsn5v4",
-//							"remark": null,
-//							"groupid": null,
-//							"register_time": "2016-12-20 10:21:00",
-//							"status": "7",
-//							"book_id": "0"
-//						};
 
+//		var info = {
+//			"id": "21",
+//			"subscribe": null,
+//			"openid": "oGh6gwCNOQpRsvnNf3pVJ1rK5N4k",
+//			"nickname": "\u6d77\u9614\u5929\u7a7a",
+//			"sex": "1",
+//			"language": "zh_CN",
+//			"city": "",
+//			"province": "",
+//			"country": "",
+//			"headimgurl": "http:\/\/wx.qlogo.cn\/mmopen\/Q3auHgzwzM4I8ibXxonibqKs6AJmcToqka34cUoDiaClPbmN8Jh6ic3pIvt72F2oxrib0EficcT2o2VdOrS7KGYZ1F7Q\/0",
+//			"subscribe_time": null,
+//			"unionid": "ocffVt6ZE2o_Ybzs1_NbVTVsn5v4",
+//			"remark": null,
+//			"groupid": null,
+//			"register_time": "2016-12-20 10:21:00",
+//			"status": "7",
+//			"book_id": "0"
+//		};
+//
 		$scope.iflogin = false;
 //		setStorage("userinfo", info);
+
+
+		$scope.saveUserBook = function(userId, bookId) {
+			if($rootScope.mybook) {
+				$rootScope.userinfo.mybook = $rootScope.mybook;
+				setTimeout(function() {
+					$state.go("tab.dy_home")
+				}, 2000)
+			} else {
+				$rootScope.LoadingShow();
+				//获取所有book/unit
+				var url = $rootScope.rootUrl + "/books";
+				var data = {
+					"user_id": userId,
+					"book_id": bookId
+				};
+
+				$http.post(url, data).success(function(response) {
+					$rootScope.LoadingHide();
+					if(response.error) {
+						$rootScope.Alert(response.msg);
+					} else {
+						if(response[0]) {
+							$rootScope.userinfo.mybook = response[0];
+							setTimeout(function() {
+								$state.go("tab.dy_home")
+							}, 2000)
+						}
+					}
+				}).error(function(response, status) {
+					$rootScope.LoadingHide();
+					$rootScope.Alert('连接失败！[' + response + status + ']');
+					return;
+				});
+			}
+		}
+
+		$scope.setBook = function(userId, bookId) {
+			$rootScope.LoadingShow();
+			//获取所有book/unit
+			var url = $rootScope.rootUrl + "/user_set_book";
+			var data = {
+				"user_id": userId,
+				"book_id": bookId
+			};
+			$http.post(url, data).success(function(response) {
+				$rootScope.LoadingHide();
+				if(response.error) {
+					$rootScope.Alert(response.msg);
+				} else {
+					$rootScope.userinfo.book_id = bookId;
+					setStorage("userinfo", angular.copy($rootScope.userinfo));
+					$scope.saveUserBook(userId, bookId);
+				}
+			}).error(function(response, status) {
+				$rootScope.LoadingHide();
+				$rootScope.Alert('连接失败！[' + response + status + ']');
+				return;
+			});
+		}
+
+		$scope.getBook = function(userId, bookId) {
+			$rootScope.LoadingShow();
+			//获取所有book/unit
+			var url = $rootScope.rootUrl + "/books";
+			var data = {
+				"user_id": userId, //没有登录时没有userId的暂拿着我的id21来获取book
+				"book_id": bookId
+			};
+
+			$http.post(url, data).success(function(response) {
+				$rootScope.LoadingHide();
+				if(response.error) {
+					$rootScope.Alert(response.msg);
+				} else {
+					if(response[0]) {
+						$rootScope.mybook = response[0];
+					}
+				}
+			}).error(function(response, status) {
+				$rootScope.LoadingHide();
+				$rootScope.Alert('连接失败！[' + response + status + ']');
+				return;
+			});
+		}
+
+
 		var userinfo = getStorage("userinfo");
-		if(userinfo && userinfo.id) {
+		if(userinfo.id) {
 			$scope.iflogin = true;
-			setTimeout(function() {
-				$state.go("tab.dy_home")
-			}, 3000)
+			$rootScope.userinfo = userinfo;
+			if($rootScope.userinfo.book_id != $rootScope.bookId) {
+				$scope.setBook($rootScope.userinfo.id, $rootScope.bookId);
+			} else {
+				$scope.saveUserBook($rootScope.userinfo.id, $rootScope.userinfo.book_id);
+			}
+		} else {
+			$scope.getBook(21, $rootScope.bookId);
 		}
 
 		$scope.wxLogin = function() {
-			$rootScope.LoadingShow();
 
+			$rootScope.LoadingShow();
 			Wechat.isInstalled(function(installed) {
 				if(installed) {
+
 					Wechat.auth("snsapi_userinfo", function(response) {
 						//#region 通过code获取access_token
-						var url = "https://api.weixin.qq.com/sns/oauth2/access_token?appid=" + $rootScope.WEIXIN.AppID + "&secret=" + $rootScope.WEIXIN.AppSecret + "&code=" + response.code + "&grant_type=authorization_code";
+						var url = "https://api.weixin.qq.com/sns/oauth2/access_token?appid=" + $rootScope.mybook.wx_appid + "&secret=" + $rootScope.mybook.wx_appsecret + "&code=" + response.code + "&grant_type=authorization_code";
 
 						$http.get(url).success(function(response) {
 							//#region 获取用户个人信息（UnionID机制）
 							var url = "https://api.weixin.qq.com/sns/userinfo?access_token=" + response.access_token + "&openid=" + response.openid;
 
 							$http.get(url).success(function(wx_response) {
-
 								$rootScope.LoadingHide();
 								var unionid = wx_response.unionid;
 								var url = $rootScope.rootUrl + "/user/";
@@ -62,27 +155,17 @@ dcCtrl
 												$rootScope.Alert(response.msg);
 											} else {
 												$rootScope.userinfo = response;
-												setStorage("userinfo", angular.copy($rootScope.userinfo));
-												if($rootScope.userinfo.book_id === "0") {
-													$rootScope.userinfo.book_id = $rootScope.bookId;
-													//		$state.go("grade")
-													$state.go("tab.dy_home")
-												} else {
-													$state.go("tab.dy_home")
-												}
+												$scope.setBook($rootScope.userinfo.id, $rootScope.bookId);
 											}
 										}, "json")
 
 									} else {
 										$rootScope.userinfo = response;
-										setStorage("userinfo", angular.copy($rootScope.userinfo));
-										if($rootScope.userinfo.book_id === "0") {
-											//										$state.go("grade")
-											$rootScope.userinfo.book_id = $rootScope.bookId;
-											$state.go("tab.dy_home")
-
+										if($rootScope.userinfo.book_id != $rootScope.bookId) {
+											$scope.setBook($rootScope.userinfo.id, $rootScope.bookId);
 										} else {
-											$state.go("tab.dy_home")
+											setStorage("userinfo", $rootScope.userinfo);
+											$scope.saveUserBook($rootScope.userinfo.id, $rootScope.userinfo.book_id);
 										}
 									}
 
@@ -103,6 +186,7 @@ dcCtrl
 						$rootScope.LoadingHide();
 						$rootScope.Alert("Failed: " + reason);
 					});
+
 				} else {
 					$rootScope.LoadingHide();
 					$rootScope.Confirm("微信没有安装，请先安装微信.", "去安装微信?", "", function() {
@@ -128,13 +212,11 @@ dcCtrl
 
 		$http.post(url, data).success(function(response) {
 			$rootScope.LoadingHide();
-
 			if(response.error) {
 				$rootScope.Alert(response.msg);
 			} else {
 				$rootScope.bookList = response;
 			}
-
 		}).error(function(response, status) {
 			$rootScope.LoadingHide();
 			$rootScope.Alert('连接失败！[' + response + status + ']');
@@ -146,6 +228,7 @@ dcCtrl
 			$scope.now_num = gid;
 			$rootScope.grade = grade;
 		}
+
 		$scope.bookSelect = function(num) {
 			if(num == 0) {
 				$rootScope.semester = "上册";
@@ -176,6 +259,7 @@ dcCtrl
 					"user_id": $rootScope.userinfo.id,
 					"book_id": $rootScope.mybook.id
 				};
+
 				$http.post(url, data).success(function(response) {
 					$rootScope.LoadingHide();
 					if(response.error) {
@@ -186,13 +270,11 @@ dcCtrl
 						setStorage("userinfo", angular.copy($rootScope.userinfo));
 						$state.go("tab.dy_home");
 					}
-
 				}).error(function(response, status) {
 					$rootScope.LoadingHide();
 					$rootScope.Alert('连接失败！[' + response + status + ']');
 					return;
 				});
-
 			} else {
 				$rootScope.Alert("教材错误!");
 			}
@@ -205,13 +287,12 @@ dcCtrl
 		$scope.units = [];
 		$scope.wordSum = 0;
 		$scope.learned = 0;
-		if(!$rootScope.userinfo) {
-			$rootScope.userinfo = getStorage("userinfo");
+
+		if(!$rootScope.mybook) {
+			$rootScope.mybook = $rootScope.userinfo.mybook;
 		}
-		$rootScope.mybook = $rootScope.userinfo.mybook;
 
 		$scope.getUnits = function(book_id) {
-
 			$rootScope.LoadingShow();
 			var url = $rootScope.rootUrl + "/units";
 			var data = {
@@ -228,12 +309,10 @@ dcCtrl
 						$scope.wordSum = $scope.wordSum + parseInt(item.word_total);
 						$scope.learned = $scope.learned + parseInt(item.word_completed_total);
 					})
-
 					//检查是否有新版本
 					if(device.platform === 'Android') {
 						$scope.version("android", book_id);
 					}
-
 				}
 
 			}).error(function(response, status) {
@@ -241,44 +320,6 @@ dcCtrl
 				$rootScope.Alert('连接失败！[' + response + status + ']');
 				return;
 			});
-		}
-
-		$scope.setBook = function() {
-			if($rootScope.mybook && $rootScope.mybook.id == $rootScope.userinfo.book_id) {
-				$scope.bookStatus($rootScope.userinfo.id, $rootScope.userinfo.book_id);
-			} else {
-				if($rootScope.userinfo.id && $rootScope.userinfo.book_id) {
-					$rootScope.LoadingShow();
-					//获取所有book/unit
-					var url = $rootScope.rootUrl + "/books";
-					var data = {
-						"user_id": $rootScope.userinfo.id
-					};
-					$http.post(url, data).success(function(response) {
-						$rootScope.LoadingHide();
-						if(response.error) {
-							$rootScope.Alert(response.msg);
-						} else {
-							$rootScope.bookList = response;
-							angular.forEach($rootScope.bookList, function(item) {
-								if(item.id == $rootScope.userinfo.book_id) {
-									$rootScope.mybook = item;
-									$rootScope.userinfo.mybook = $rootScope.mybook;
-									setStorage("userinfo", angular.copy($rootScope.userinfo));
-
-									$scope.bookStatus($rootScope.userinfo.id, $rootScope.userinfo.book_id);
-
-								}
-							})
-						}
-
-					}).error(function(response, status) {
-						$rootScope.LoadingHide();
-						$rootScope.Alert('连接失败！[' + response + status + ']');
-						return;
-					});
-				}
-			}
 		}
 
 		/**
@@ -294,7 +335,6 @@ dcCtrl
 				"user_id": user_id,
 				"book_id": book_id,
 			};
-
 			$http.post(url, data).success(function(response) {
 				$rootScope.LoadingHide();
 				if(response.error) {
@@ -303,7 +343,6 @@ dcCtrl
 				} else {
 					$rootScope.userinfo.active = true;
 				}
-
 				$scope.getUnits($rootScope.mybook.id);
 			}).error(function(response, status) {
 				$rootScope.LoadingHide();
@@ -312,36 +351,7 @@ dcCtrl
 			});
 		}
 
-		if(!$rootScope.userinfo.id) {
-			$state.go("login")
-		}
-
-		if($rootScope.userinfo.book_id != $rootScope.bookId) {
-			$rootScope.userinfo.book_id = $rootScope.bookId
-			$rootScope.LoadingShow();
-			//获取所有book/unit
-			var url = $rootScope.rootUrl + "/user_set_book";
-			var data = {
-				"user_id": $rootScope.userinfo.id,
-				"book_id": $rootScope.userinfo.book_id
-			};
-			$http.post(url, data).success(function(response) {
-				$rootScope.LoadingHide();
-				if(response.error) {
-					$rootScope.Alert(response.msg);
-				} else {
-					$scope.setBook();
-				}
-
-			}).error(function(response, status) {
-				$rootScope.LoadingHide();
-				$rootScope.Alert('连接失败！[' + response + status + ']');
-				return;
-			});
-
-		} else {
-			$scope.setBook();
-		}
+		$scope.bookStatus($rootScope.userinfo.id, $rootScope.userinfo.book_id);
 
 		//扫描单词或练习二维码  
 		$scope.scancode = function() {
@@ -493,7 +503,6 @@ dcCtrl
 					//				$rootScope.Alert(response.msg);
 				} else {
 					$rootScope.app = response;
-
 					//此页面不设置缓存点击就刷新了 避免提示升级次数过多 暂设定为一天一次 只看date.getDate 不一样就提示升级
 					var date = new Date();
 					if(getStorage("gxdate", true) === date.getDate() + "") {} else {
@@ -675,7 +684,6 @@ dcCtrl
 						}
 					}
 					if($scope.word_list[i].if_do && $scope.word_list[i].exercises.length > 0) {
-
 						for(var j = 0; j < $scope.word_list[i].exercises.length; j++) {
 							if($scope.word_list[i].exercises[j].point == null || $scope.word_list[i].exercises[j].point == "") {
 								$scope.word_list[i].if_do = false; //是否所有的练习拿到满分
@@ -694,7 +702,6 @@ dcCtrl
 					}
 				}
 				$rootScope.words = $scope.word_list;
-
 			}
 
 		}).error(function(response, status) {
@@ -795,8 +802,7 @@ dcCtrl
 						$scope.is_reading_num = -1
 						$scope.recording = false;
 						$scope.is_canplay = true;
-						$interval.cancel(timer); //停止并清除
-
+						$interval.cancel(timer); //停止并清除					
 					} else if(j < radios.length) {
 						playWordAudio(radios[j].audio);
 						$scope.is_reading_num = radios[j].id;
@@ -822,7 +828,6 @@ dcCtrl
 		var timer2;
 		$scope.playFollowAudio = function() {
 			if(mediaRec && $scope.recording == false) {
-
 				if(!$scope.playing) {
 					$scope.playing = true;
 					mediaRec.play();
@@ -895,14 +900,12 @@ dcCtrl
 
 		$rootScope.if_do = $scope.word.if_do;
 		$rootScope.if_finish = $scope.word.if_finish;
-		
-		
 
-		if($scope.word.zh.split('/').length - 1 == 2 && $scope.word.zh.indexOf('/')>10) {
+		if($scope.word.zh.split('/').length - 1 == 2 && $scope.word.zh.indexOf('/') > 10) {
 
-           setTimeout(function() {
-           	     $('#explain_word').html($scope.word.zh.replace('/','<br>/'));     	
-           }, 100);
+			setTimeout(function() {
+				$('#explain_word').html($scope.word.zh.replace('/', '<br>/'));
+			}, 100);
 		}
 
 		$scope.initGrade = function() {
@@ -1172,7 +1175,7 @@ dcCtrl
 							$(this).find(".answer_box").text(ui.draggable.text()).parent().one("click", function() {
 								if($scope.exercise.myanswer == -1) {
 									var txt = $(this).find(".answer_box").text()
-									
+
 									$(".question_type_" + $scope.exercise.id + " .draggable label").each(function() {
 										if($(this).text() == txt) {
 											$(this).css("visibility", "visible");
@@ -1766,13 +1769,12 @@ dcCtrl
 
 		$scope.initGrade();
 
-        if($scope.word.zh.split('/').length - 1 == 2 && $scope.word.zh.indexOf('/')>10) {
+		if($scope.word.zh.split('/').length - 1 == 2 && $scope.word.zh.indexOf('/') > 10) {
 
-           setTimeout(function() {
-           	     $('#explain_word1').html($scope.word.zh.replace('/','<br>/'));     	
-           }, 100);
+			setTimeout(function() {
+				$('#explain_word1').html($scope.word.zh.replace('/', '<br>/'));
+			}, 100);
 		}
-
 
 		$scope.nextTest = function(str) {
 
@@ -2027,14 +2029,13 @@ dcCtrl
 		}
 
 		$scope.initData();
-		
-		 if($scope.word.zh.split('/').length - 1 == 2 && $scope.word.zh.indexOf('/')>10) {
 
-           setTimeout(function() {
-           	     $('#explain_word2').html($scope.word.zh.replace('/','<br>/'));     	
-           }, 100);
+		if($scope.word.zh.split('/').length - 1 == 2 && $scope.word.zh.indexOf('/') > 10) {
+
+			setTimeout(function() {
+				$('#explain_word2').html($scope.word.zh.replace('/', '<br>/'));
+			}, 100);
 		}
-		
 
 		$scope.reSpell = function() {
 			$scope.initData();
@@ -2292,6 +2293,10 @@ dcCtrl
 	.controller('me_homeCtrl', function($rootScope, $scope, $state, $http, $ionicActionSheet) {
 
 		$scope.point = 0;
+		$scope.active_info = "";
+		if($rootScope.userinfo.active) {
+			$scope.active_info = "已激活";
+		}
 		$scope.user_point = function() {
 			var url = $rootScope.rootUrl + "/user_point";
 			var data = {
@@ -2323,11 +2328,14 @@ dcCtrl
 		$scope.user_point();
 
 		$scope.appVcode = function() {
-			if(!$rootScope.userinfo.active) {
-				$state.go("me_appvcode")
-			} else {
-				$rootScope.Alert("您已激活");
-			}
+			$state.go("me_appvcode")
+		}
+
+		$scope.myVcode = function() {
+			$state.go("my_vcode")
+		}
+		$scope.myOrder = function() {
+			$state.go("my_order")
 		}
 
 		$scope.gameTop10 = function() {
@@ -2407,7 +2415,7 @@ dcCtrl
 							messageAction: "<action>dotalist</action>",
 							media: {
 								type: Wechat.Type.WEBPAGE,
-								webpageUrl: $rootScope.app.url
+								webpageUrl: $rootScope.app.open_qq_url
 							}
 						},
 						scene: Wechat.Scene.SESSION // share to Timeline
@@ -2535,6 +2543,11 @@ dcCtrl
 	})
 	.controller('me_appvcodeCtrl', function($rootScope, $ionicModal, $scope, $state, $http, $ionicActionSheet) {
 
+		var price = parseInt($rootScope.mybook.price);
+		var sale_price = parseInt($rootScope.mybook.sale_price);
+		$scope.change_price = price / 100;
+		$scope.change_sale_price = sale_price / 100;
+
 		$scope.vcode = function() {
 			cordova.plugins.barcodeScanner.scan(
 				function(result) {
@@ -2559,14 +2572,11 @@ dcCtrl
 			);
 		}
 
-         $scope.vcodeByText=function(){
-         	
-         	if($('#vcode_text').val().length > 0) {
-                $scope.bookActive($rootScope.userinfo.id, $rootScope.userinfo.book_id, $.trim($('#vcode_text').val()));
-         	}
-         	
-         }
-
+		$scope.vcodeByText = function() {
+			if($('#vcode_text').val().length > 0) {
+				$scope.bookActive($rootScope.userinfo.id, $rootScope.userinfo.book_id, $.trim($('#vcode_text').val()));
+			}
+		}
 
 		/**
 		 * 激活教材使用权
@@ -2614,6 +2624,62 @@ dcCtrl
 			}
 		}
 
+		$scope.unifiedorder = function(userId, bookId) {
+			$rootScope.LoadingShow();
+			var url = $rootScope.rootUrl + "/unifiedorder";
+			var data = {
+				"user_id": userId,
+				"book_id": bookId,
+			};
+			$http.post(url, data).success(function(response) {
+				$rootScope.LoadingHide();
+				if(response.error) {
+					$rootScope.Alert(response.msg);
+				} else {
+					//					{"appid":"wx83797cbb8b3ed830","partnerid":"1445757902","prepayid":"wx201703271007183fe1a941870532825354","package":"Sign=WXPay","noncestr":"7fcf20f3baee206808e7076f9df63e55","timestamp":1490580438,"sign":"10492DE2690F195B3E2588D06E11BD97","out_trade_no":"170327100718b14u1"}
+					var params = {
+						mch_id: response.partnerid, // merchant id
+						prepay_id: response.prepayid, // prepay id returned from server
+						nonce: response.noncestr, // nonce string returned from server
+						timestamp: response.timestamp, // timestamp
+						sign: response.sign, // signed string
+					};
+					Wechat.sendPaymentRequest(params, function() {
+						$scope.queryorder($rootScope.userinfo.id, $rootScope.mybook.id, response.out_trade_no);
+					}, function(reason) {
+						$rootScope.Alert("支付失败: " + reason);
+					});
+				}
+			}).error(function(response, status) {
+				$rootScope.LoadingHide();
+				$rootScope.Alert('连接失败！[' + response + status + ']');
+				return;
+			});
+		}
+
+		$scope.queryorder = function(userId, bookId, out_trade_no) {
+			$rootScope.LoadingShow();
+			var url = $rootScope.rootUrl + "/queryorder";
+			var data = {
+				"user_id": userId,
+				"book_id": bookId,
+				"out_trade_no": out_trade_no
+			};
+			$http.post(url, data).success(function(response) {
+				$rootScope.LoadingHide();
+				if(rresponse.return_code == 'SUCCESS') {
+					$rootScope.Alert("支付成功");
+					alert(response.return_code + "---" + response.out_trade_no);
+				} else {
+					$rootScope.Alert(response.msg);
+				}
+			}).error(function(response, status) {
+				$rootScope.LoadingHide();
+				$rootScope.Alert('连接失败！[' + response + status + ']');
+				return;
+			});
+		}
+
 		$scope.showLeft = true;
 		$scope.showRight = false;
 		$scope.show1 = function() {
@@ -2623,11 +2689,16 @@ dcCtrl
 		$scope.show2 = function() {
 			$scope.showLeft = false;
 			$scope.showRight = true;
+			setTimeout(function() {
+				$('#appvcode_detail').html($rootScope.mybook.detail);
+			}, 1500);
 		}
+		setTimeout(function() {
+			$('#appvcode_detail').html($rootScope.mybook.detail);
+		}, 1500);
 	})
 
 	.controller('me_gametop10Ctrl', function($rootScope, $ionicModal, $scope, $state, $http, $ionicActionSheet) {
-
 		$scope.user_game_order = function() {
 			var url = $rootScope.rootUrl + "/user_game_order";
 			var data = {
@@ -2646,7 +2717,68 @@ dcCtrl
 				return;
 			});
 		}
-
 		$scope.user_game_order();
+	})
+	.controller('my_vcodeCtrl', function($rootScope, $ionicModal, $scope, $state, $http, $ionicActionSheet, $cordovaClipboard) {
+		$scope.book_status = function() {
+			var url = $rootScope.rootUrl + "/book_status";
+			var data = {
+				"user_id": $rootScope.userinfo.id,
+			};
+			$http.post(url, data).success(function(response) {
+				$rootScope.LoadingHide();
+				if(response.error) {
+					$rootScope.Alert(response.msg);
+				} else {
+					$scope.dataList = response;
+				}
+			}).error(function(response, status) {
+				$rootScope.LoadingHide();
+				$rootScope.Alert('连接失败！[' + response + status + ']');
+				return;
+			});
+		}
+		$scope.book_status();
 
+		$scope.wechatShareCode = function(code) {
+
+			Wechat.isInstalled(function(installed) {
+				if(installed) {
+					Wechat.share({
+						text: "验证码:" + code+"适用于以下app http://xx.kaouyu.com/www/#/more_apps",
+						scene: Wechat.Scene.SESSION // share to Timeline
+					}, function() {
+						$rootScope.Alert("已分享");
+					}, function(reason) {
+						$rootScope.Alert("失败: " + reason);
+					})
+				} else {
+					$rootScope.Alert("请安装微信客户端！")
+				}
+			}, function(reason) {
+				$rootScope.Alert("Failed: " + reason);
+			});
+		}
+
+	})
+	.controller('my_orderCtrl', function($rootScope, $ionicModal, $scope, $state, $http, $ionicActionSheet) {
+		$scope.myorder = function() {
+			var url = $rootScope.rootUrl + "/myorder";
+			var data = {
+				"user_id": $rootScope.userinfo.id,
+			};
+			$http.post(url, data).success(function(response) {
+				$rootScope.LoadingHide();
+				if(response.error) {
+					$rootScope.Alert(response.msg);
+				} else {
+					$scope.dataList = response;
+				}
+			}).error(function(response, status) {
+				$rootScope.LoadingHide();
+				$rootScope.Alert('连接失败！[' + response + status + ']');
+				return;
+			});
+		}
+		$scope.myorder();
 	})
