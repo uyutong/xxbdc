@@ -2667,11 +2667,14 @@ dcCtrl
 			};
 			$http.post(url, data).success(function(response) {
 				$rootScope.LoadingHide();
-				if(rresponse.return_code == 'SUCCESS') {
-					$rootScope.Alert("支付成功");
-					alert(response.return_code + "---" + response.out_trade_no);
+				if(response.return_code == 'SUCCESS') {
+				    $rootScope.userinfo.active = true;
+					$rootScope.Alert("支付成功并激活成功");
+//					setTimeout(function(){
+//			            $state.go("my_order")
+//					},2000)
 				} else {
-					$rootScope.Alert(response.msg);
+					$rootScope.Alert(response.return_msg);
 				}
 			}).error(function(response, status) {
 				$rootScope.LoadingHide();
@@ -2679,6 +2682,9 @@ dcCtrl
 				return;
 			});
 		}
+
+
+
 
 		$scope.showLeft = true;
 		$scope.showRight = false;
@@ -2700,6 +2706,7 @@ dcCtrl
 
 	.controller('me_gametop10Ctrl', function($rootScope, $ionicModal, $scope, $state, $http, $ionicActionSheet) {
 		$scope.user_game_order = function() {
+			$rootScope.LoadingShow();
 			var url = $rootScope.rootUrl + "/user_game_order";
 			var data = {
 				"book_id": $rootScope.mybook.id,

@@ -61,9 +61,14 @@
 					<div class="col-20 col-center" style="color: gray;text-decoration:line-through;">原价：¥{{change_price}}</div>
 					<div class="col-20 col-center text-center" style="color: red;font-size:20px ;">¥{{change_sale_price}}</div>
 					<div class="col-60 text-center" class="text-center" style="padding: 5px;">
-						<button class="app_vcode_button" ng-click="unifiedorder(userinfo.id,mybook.id)">
-				                购买验证码
-			        </button>
+						<button ng-show="!userinfo.active" class="app_vcode_button" ng-click="unifiedorder(userinfo.id,mybook.id)">
+				                             购买验证码
+			            </button>
+			            
+			            <button ng-show="userinfo.active" class="app_vcode_button" style="background:gainsboro;"  ng-click="">
+				                             您已激活                  
+			            </button>
+			            
 					</div>
 				</div>
 				

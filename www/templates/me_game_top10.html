@@ -1,10 +1,10 @@
-﻿<ion-view class="background-common">
+﻿<div class="bar bar-header dy-word-common-top">
+	<span class="s1">游戏排名</span><br>
+	<img class="s3" src="img/arrow_right.png" ng-click="goBack()">
 
-	<div class="dy-word-common-top">
-		<span class="s1">游戏排名</span><br>
-		<img class="s3" src="img/arrow_right.png" ng-click="goBack()">
+</div>
 
-	</div>
+<ion-content class="has-header background-common">
 
 	<div class="me-home-list">
 
@@ -22,7 +22,7 @@
 
 			<span class="col-10"><img src="{{order.headimgurl}}" width="34px"></span>
 
-			<span class="col-40" >&nbsp;&nbsp;{{order.nickname}}</span>
+			<span class="col-40">&nbsp;&nbsp;{{order.nickname}}</span>
 
 			<span class="col-25" style="text-align: center;">{{order.game_completed_total}}</span>
 
@@ -43,4 +43,4 @@
 
 	</div>
 
-</ion-view>
+</ion-content>
