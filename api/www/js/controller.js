@@ -21,9 +21,7 @@ dcCtrl
 				$rootScope.Alert(response.msg);
 			} else {
 				$scope.word = response;
-
 				$(".video-box video").attr("src", "/upload/word/mp4/" + $scope.word.video);
-
 				$('.video-box video').mediaelementplayer();
 			}
 
@@ -470,15 +468,11 @@ dcCtrl
 			} else {
 				var myanswers = item.myanswer.split('^');
 				var answers = item.answer.split('^');
-
 				item.result = [];
-
 				for(i = 0; i < myanswers.length; i++) {
 					item.result[i] = (myanswers[i] == answers[i]);
 				}
-
 				$scope.answered++;
-
 			}
 		}
 

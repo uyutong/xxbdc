@@ -239,7 +239,8 @@
 			.state('me_appvcode', {
 				url: '/me_appvcode',
 				templateUrl: 'templates/me_app_vcode.html',
-				controller: 'me_appvcodeCtrl'
+				controller: 'me_appvcodeCtrl',
+				cache: false
 			})
 			//#endregion
 
@@ -247,7 +248,8 @@
 			.state('me_gametop10', {
 				url: '/me_gametop10',
 				templateUrl: 'templates/me_game_top10.html',
-				controller: 'me_gametop10Ctrl'
+				controller: 'me_gametop10Ctrl',
+				cache: false
 			})
 			//#endregion
 
@@ -271,7 +273,8 @@
 			.state('my_order', {
 				url: '/my_order',
 				templateUrl: 'templates/my_order.html',
-				controller: 'my_orderCtrl'
+				controller: 'my_orderCtrl',
+				cache: false
 			})
 		   //#endregion	
 		   
@@ -279,7 +282,9 @@
 			.state('my_vcode', {
 				url: '/my_vcode',
 				templateUrl: 'templates/my_vcode.html',
-				controller: 'my_vcodeCtrl'
+				controller: 'my_vcodeCtrl',
+				cache: false
+
 			})
 		   //#endregion	
 		   

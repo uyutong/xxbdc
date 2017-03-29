@@ -2,30 +2,29 @@
 dcCtrl
 	.controller('loginCtrl', function($rootScope, $scope, $state, $http, $ionicActionSheet) {
 
-//		var info = {
-//			"id": "21",
-//			"subscribe": null,
-//			"openid": "oGh6gwCNOQpRsvnNf3pVJ1rK5N4k",
-//			"nickname": "\u6d77\u9614\u5929\u7a7a",
-//			"sex": "1",
-//			"language": "zh_CN",
-//			"city": "",
-//			"province": "",
-//			"country": "",
-//			"headimgurl": "http:\/\/wx.qlogo.cn\/mmopen\/Q3auHgzwzM4I8ibXxonibqKs6AJmcToqka34cUoDiaClPbmN8Jh6ic3pIvt72F2oxrib0EficcT2o2VdOrS7KGYZ1F7Q\/0",
-//			"subscribe_time": null,
-//			"unionid": "ocffVt6ZE2o_Ybzs1_NbVTVsn5v4",
-//			"remark": null,
-//			"groupid": null,
-//			"register_time": "2016-12-20 10:21:00",
-//			"status": "7",
-//			"book_id": "0"
-//		};
+		var info = {
+			"id": "21",
+			"subscribe": null,
+			"openid": "oGh6gwCNOQpRsvnNf3pVJ1rK5N4k",
+			"nickname": "\u6d77\u9614\u5929\u7a7a",
+			"sex": "1",
+			"language": "zh_CN",
+			"city": "",
+			"province": "",
+			"country": "",
+			"headimgurl": "http:\/\/wx.qlogo.cn\/mmopen\/Q3auHgzwzM4I8ibXxonibqKs6AJmcToqka34cUoDiaClPbmN8Jh6ic3pIvt72F2oxrib0EficcT2o2VdOrS7KGYZ1F7Q\/0",
+			"subscribe_time": null,
+			"unionid": "ocffVt6ZE2o_Ybzs1_NbVTVsn5v4",
+			"remark": null,
+			"groupid": null,
+			"register_time": "2016-12-20 10:21:00",
+			"status": "7",
+			"book_id": "0"
+		};
 //
 		$scope.iflogin = false;
-//		setStorage("userinfo", info);
-
-
+		setStorage("userinfo", info);
+		
 		$scope.saveUserBook = function(userId, bookId) {
 			if($rootScope.mybook) {
 				$rootScope.userinfo.mybook = $rootScope.mybook;
