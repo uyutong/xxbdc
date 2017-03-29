@@ -39,7 +39,15 @@ dcCtrl
 		$scope.playDetailWord0 = function(audio) {
 			$rootScope.playWord(audio, $("#detail_paly_0"));
 		}
-
+		
+		$scope.goExercise = function(){
+			$state.go("word_exercise",{
+					"book_id": $stateParams.book_id,
+					"unit_id": $stateParams.unit_id,
+			        "word": $stateParams.word
+				})
+		}
+		
 		//		$scope.play = function(audio) {
 		//			var v = document.getElementById("audio");
 		//			v.src = $rootScope.siteUrl + "/upload/word/mp3/" + audio;
