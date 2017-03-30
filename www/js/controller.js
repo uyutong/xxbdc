@@ -2,28 +2,28 @@
 dcCtrl
 	.controller('loginCtrl', function($rootScope, $scope, $state, $http, $ionicActionSheet) {
 
-		var info = {
-			"id": "21",
-			"subscribe": null,
-			"openid": "oGh6gwCNOQpRsvnNf3pVJ1rK5N4k",
-			"nickname": "\u6d77\u9614\u5929\u7a7a",
-			"sex": "1",
-			"language": "zh_CN",
-			"city": "",
-			"province": "",
-			"country": "",
-			"headimgurl": "http:\/\/wx.qlogo.cn\/mmopen\/Q3auHgzwzM4I8ibXxonibqKs6AJmcToqka34cUoDiaClPbmN8Jh6ic3pIvt72F2oxrib0EficcT2o2VdOrS7KGYZ1F7Q\/0",
-			"subscribe_time": null,
-			"unionid": "ocffVt6ZE2o_Ybzs1_NbVTVsn5v4",
-			"remark": null,
-			"groupid": null,
-			"register_time": "2016-12-20 10:21:00",
-			"status": "7",
-			"book_id": "0"
-		};
+//		var info = {
+//			"id": "21",
+//			"subscribe": null,
+//			"openid": "oGh6gwCNOQpRsvnNf3pVJ1rK5N4k",
+//			"nickname": "\u6d77\u9614\u5929\u7a7a",
+//			"sex": "1",
+//			"language": "zh_CN",
+//			"city": "",
+//			"province": "",
+//			"country": "",
+//			"headimgurl": "http:\/\/wx.qlogo.cn\/mmopen\/Q3auHgzwzM4I8ibXxonibqKs6AJmcToqka34cUoDiaClPbmN8Jh6ic3pIvt72F2oxrib0EficcT2o2VdOrS7KGYZ1F7Q\/0",
+//			"subscribe_time": null,
+//			"unionid": "ocffVt6ZE2o_Ybzs1_NbVTVsn5v4",
+//			"remark": null,
+//			"groupid": null,
+//			"register_time": "2016-12-20 10:21:00",
+//			"status": "7",
+//			"book_id": "0"
+//		};
 //
 		$scope.iflogin = false;
-		setStorage("userinfo", info);
+//		setStorage("userinfo", info);
 		
 		$scope.saveUserBook = function(userId, bookId) {
 			if($rootScope.mybook) {
@@ -2167,7 +2167,7 @@ dcCtrl
 
 		$rootScope.game_completed_total = 0;
 		$rootScope.sort_order = 1;
-
+		
 		$scope.user_game_order = function(book_id) {
 			var url = $rootScope.rootUrl + "/user_game_order";
 			var data = {
@@ -2200,7 +2200,7 @@ dcCtrl
 		$scope.gameTop10 = function() {
 			$state.go("me_gametop10")
 		}
-
+		
 		$scope.startGame = function(unit_id, index, _index) {
 			if(_index > 0 && !$rootScope.userinfo.active) {
 				$state.go("me_appvcode")
@@ -2211,7 +2211,7 @@ dcCtrl
 				})
 			}
 		}
-
+		
 	})
 
 	.controller('yx_mainCtrl', function($rootScope, $scope, $state, $stateParams, $http, $ionicActionSheet, $ionicPopup, $ionicPopover) {
@@ -2290,7 +2290,6 @@ dcCtrl
 	})
 
 	.controller('me_homeCtrl', function($rootScope, $scope, $state, $http, $ionicActionSheet) {
-
 		$scope.point = 0;
 		$scope.active_info = "";
 		if($rootScope.userinfo.active) {
@@ -2538,10 +2537,10 @@ dcCtrl
 				cordova.exec(success, fail, "OpenLink", "url", [$scope.apps[index].url]);
 			}
 		}
-
 	})
+	
 	.controller('me_appvcodeCtrl', function($rootScope, $ionicModal, $scope, $state, $http, $ionicActionSheet) {
-
+		
 		var price = parseInt($rootScope.mybook.price);
 		var sale_price = parseInt($rootScope.mybook.sale_price);
 		$scope.change_price = price / 100;
@@ -2744,14 +2743,15 @@ dcCtrl
 				return;
 			});
 		}
+		
 		$scope.book_status();
 
-		$scope.wechatShareCode = function(code) {
+		$scope.wechatShareCode = function(code,name) {
 
 			Wechat.isInstalled(function(installed) {
 				if(installed) {
 					Wechat.share({
-						text: "验证码:" + code+"适用于以下app http://xx.kaouyu.com/www/#/more_apps",
+						text: "验证码("+code+")只适用于"+name+"APP     打开APP下载列表http://xx.kaouyu.com/www/#/more_apps",
 						scene: Wechat.Scene.SESSION // share to Timeline
 					}, function() {
 						$rootScope.Alert("已分享");
