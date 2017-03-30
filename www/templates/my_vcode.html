@@ -8,11 +8,15 @@
 		<a class="item"  ng-repeat="book in dataList">
 			<h2 style="-webkit-user-select: auto;padding-top: 5px;padding-bottom: 5px;white-space:normal;font-size:14px;">{{book.code}}</h2>
 			<p>{{book.name}}</p>
-			<div ng-show="book.leftover>0" class="text-center"><button class=" button button-small  button-balanced" ng-click="wechatShareCode(book.code,book.name)">&#12288;分享给好友&#12288;</button>
+			<div ng-show="book.leftover>0" class="text-center"><button class=" button button-small  button-balanced" ng-click="wechatShareCode(book.code,book.name)">&#12288;分享给{{book.leftover}}位好友&#12288;</button>
             </div>
+           <div ng-show="book.leftover==0" class="text-center"><button class=" button button-small  button-stable" ng-click="">&#12288;分享次数已用完&#12288;</button>
+            </div>
+           
+            
 		</a>
 	</div>
 	
-	<div class="text-left padding" style="color: red;" >注：长按验证码可复制，只用于同书册的APP，最多两人使用！</div>
+	<div class="text-left padding" style="color: red;" >注：长按验证码可复制，只用于激活同书册的APP，最多两人使用！</div>
 
 </ion-content>
