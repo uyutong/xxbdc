@@ -309,6 +309,7 @@ dcCtrl
 						$scope.learned = $scope.learned + parseInt(item.word_completed_total);
 					})
 					//检查是否有新版本
+					
 					if(device.platform === 'Android') {
 						$scope.version("android", book_id);
 					}
@@ -499,13 +500,13 @@ dcCtrl
 			$http.post(url, data).success(function(response) {
 				$rootScope.LoadingHide();
 				if(response.error) {
-					//				$rootScope.Alert(response.msg);
+					//$rootScope.Alert(response.msg);
 				} else {
 					$rootScope.app = response;
-					//此页面不设置缓存点击就刷新了 避免提示升级次数过多 暂设定为一天一次 只看date.getDate 不一样就提示升级
 					var date = new Date();
-					if(getStorage("gxdate", true) === date.getDate() + "") {} else {
-						setStorage("gxdate", date.getDate() + "", true);
+					//此页面不设置缓存点击就刷新了 避免提示升级次数过多 暂设定为一天一次 只看date.getDate 不一样就提示升级
+					if(getStorage("gxdate", true) === date.getDate() + "") {
+					} else {
 						$scope.checkUpdate();
 					}
 				}
@@ -533,6 +534,7 @@ dcCtrl
 					var newVersionNum = parseInt($rootScope.app.version.replace(new RegExp(/(\.)/g), '0'));
 
 					if(newVersionNum > nowVersionNum && $rootScope.app.status === '1') {
+					
 						if(type === 'wifi') {
 							$ionicPopup.confirm({
 								title: '版本升级',
@@ -556,6 +558,9 @@ dcCtrl
 								}
 							});
 						}
+						//设置今天不在提示升级
+						var date = new Date();
+						setStorage("gxdate", date.getDate() + "", true);
 					}
 				});
 
@@ -2681,9 +2686,6 @@ dcCtrl
 			});
 		}
 
-
-
-
 		$scope.showLeft = true;
 		$scope.showRight = false;
 		$scope.show1 = function() {
@@ -2724,6 +2726,7 @@ dcCtrl
 		}
 		$scope.user_game_order();
 	})
+	
 	.controller('my_vcodeCtrl', function($rootScope, $ionicModal, $scope, $state, $http, $ionicActionSheet, $cordovaClipboard) {
 		$scope.book_status = function() {
 			var url = $rootScope.rootUrl + "/book_status";
