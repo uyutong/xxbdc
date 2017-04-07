@@ -278,7 +278,7 @@ dcCtrl
 			}
 		}
 	})
-
+    //
 	.controller('dy_homeCtrl', function($rootScope, $scope, $state, $http, $ionicActionSheet, $ionicPopup, $ionicLoading, $cordovaNetwork, $cordovaAppVersion, $cordovaFileTransfer, $cordovaFileOpener2) {
 
 		$scope.ifsearch = false;
