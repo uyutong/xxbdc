@@ -2,29 +2,29 @@
 dcCtrl
 	.controller('loginCtrl', function($rootScope, $scope, $state, $http, $ionicActionSheet) {
 
-//		var info = {
-//			"id": "21",
-//			"subscribe": null,
-//			"openid": "oGh6gwCNOQpRsvnNf3pVJ1rK5N4k",
-//			"nickname": "\u6d77\u9614\u5929\u7a7a",
-//			"sex": "1",
-//			"language": "zh_CN",
-//			"city": "",
-//			"province": "",
-//			"country": "",
-//			"headimgurl": "http:\/\/wx.qlogo.cn\/mmopen\/Q3auHgzwzM4I8ibXxonibqKs6AJmcToqka34cUoDiaClPbmN8Jh6ic3pIvt72F2oxrib0EficcT2o2VdOrS7KGYZ1F7Q\/0",
-//			"subscribe_time": null,
-//			"unionid": "ocffVt6ZE2o_Ybzs1_NbVTVsn5v4",
-//			"remark": null,
-//			"groupid": null,
-//			"register_time": "2016-12-20 10:21:00",
-//			"status": "7",
-//			"book_id": "0"
-//		};
-//
+		//		var info = {
+		//			"id": "21",
+		//			"subscribe": null,
+		//			"openid": "oGh6gwCNOQpRsvnNf3pVJ1rK5N4k",
+		//			"nickname": "\u6d77\u9614\u5929\u7a7a",
+		//			"sex": "1",
+		//			"language": "zh_CN",
+		//			"city": "",
+		//			"province": "",
+		//			"country": "",
+		//			"headimgurl": "http:\/\/wx.qlogo.cn\/mmopen\/Q3auHgzwzM4I8ibXxonibqKs6AJmcToqka34cUoDiaClPbmN8Jh6ic3pIvt72F2oxrib0EficcT2o2VdOrS7KGYZ1F7Q\/0",
+		//			"subscribe_time": null,
+		//			"unionid": "ocffVt6ZE2o_Ybzs1_NbVTVsn5v4",
+		//			"remark": null,
+		//			"groupid": null,
+		//			"register_time": "2016-12-20 10:21:00",
+		//			"status": "7",
+		//			"book_id": "0"
+		//		};
+		//
 		$scope.iflogin = false;
-//		setStorage("userinfo", info);
-		
+		//		setStorage("userinfo", info);
+
 		$scope.saveUserBook = function(userId, bookId) {
 			if($rootScope.mybook) {
 				$rootScope.userinfo.mybook = $rootScope.mybook;
@@ -108,7 +108,6 @@ dcCtrl
 				return;
 			});
 		}
-
 
 		var userinfo = getStorage("userinfo");
 		if(userinfo.id) {
@@ -309,7 +308,7 @@ dcCtrl
 						$scope.learned = $scope.learned + parseInt(item.word_completed_total);
 					})
 					//检查是否有新版本
-					
+
 					if(device.platform === 'Android') {
 						$scope.version("android", book_id);
 					}
@@ -505,8 +504,7 @@ dcCtrl
 					$rootScope.app = response;
 					var date = new Date();
 					//此页面不设置缓存点击就刷新了 避免提示升级次数过多 暂设定为一天一次 只看date.getDate 不一样就提示升级
-					if(getStorage("gxdate", true) === date.getDate() + "") {
-					} else {
+					if(getStorage("gxdate", true) === date.getDate() + "") {} else {
 						$scope.checkUpdate();
 					}
 				}
@@ -534,7 +532,6 @@ dcCtrl
 					var newVersionNum = parseInt($rootScope.app.version.replace(new RegExp(/(\.)/g), '0'));
 
 					if(newVersionNum > nowVersionNum && $rootScope.app.status === '1') {
-					
 						if(type === 'wifi') {
 							$ionicPopup.confirm({
 								title: '版本升级',
@@ -543,7 +540,13 @@ dcCtrl
 								okText: '升级'
 							}).then(function(res) {
 								if(res) {
-									$scope.UpdateForAndroid();
+									var success = function(message) {
+										alert("success = " + message);
+									};
+									var fail = function(message) {
+										alert("fail = " + message);
+									};
+									cordova.exec(success, fail, "OpenLink", "url", [$rootScope.app.url]);
 								}
 							});
 						} else {
@@ -554,7 +557,14 @@ dcCtrl
 								okText: '升级'
 							}).then(function(res) {
 								if(res) {
-									$scope.UpdateForAndroid();
+									//									$scope.UpdateForAndroid();
+									var success = function(message) {
+										alert("success = " + message);
+									};
+									var fail = function(message) {
+										alert("fail = " + message);
+									};
+									cordova.exec(success, fail, "OpenLink", "url", [$rootScope.app.url]);
 								}
 							});
 						}
@@ -605,7 +615,7 @@ dcCtrl
 							});
 							$ionicLoading.hide();
 						}, function(progress) {
-							console.log("progress", progress.loaded + "---" + progress.total)
+							//							console.log("progress", progress.loaded + "---" + progress.total)
 							setTimeout(function() {
 								var downloadProgress = (progress.loaded / progress.total) * 100;
 								$ionicLoading.show({
@@ -616,7 +626,6 @@ dcCtrl
 								}
 							});
 						});
-
 					}, onErrorCreateFile);
 
 			}, onErrorLoadFs);
@@ -2170,10 +2179,8 @@ dcCtrl
 			});
 		}
 
-		$rootScope.game_completed_total = 0;
-		$rootScope.sort_order = 1;
-		
 		$scope.user_game_order = function(book_id) {
+			$scope.game_completed_total = 0;
 			var url = $rootScope.rootUrl + "/user_game_order";
 			var data = {
 				"user_id": $rootScope.userinfo.id,
@@ -2185,8 +2192,8 @@ dcCtrl
 				if(response.error) {
 					$rootScope.Alert(response.msg);
 				} else {
-					$rootScope.game_completed_total = response.game_completed_total;
-					$rootScope.sort_order = response.sort_order;
+					$scope.game_completed_total = response.game_completed_total;
+					$scope.sort_order = response.sort_order;
 				}
 
 			}).error(function(response, status) {
@@ -2205,7 +2212,7 @@ dcCtrl
 		$scope.gameTop10 = function() {
 			$state.go("me_gametop10")
 		}
-		
+
 		$scope.startGame = function(unit_id, index, _index) {
 			if(_index > 0 && !$rootScope.userinfo.active) {
 				$state.go("me_appvcode")
@@ -2216,7 +2223,7 @@ dcCtrl
 				})
 			}
 		}
-		
+
 	})
 
 	.controller('yx_mainCtrl', function($rootScope, $scope, $state, $stateParams, $http, $ionicActionSheet, $ionicPopup, $ionicPopover) {
@@ -2543,9 +2550,9 @@ dcCtrl
 			}
 		}
 	})
-	
+
 	.controller('me_appvcodeCtrl', function($rootScope, $ionicModal, $scope, $state, $http, $ionicActionSheet) {
-		
+
 		var price = parseInt($rootScope.mybook.price);
 		var sale_price = parseInt($rootScope.mybook.sale_price);
 		$scope.change_price = price / 100;
@@ -2671,11 +2678,11 @@ dcCtrl
 			$http.post(url, data).success(function(response) {
 				$rootScope.LoadingHide();
 				if(response.return_code == 'SUCCESS') {
-				    $rootScope.userinfo.active = true;
+					$rootScope.userinfo.active = true;
 					$rootScope.Alert("支付成功并激活成功");
-//					setTimeout(function(){
-//			            $state.go("my_order")
-//					},2000)
+					//					setTimeout(function(){
+					//			            $state.go("my_order")
+					//					},2000)
 				} else {
 					$rootScope.Alert(response.return_msg);
 				}
@@ -2726,7 +2733,7 @@ dcCtrl
 		}
 		$scope.user_game_order();
 	})
-	
+
 	.controller('my_vcodeCtrl', function($rootScope, $ionicModal, $scope, $state, $http, $ionicActionSheet, $cordovaClipboard) {
 		$scope.book_status = function() {
 			var url = $rootScope.rootUrl + "/book_status";
@@ -2746,15 +2753,15 @@ dcCtrl
 				return;
 			});
 		}
-		
+
 		$scope.book_status();
 
-		$scope.wechatShareCode = function(code,name) {
+		$scope.wechatShareCode = function(code, name) {
 
 			Wechat.isInstalled(function(installed) {
 				if(installed) {
 					Wechat.share({
-						text: "验证码("+code+")只适用于"+name+"APP     打开APP下载列表http://xx.kaouyu.com/www/#/more_apps",
+						text: "验证码(" + code + ")只适用于" + name + "APP     打开APP下载列表http://xx.kaouyu.com/www/#/more_apps",
 						scene: Wechat.Scene.SESSION // share to Timeline
 					}, function() {
 						$rootScope.Alert("已分享");
