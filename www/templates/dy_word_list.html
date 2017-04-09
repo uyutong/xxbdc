@@ -50,7 +50,7 @@
 
 <img ng-show="playing" style="position: absolute;top:50%;left: 50%;transform: translate(-50%, -50%);" width="70px" src="img/play_gif.gif">
 
-<div class="row row-center" style="position: fixed;top:50px;left:0px;height:30px;background:white ;padding-left: 0px;padding-right: 0px;">
+<div class="row row-center" style="position: fixed;top:{{isIOS?70:50}}px;left:0px;height:30px;background:white ;padding-left: 0px;padding-right: 0px;">
 	<div ng-class="{'col':true,'text-center':true,'word_list_tab':true,'activ':tab_num==-1}" ng-click="wordSelect(-1)">全部  {{word_list.length}}</div>
 	<div ng-class="{'col':true,'text-center':true,'word_list_tab':true,'activ':tab_num==0}" ng-click="wordSelect(0)">零奖杯 {{word_list_0.length}}</div>
 	<div ng-class="{'col':true,'text-center':true,'word_list_tab':true,'activ':tab_num==1}" ng-click="wordSelect(1)">单奖杯 {{word_list_1.length}}</div>

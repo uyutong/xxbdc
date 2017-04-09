@@ -1120,3 +1120,24 @@
 	color: gray;
 	font-size: 15px;
 }
+
+/************ IOS BEGIN *******************/
+.ios20{height:20px; width:100%; clear:both;}
+.bg_yello{background: #ffc343;}
+.platform-ios .me-home-top .s1{top:30px;}
+.platform-ios .dy-word-common-top .s1{transform: translate(-50%, -110%);}
+.platform-ios .dy-word-common-top .s2 {
+ 
+    transform: translate(0, -120%);
+}
+
+.platform-ios .dy-word-common-top .s3 {
+
+    transform: translate(0, -90%);
+}
+
+.platform-ios .dy-word-common-top .s4 {
+    transform: translate(0, -100%);
+
+}
+/************ IOS END *******************/

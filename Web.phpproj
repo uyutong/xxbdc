@@ -628,11 +628,14 @@
     <Content Include="www\templates\api.html" />
     <Content Include="www\templates\grade_select.html" />
     <Content Include="www\templates\dy_word_detail.html" />
+    <Content Include="www\templates\home.html" />
     <Content Include="www\templates\me_about_us.html" />
     <Content Include="www\templates\me_app_vcode.html" />
     <Content Include="www\templates\more_apps.html" />
     <Content Include="www\templates\me_game_top10.html" />
     <Content Include="www\templates\me_home.html" />
+    <Content Include="www\templates\my_order.html" />
+    <Content Include="www\templates\my_vcode.html" />
     <Content Include="www\templates\tab.html" />
     <Content Include="www\templates\login.html" />
     <Content Include="www\templates\yx_home.html" />

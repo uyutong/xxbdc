@@ -12,7 +12,14 @@
 		////正式数据
 		//$rootScope.rootUrl = "http://kuyxxword.ourapp.site:66/index.php/api";
 		$ionicPlatform.ready(function() {
-			initCordova();
+		    initCordova();
+
+		    cordova.getAppVersion.getVersionNumber(function (version) {
+		        $rootScope.currentVersion = version;
+		    });
+
+		    
+
 		});
 		
 		InitIonic($rootScope, $ionicModal, $ionicPopup, $ionicLoading, $http, $state);
@@ -95,6 +102,10 @@
 				'index': $rootScope.list_index
 			})
 		}
+
+		var ua = navigator.userAgent;
+		$rootScope.isIOS = ua.match(/(iPhone|iPod|iPad)/);
+		$rootScope.isAndroid = ua.match(/Android/);
 		
 	})
 
@@ -288,8 +299,15 @@
 			})
 		   //#endregion	
 		   
+        .state('home', {
+            url: '/home',
+            templateUrl: 'templates/home.html',
+            controller: 'homeCtrl',
+            cache: false
+
+        })
 		   
-		$urlRouterProvider.otherwise('/login');
+		$urlRouterProvider.otherwise('/home');
 
 	});
 
@@ -372,6 +390,8 @@ function InitIonic($rootScope, $ionicModal, $ionicPopup, $ionicLoading, $http, $
 		}, false)
 		v.play();
 		obj.attr("src", "img/play_gif.gif");
+        
+        console.log("upload/word/mp3/" + audio);
 	}
 
 	$rootScope.playWebWord = function(audio) {
