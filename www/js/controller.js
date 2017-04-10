@@ -1,5 +1,43 @@
-﻿var dcCtrl = angular.module('dachutimes.controllers', []);
+var dcCtrl = angular.module('dachutimes.controllers', []);
 dcCtrl
+    .controller('homeCtrl', function ($rootScope, $scope, $state, $http, $ionicActionSheet) {
+
+        //#region 苹果审核人员用 勿删
+        var info = { "id": "24", "subscribe": null, "openid": "oVl0IwD3qn9_3GHx2qOGXBJlxRUc", "nickname": "\u9a6c\u6d2a\u6d9b", "sex": "1", "language": "zh_CN", "city": "Mentougou", "province": "Beijing", "country": "CN", "headimgurl": "http:\/\/wx.qlogo.cn\/mmopen\/XiaYa0IAAlP8OZom5WMCCVl1icLibz9F6yE85NXOpZZ1NNsJ5G65nnkzgoN8fA07WibKM0hmpI56FviaafZk6MWbbPlDFfpFjTXxN\/0", "subscribe_time": null, "unionid": "ocffVt08HworeoxlzULVlOFdkYY4", "remark": null, "groupid": null, "register_time": "2017-02-22 21:43:59", "status": "0", "book_id": "14" };
+
+        if ($rootScope.isIOS) {
+            var url = $rootScope.rootUrl + "/version";
+            var data = {
+                "platform": "ios",
+                "book_id": $rootScope.bookId
+            };
+            $http.post(url, data).success(function (response) {
+                if (response.error) {
+
+                } else {
+
+                    setTimeout(function () {
+
+                        if (response.status == 0 && response.version == $rootScope.currentVersion) {
+
+                            setStorage("userinfo", info);
+                        }
+
+                        $state.go("login");
+
+                    }, 1000);
+                }
+            }).error(function (response, status) {
+                return;
+            });
+        }
+        else {
+            $state.go("login");
+        }
+        //#endregion 苹果审核人员用 勿删
+
+    })
+
 	.controller('loginCtrl', function($rootScope, $scope, $state, $http, $ionicActionSheet) {
 
 		//		var info = {
@@ -21,7 +59,51 @@ dcCtrl
 		//			"status": "7",
 		//			"book_id": "0"
 		//		};
-		//
+	    //
+
+	    //#region 苹果审核人员用 勿删
+	    var info = { "id": "24", "subscribe": null, "openid": "oVl0IwD3qn9_3GHx2qOGXBJlxRUc", "nickname": "\u9a6c\u6d2a\u6d9b", "sex": "1", "language": "zh_CN", "city": "Mentougou", "province": "Beijing", "country": "CN", "headimgurl": "http:\/\/wx.qlogo.cn\/mmopen\/XiaYa0IAAlP8OZom5WMCCVl1icLibz9F6yE85NXOpZZ1NNsJ5G65nnkzgoN8fA07WibKM0hmpI56FviaafZk6MWbbPlDFfpFjTXxN\/0", "subscribe_time": null, "unionid": "ocffVt08HworeoxlzULVlOFdkYY4", "remark": null, "groupid": null, "register_time": "2017-02-22 21:43:59", "status": "0", "book_id": "14" };
+
+	    if ($rootScope.isIOS) {
+	        var url = $rootScope.rootUrl + "/version";
+	        var data = {
+	            "platform": "ios",
+	            "book_id": $rootScope.bookId
+	        };
+	        $http.post(url, data).success(function (response) {
+	            if (response.error) {
+
+	            } else {
+
+	                setTimeout(function () {
+
+	                    if (response.status == 0 && response.version == $rootScope.currentVersion) {
+
+	                        setStorage("userinfo", info);
+
+	                        var userinfo = getStorage("userinfo");
+
+	                        if (userinfo.id) {
+	                            $scope.iflogin = true;
+	                            $rootScope.userinfo = userinfo;
+	                            if ($rootScope.userinfo.book_id != $rootScope.bookId) {
+	                                $scope.setBook($rootScope.userinfo.id, $rootScope.bookId);
+	                            } else {
+	                                $scope.saveUserBook($rootScope.userinfo.id, $rootScope.userinfo.book_id);
+	                            }
+	                        } else {
+	                            $scope.getBook(21, $rootScope.bookId);
+	                        }
+	                    }
+	                }, 1000);
+	            }
+	        }).error(function (response, status) {
+	            return;
+	        });
+	    }
+	    //#endregion 苹果审核人员用 勿删
+        
+
 		$scope.iflogin = false;
 		//		setStorage("userinfo", info);
 
@@ -110,6 +192,7 @@ dcCtrl
 		}
 
 		var userinfo = getStorage("userinfo");
+
 		if(userinfo.id) {
 			$scope.iflogin = true;
 			$rootScope.userinfo = userinfo;
@@ -280,6 +363,36 @@ dcCtrl
 	})
     //
 	.controller('dy_homeCtrl', function($rootScope, $scope, $state, $http, $ionicActionSheet, $ionicPopup, $ionicLoading, $cordovaNetwork, $cordovaAppVersion, $cordovaFileTransfer, $cordovaFileOpener2) {
+                
+                ///////////////
+	    $scope.mstop = function () {
+	        window.plugins.audioRecorderAPI.stop(function (msg) {
+	            // success
+	            alert('ok: ' + msg);
+	        }, function (msg) {
+	            // failed
+	            alert('ko: ' + msg);
+	        });
+	    }
+	    $scope.mstart = function () {
+	        window.plugins.audioRecorderAPI.record(function (msg) {
+	            // complete
+	            alert('ok: ' + msg);
+	        }, function (msg) {
+	            // failed
+	            alert('ko: ' + msg);
+	        }, 30); // record 30 seconds
+	    }
+	    $scope.mplay = function () {
+	        window.plugins.audioRecorderAPI.playback(function (msg) {
+	            // complete
+	            alert('ok: ' + msg);
+	        }, function (msg) {
+	            // failed
+	            alert('ko: ' + msg);
+	        });
+	    }
+                ///////////////
 
 		$scope.ifsearch = false;
 		$scope.units = [];
@@ -1806,6 +1919,7 @@ dcCtrl
 		}
 		// Record audio
 		//mp3不支持
+        var remoreAudioUrl="";
 		var mediaRec;
 		var src = "audio.amr";
 		$scope.clicked = false;
@@ -1817,16 +1931,27 @@ dcCtrl
 				$scope.clicked = true;
 				$scope.seconds = 0;
 				$scope.count = 0;
-				mediaRec = new Media(src,
-					// success callback
-					function() {},
-					// error callback
-					function(err) {
-						$scope.clicked = false;
-					}
-				);
-				// Record audio
-				mediaRec.startRecord();
+
+				if ($rootScope.isAndroid) {
+
+				    mediaRec = new Media(src,
+                        // success callback
+                        function () { },
+                        // error callback
+                        function (err) {
+                            $scope.clicked = false;
+                        }
+                    );
+				    // Record audio
+				    mediaRec.startRecord();
+				}
+				else {
+
+				    window.plugins.audioRecorderAPI.stop();
+				    window.plugins.audioRecorderAPI.record(function (msg) { }, function (msg) { }, $scope.time_long); // 录30秒后自动停止
+
+				}
+
 				$("#read_record").attr("src", "img/record_gif.gif")
 				var timer = $interval(function() {
 					$scope.count++;
@@ -1838,12 +1963,27 @@ dcCtrl
 
 					$('.progress_bar').width(($scope.per_progress * $scope.seconds) + '%').css("backgroundColor", "#0c7cd6");
 					if($scope.count == $scope.time_long + 1) {
-						mediaRec.stopRecord();
+						
 						$("#read_record").attr("src", "img/xiaoxue_cut_09.png")
 						$scope.recorded = true;
 						$scope.clicked = false;
 
-						$scope.uploadAudio($scope.word.en);
+						if ($rootScope.isAndroid) {
+						    mediaRec.stopRecord();
+						    $scope.uploadAudio($scope.word.en);
+						}
+						else {
+						    window.plugins.audioRecorderAPI.stop(function (savedFilePath) {
+
+						        remoreAudioUrl = savedFilePath.split('/')[savedFilePath.split('/').length - 1];
+
+						        $scope.uploadAudio($scope.word.en, savedFilePath);
+
+						    }, function (msg) {
+						        // failed
+						        //alert('ko: ' + msg);
+						    });
+						}
 					}
 
 					if($scope.count > $scope.time_long) {
@@ -1857,12 +1997,19 @@ dcCtrl
 		// Play audio
 		//
 
-		$scope.uploadAudio = function(word) {  
+		$scope.uploadAudio = function(word,iosURL) {  
 
 			$scope.if_low_show = false;
 
 			$rootScope.LoadingShow();
-			var fileURL = cordova.file.externalRootDirectory + "audio.amr";   
+			var fileURL = cordova.file.externalRootDirectory + "audio.amr";
+
+			if (iosURL)
+			{
+			    fileURL = iosURL;
+			}
+                
+
 			var options = new FileUploadOptions();  
 			options.fileKey = "audio";  
 			options.fileName = fileURL.substr(fileURL.lastIndexOf('/') + 1);  
@@ -1872,7 +2019,9 @@ dcCtrl
 			params.format = 'amr';
 			options.params = params;   
 			var ft = new FileTransfer();   //上传地址
-			var SERVER = $rootScope.rootUrl + "/stt";  
+			var SERVER = $rootScope.rootUrl + "/stt";
+                
+                
 			ft.upload(fileURL, encodeURI(SERVER), function(r) {     
 				$rootScope.LoadingHide();
 				var response = JSON.parse(r.response)
@@ -1926,12 +2075,26 @@ dcCtrl
 		}
 
 		$scope.playRecordAudio = function() {
+                
+            
 
 			if(!$scope.playing) {
 				$scope.seconds = 0;
 				$scope.count = 0;
 				$scope.playing = true;
-				mediaRec.play();
+				if ($rootScope.isIOS) {
+
+				    //alert('http://xx.kaouyu.com/upload/test/'+remoreAudioUrl);
+
+				    var v = document.getElementById("audio");
+				    v.src = 'http://xx.kaouyu.com/upload/test/' + remoreAudioUrl;
+				    v.play();
+
+
+				}
+				else {
+				    mediaRec.play();
+				}
 				$("#read_play").attr("src", "img/play_gif.gif")
 				var timer2 = $interval(function() {
 					$scope.count++;
@@ -1943,7 +2106,9 @@ dcCtrl
 					$('.progress_bar').width(($scope.per_progress * $scope.seconds) + '%').css("backgroundColor", "#0c7cd6");
 					if($scope.seconds == $scope.time_long) {
 						$scope.playing = false;
-						mediaRec.stop();
+						if ($rootScope.isAndroid) {
+						    mediaRec.stop();
+						}
 						$("#read_play").attr("src", "img/xiaoxue_cut_07.png")
 					}
 					if($scope.count > $scope.time_long) {
@@ -2002,8 +2167,8 @@ dcCtrl
 			$scope.letters = [];
 			$scope.wrong_times = 0;
 
-			function sortNumber(a, b) {
-				return a < b
+			function sortNumber() {
+			    return Math.random() - 0.5;
 			}
 
 			if($scope.spell.indexOf(" ") == -1 && $scope.spell.indexOf("'") == -1 && $scope.spell.indexOf("-") == -1 && $scope.spell.indexOf(".") == -1 && $scope.spell.indexOf("…") == -1 && $scope.spell.indexOf("’")) {

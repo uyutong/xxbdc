@@ -1,6 +1,6 @@
 ﻿<ion-view class="background-yx">
-
 	<div class="yx-home-top">
+        <div class="ios20" ng-if="isIOS"></div>
 		<span class="s1" ng-click="gameTop10()">游戏排名&nbsp;&nbsp;&nbsp;{{sort_order}}</span>
 		<span class="s2" ng-click="scoreInfo()">积分:{{game_completed_total}}</span>
 	</div>
@@ -29,4 +29,4 @@
 
 	</div>
 
-</ion-view>
+</ion-vie

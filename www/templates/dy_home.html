@@ -1,4 +1,6 @@
-﻿<ion-view class="backgroud-light">
+<ion-view class="backgroud-light">
+
+    <div class="ios20 bg_yello" ng-if="isIOS"></div>
 
 	<div class="dy-home-top">
 		<span class="s1" ng-show="!ifsearch">{{mybook.grade}}英语 {{mybook.semester}}</span><br>
@@ -35,5 +37,7 @@
 		</div>
 	</div>
 
-
+<!--<a class="button" ng-click="mstart()">开始</a>-->
+<!--<a class="button" ng-click="mstop()">结束</a>-->
+<!--<a class="button" ng-click="mplay()">播放</a>-->
 </ion-view>
