@@ -2526,6 +2526,17 @@ dcCtrl
 					$rootScope.Alert(response.msg);
 				} else {
 					$scope.apps = response;
+				    var temp_array = [];
+				    angular.forEach($scope.apps,function(item){
+				    	if(item.publisher.indexOf('三年级起点')>0 && $rootScope.bookPublish.indexOf('三年级起点')>0){
+				    		temp_array.push(item);
+				    	}else if(item.publisher.indexOf('一年级起点')>0 && $rootScope.bookPublish.indexOf('一年级起点')>0){
+//				    		if(parseInt(item.id)>=parseInt($rootScope.app.id)&&temp_array.length<8){
+				    			temp_array.push(item);
+//				    		}
+				    	}
+				    })
+				    $scope.apps = temp_array;
 				}
 			}).error(function(response, status) {
 				$rootScope.LoadingHide();
@@ -2535,7 +2546,6 @@ dcCtrl
 		}
 		//$scope.versions(device.platform)
 		$scope.versions("android")
-
 		$scope.downloadApk = function(index) {
 			if(device.platform === 'iOS') {
 				window.open($scope.apps[index].url, '_blank');
