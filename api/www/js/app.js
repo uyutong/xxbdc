@@ -7,7 +7,6 @@
     $rootScope.siteUrl = "http://xx.kaouyu.com";
     $rootScope.rootUrl = $rootScope.siteUrl + "/index.php/api";
     
-
     $ionicPlatform.ready(function () {
         initCordova();
     });
@@ -36,10 +35,10 @@
         controller: 'word_exerciseCtrl'
     })
     
-    .state('word_list', {
-        url: '/word_list/:book_id/:unit_id/:type',
+    .state('wx_word_list', {
+        url: '/wx_word_list/:book_id/:unit_id/:type',
         templateUrl: 'templates/wx_word_list.html',
-        controller: 'word_listCtrl'
+        controller: 'wx_word_listCtrl'
     })
 
     //#region
@@ -49,6 +48,13 @@
 		controller: 'more_appsCtrl'
 	})
 	//#endregion	
+
+    .state('word_list', {
+        url: '/word_list/:book_id/:unit_id',
+        templateUrl: 'templates/word_list.html',
+        controller: 'word_listCtrl'
+    })
+
 
     //$urlRouterProvider.otherwise('/grade');
 });
@@ -111,6 +117,14 @@ function InitIonic($rootScope, $ionicModal, $ionicPopup, $ionicLoading, $http, $
     };
     
     
+    $rootScope.playWebWord = function(audio) {
+		var v = document.getElementById("audio");
+		v.src = $rootScope.siteUrl + "/upload/word/mp3/" + audio;
+		v.loop = false;
+		v.play();
+	}
+    
+  
     $rootScope.playWord = function(audio, obj) {
 	
 		var v = document.getElementById("audio");

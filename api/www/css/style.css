@@ -323,6 +323,8 @@
 	line-height: 70px;
 	position: relative;
 	text-align: center;
+	font-size: 18px;
+
 }
 
 .dy-home-sp-color1 {
@@ -479,6 +481,8 @@
 	background-image: url(../img/word_list_bg.png);
 	margin: 8px 0px;
 	position: relative;
+	font-size: 18px;
+
 }
 
 .dy-word-list-list .out_div.activated {
