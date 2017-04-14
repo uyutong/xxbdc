@@ -3,6 +3,7 @@ dcCtrl
 	//#region 扫描单词页
 	.controller('word_detailCtrl', function($rootScope, $ionicModal, $scope, $state, $http, $stateParams) {
 
+        $scope.book_id = $stateParams.book_id;    
 		//#region 获取单词
 		$rootScope.LoadingShow();
 		var url = $rootScope.rootUrl + "/word";
@@ -19,7 +20,7 @@ dcCtrl
 				$rootScope.Alert(response.msg);
 			} else {
 				$scope.word = response;
-				$(".video-box video").attr("src", "/upload/word/mp4/" + $scope.word.video);
+				$(".video-box video").attr("src", $rootScope.siteUrl+"/upload/word/mp4/" + $scope.word.video);
 				$('.video-box video').mediaelementplayer();
 			}
 
@@ -30,8 +31,22 @@ dcCtrl
 		});
 		//#endregion
 
+		$scope.playDetailWord2 = function(audio) {
+			
+			var v = document.getElementById("audio");
+			v.src = $rootScope.siteUrl + "/upload/word/google/" + audio;
+			v.loop = false;
+			v.addEventListener('ended', function() {
+				$("#detail_paly_2").attr("src", "img/xiaoxue_cut_07.png");
+			}, false);
+			v.play();
+			$("#detail_paly_2").attr("src", "img/play_gif.gif");
+	
+		}
+		
 		$scope.playDetailWord1 = function(audio) {
 			$rootScope.playWord(audio, $("#detail_paly_1"));
+			
 		}
 
 		$scope.playDetailWord0 = function(audio) {
@@ -191,6 +206,8 @@ dcCtrl
 
 	//#region 扫描练习页
 	.controller('word_exerciseCtrl', function($rootScope, $ionicModal, $scope, $state, $http, $stateParams, $ionicSlideBoxDelegate) {
+      
+        $scope.book_id = $stateParams.book_id;
 
 	    var sketcher = null;
 
@@ -353,7 +370,7 @@ dcCtrl
 
 				})
 
-				if ($scope.word.en.length > 1) {
+				if ($scope.book_id!="22") {
 				    setTitle("趣味练习 1/" + ($scope.word.exercises.length + 1));
 
 				    setTimeout(function () {
@@ -364,9 +381,8 @@ dcCtrl
 
 				    setTimeout(function () {
 
-				        $(".video-box2 video").attr("src", "/upload/word/mp4/" + $scope.word.video_brush);
+				        $(".video-box2 video").attr("src",$rootScope.siteUrl+"/upload/word/mp4/" + $scope.word.video_brush);
 				        $('.video-box2 video').mediaelementplayer();
-
 
 				        sketcher= new SimpleDrawingBoard(document.getElementById('brushBox'), {
 				            lineColor: '#000',

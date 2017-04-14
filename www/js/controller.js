@@ -477,12 +477,14 @@ dcCtrl
 					//http://xx.kaouyu.com/www/#/word_detail/2/39/is
 					//http://xx.kaouyu.com/www/#/word_exercise/2/39/ear
 
-					if(result.text.split("?").length == 2) {
+	                if(result.text.split("?").length == 2) {
 						//			
 						var scan_arr = result.text.split("?")[1].split("&");
-						if(scan_arr.length == 3) {
+												
+						if(scan_arr.length == 3 && scan_arr[2].indexOf("unit")==-1) {
 
 							var unit = scan_arr[1].substring(8, scan_arr[1].length);
+							
 							$rootScope.LoadingShow();
 							var url = $rootScope.rootUrl + "/words";
 							var data = {
@@ -530,9 +532,19 @@ dcCtrl
 								return;
 							});
 
+						}else{
+//							var unit_id = scan_arr[2].substring()
+							var unit = scan_arr[1].substring(8, scan_arr[1].length);
+							
+							for(var i=0;i<$scope.units.length;i++){
+								if($scope.units[i].id==unit){
+									$scope.unitSelect(unit,i);
+								}
+							}
 						}
 
 					}
+
 
 				},
 				function(error) {
@@ -2675,17 +2687,17 @@ dcCtrl
 					$rootScope.Alert(response.msg);
 				} else {
 					$scope.apps = response;
-				    var temp_array = [];
-				    angular.forEach($scope.apps,function(item){
-				    	if(item.publisher.indexOf('三年级起点')>0 && $rootScope.bookPublish.indexOf('三年级起点')>0){
-				    		temp_array.push(item);
-				    	}else if(item.publisher.indexOf('一年级起点')>0 && $rootScope.bookPublish.indexOf('一年级起点')>0){
-//				    		if(parseInt(item.id)>=parseInt($rootScope.app.id)&&temp_array.length<8){
-				    			temp_array.push(item);
-//				    		}
-				    	}
-				    })
-				    $scope.apps = temp_array;
+//				    var temp_array = [];
+//				    angular.forEach($scope.apps,function(item){
+//				    	if(item.publisher.indexOf('三年级起点')>0 && $rootScope.bookPublish.indexOf('三年级起点')>0){
+//				    		temp_array.push(item);
+//				    	}else if(item.publisher.indexOf('一年级起点')>0 && $rootScope.bookPublish.indexOf('一年级起点')>0){
+////				    		if(parseInt(item.id)>=parseInt($rootScope.app.id)&&temp_array.length<8){
+//				    			temp_array.push(item);
+////				    		}
+//				    	}
+//				    })
+//				    $scope.apps = temp_array;
 				}
 			}).error(function(response, status) {
 				$rootScope.LoadingHide();

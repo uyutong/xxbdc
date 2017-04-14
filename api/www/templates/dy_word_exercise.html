@@ -3,27 +3,29 @@
 	<!--<ion-slide-box delegate-handle="slide_exercise" on-slide-changed="slide_change($index)">
 		<ion-slide ng-repeat="exercise in word.exercises">-->
     <!--书写练习-->
-    <div class="text-center" ng-if="word.en.length==1">
+    <div class="text-center" ng-if="book_id=='22'">
         
+        
+        <div class="text-left" style="margin-top:10px;margin-left: 10px;">书写视频教程：</div>        
         <div class="padding video-box2">
             <video type="video/mp4" poster="img/transparent.png" webkit-playsinline style="width: 100%; height: 100%;  background-image:url({{$root.siteUrl}}/upload/word/img/{{word.photo}});"></video>
         </div>
 
-        <div style="min-height:80px; margin-top:20px; background-image:url(img/{{word.en}}.jpg); background-repeat:no-repeat; background-size:contain; background-position:10px 0px 0px 0px;">
+        <div class="text-left" style="margin-top:10px;margin-left: 10px">写字板：</div>        
+        <div style="min-height:80px; margin-top:20px; background-image:url(img/{{word.en}}.jpg); background-repeat:no-repeat; background-size:cover; background-position:10px 0px 0px 0px;">
             <canvas id="brushBox" style="width:100%;height:100%;" />
         </div>
 
-        <div class="text-center" style="width:100%;position: fixed;bottom: 30px;left: 0; ">
+        <div class="text-center" style="width:100%;position: fixed;bottom: 10px;left: 0; ">
             <button class="button button-balanced" ng-click="clear()">&#12288;清除&#12288;</button>
-
-            <!--<button class="button button-balanced" ng-click="share()">&#12288;分享&#12288;</button>-->
         </div>
 
     </div>
 
 
+    <div ng-if="book_id!='22'">
 	<!--0. 单词拼写-->
-	<div class="question_type_3" ng-if="now_page==0&&word.en.length>1">
+	<div class="question_type_3" ng-if="now_page==0">
 
 		<div class="dy-word-test-explain">
 			<span class="s1">
@@ -200,6 +202,8 @@
 
 	<div class="dy-word-test-bottom" ng-click="nextTest()" ng-if="now_page<word.exercises.length">继续</div>
 
+
+    </div>
 	<!--</ion-slide>
 	</ion-slide-box>-->
 
