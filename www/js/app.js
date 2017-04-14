@@ -173,6 +173,7 @@ angular.module('dachutimes', ['ionic', 'dachutimes.controllers', 'ngCordova'])
 				templateUrl: 'templates/book_select.html',
 				controller: 'bookCtrl',
 				cache: false,
+
 			})
 			//#endregion
 			
@@ -216,6 +217,7 @@ angular.module('dachutimes', ['ionic', 'dachutimes.controllers', 'ngCordova'])
 				templateUrl: 'templates/yx_main.html',
 				controller: 'yx_mainCtrl',
 				cache: false
+
 			})
 			//#endregion
 
@@ -336,7 +338,7 @@ angular.module('dachutimes', ['ionic', 'dachutimes.controllers', 'ngCordova'])
 
         })
 		   
-		$urlRouterProvider.otherwise('/login');
+		$urlRouterProvider.otherwise('/home');
 
 	});
 
