@@ -8,7 +8,7 @@ angular.module('dachutimes', ['ionic', 'dachutimes.controllers', 'ngCordova'])
 		$rootScope.siteUrl = "http://xx.kaouyu.com";
 		//$rootScope.rootUrl = "http://kuyxxword.ourapp.site:666/index.php/api";
 		$rootScope.rootUrl = "http://xx.kaouyu.com/index.php/api";
-		$rootScope.bookId = 14;
+		$rootScope.bookId = 4;
 		$rootScope.bookName = "三年级上册";
 		$rootScope.bookPublish = "（人教版 三年级起点）";
 		////正式数据
@@ -326,7 +326,7 @@ angular.module('dachutimes', ['ionic', 'dachutimes.controllers', 'ngCordova'])
 				templateUrl: 'templates/my_vcode.html',
 				controller: 'my_vcodeCtrl',
 				cache: false
-
+	
 			})
 		   //#endregion	
 		   

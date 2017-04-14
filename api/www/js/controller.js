@@ -226,7 +226,6 @@ dcCtrl
 				$scope.questions = [];
 				$scope.keys = [];
 				$scope.letters = [];
-
 				var has_submit = 0;
 
 				function sortNumber(a, b) {

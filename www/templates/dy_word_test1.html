@@ -128,7 +128,7 @@
 				<div class="draggable">
 					<label class="button button-light button-small" ng-repeat="item in exercise.question">{{item}}</label>
 				</div>
-
+				
 				<div class="droppable">
 					<div class="item" ng-repeat="item in exercise.items_formats">
 						<i ng-class="{'icon':true,'ion-ios-checkmark-empty balanced':exercise.result[$index],'ion-ios-close-empty assertive':!exercise.result[$index]}" style="font-size:24px ;" ng-if="exercise.result"></i> {{$index+1}}. {{item.zh0}}
@@ -138,7 +138,7 @@
 						<span style="background-color:yellowgreen; color:#fff; padding:0px 2px; margin-right:3px; border-top:2px solid #FFF;" ng-if="exercise.result&&item.en" onclick="$(this).next().fadeToggle();">译</span><span ng-if="exercise.result&&item.en" style="background-color:yellowgreen; color:#fff; padding:0px 2px;border-top:2px solid #FFF;" onclick="$(this).fadeOut();">{{item.en}}</span>
 					</div>
 				</div>
-
+				
 				<div class="text-center padding div50" ng-if="!exercise.result">
 					<button class="button button-green button-full" style="background-color:#f9b90a;" ng-click="choose_5($index,exercise);">提交</button>
 				</div>
@@ -199,7 +199,6 @@
 
 			</div>
 			<div style="background-color: white; padding-top: 10px;padding-bottom: 10px;">
-
 				<p class="padding-horizontal gray" style="color: darkgrey;">答题方法：拖拽单词到任一图片上即可；单击匹配过的图片，可以进行修改。</p>
 			</div>
 		</div>
