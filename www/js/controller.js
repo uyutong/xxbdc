@@ -1,7 +1,7 @@
 var dcCtrl = angular.module('dachutimes.controllers', []);
 dcCtrl
     .controller('homeCtrl', function ($rootScope, $scope, $state, $http, $ionicActionSheet) {
-
+        
         //#region 苹果审核人员用 勿删
         var info = { "id": "24", "subscribe": null, "openid": "oVl0IwD3qn9_3GHx2qOGXBJlxRUc", "nickname": "\u9a6c\u6d2a\u6d9b", "sex": "1", "language": "zh_CN", "city": "Mentougou", "province": "Beijing", "country": "CN", "headimgurl": "http:\/\/wx.qlogo.cn\/mmopen\/XiaYa0IAAlP8OZom5WMCCVl1icLibz9F6yE85NXOpZZ1NNsJ5G65nnkzgoN8fA07WibKM0hmpI56FviaafZk6MWbbPlDFfpFjTXxN\/0", "subscribe_time": null, "unionid": "ocffVt08HworeoxlzULVlOFdkYY4", "remark": null, "groupid": null, "register_time": "2017-02-22 21:43:59", "status": "0", "book_id": "14" };
 
@@ -15,16 +15,11 @@ dcCtrl
                 if (response.error) {
 
                 } else {
-
                     setTimeout(function () {
-
                         if (response.status == 0 && response.version == $rootScope.currentVersion) {
-
                             setStorage("userinfo", info);
                         }
-
                         $state.go("login");
-
                     }, 1000);
                 }
             }).error(function (response, status) {
@@ -480,9 +475,11 @@ dcCtrl
 					if(result.text.split("?").length == 2) {
 						//			
 						var scan_arr = result.text.split("?")[1].split("&");
-						if(scan_arr.length == 3) {
+												
+						if(scan_arr.length == 3 && scan_arr[2].indexOf("unit")==-1) {
 
 							var unit = scan_arr[1].substring(8, scan_arr[1].length);
+							
 							$rootScope.LoadingShow();
 							var url = $rootScope.rootUrl + "/words";
 							var data = {
@@ -530,6 +527,15 @@ dcCtrl
 								return;
 							});
 
+						}else{
+//							var unit_id = scan_arr[2].substring()
+							var unit = scan_arr[1].substring(8, scan_arr[1].length);
+							
+							for(var i=0;i<$scope.units.length;i++){
+								if($scope.units[i].id==unit){
+									$scope.unitSelect(unit,i);
+								}
+							}
 						}
 
 					}
@@ -2691,17 +2697,17 @@ dcCtrl
 					$rootScope.Alert(response.msg);
 				} else {
 					$scope.apps = response;
-				    var temp_array = [];
-				    angular.forEach($scope.apps,function(item){
-				    	if(item.publisher.indexOf('三年级起点')>0 && $rootScope.bookPublish.indexOf('三年级起点')>0){
-				    		temp_array.push(item);
-				    	}else if(item.publisher.indexOf('一年级起点')>0 && $rootScope.bookPublish.indexOf('一年级起点')>0){
-//				    		if(parseInt(item.id)>=parseInt($rootScope.app.id)&&temp_array.length<8){
-				    			temp_array.push(item);
-//				    		}
-				    	}
-				    })
-				    $scope.apps = temp_array;
+//				    var temp_array = [];
+//				    angular.forEach($scope.apps,function(item){
+//				    	if(item.publisher.indexOf('三年级起点')>0 && $rootScope.bookPublish.indexOf('三年级起点')>0){
+//				    		temp_array.push(item);
+//				    	}else if(item.publisher.indexOf('一年级起点')>0 && $rootScope.bookPublish.indexOf('一年级起点')>0){
+////				    		if(parseInt(item.id)>=parseInt($rootScope.app.id)&&temp_array.length<8){
+//				    			temp_array.push(item);
+////				    		}
+//				    	}
+//				    })
+//				    $scope.apps = temp_array;
 				}
 			}).error(function(response, status) {
 				$rootScope.LoadingHide();
