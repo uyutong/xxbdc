@@ -876,6 +876,10 @@ dcCtrl
 
 		var mediaRec;
 		var src = "follow.wav";
+		if ($rootScope.isIOS)
+		{
+		    src = audioRecord;
+		}
 		$scope.playing = false;
 		$scope.recording = false;
 		$scope.is_reading_num = -1;
@@ -1062,7 +1066,9 @@ dcCtrl
 
 		$(".video-box video").attr("src", $rootScope.siteUrl + "/upload/word/mp4/" + $scope.word.video);
 
+
 		$('.video-box video').mediaelementplayer();
+
 
 		setTimeout(function() {
 			$scope.playDetailWord1($scope.word.audio_1)
@@ -1928,6 +1934,12 @@ dcCtrl
         var remoreAudioUrl="";
 		var mediaRec;
 		var src = "audio.amr";
+
+		if ($rootScope.isIOS)
+		{
+		    src = audioRecord;
+		}
+
 		$scope.clicked = false;
 		$scope.recordAudio = function() {
 			$scope.if_low_show = false;
@@ -1937,8 +1949,6 @@ dcCtrl
 				$scope.clicked = true;
 				$scope.seconds = 0;
 				$scope.count = 0;
-
-				if ($rootScope.isAndroid) {
 
 				    mediaRec = new Media(src,
                         // success callback
@@ -1950,13 +1960,7 @@ dcCtrl
                     );
 				    // Record audio
 				    mediaRec.startRecord();
-				}
-				else {
-
-				    window.plugins.audioRecorderAPI.stop();
-				    window.plugins.audioRecorderAPI.record(function (msg) { }, function (msg) { }, $scope.time_long); // 录30秒后自动停止
-
-				}
+				
 
 				$("#read_record").attr("src", "img/record_gif.gif")
 				var timer = $interval(function() {
@@ -1968,28 +1972,14 @@ dcCtrl
 					}
 
 					$('.progress_bar').width(($scope.per_progress * $scope.seconds) + '%').css("backgroundColor", "#0c7cd6");
-					if($scope.count == $scope.time_long + 1) {
-						
-						$("#read_record").attr("src", "img/xiaoxue_cut_09.png")
-						$scope.recorded = true;
-						$scope.clicked = false;
+					if ($scope.count == $scope.time_long + 1) {
 
-						if ($rootScope.isAndroid) {
-						    mediaRec.stopRecord();
-						    $scope.uploadAudio($scope.word.en);
-						}
-						else {
-						    window.plugins.audioRecorderAPI.stop(function (savedFilePath) {
+					    $("#read_record").attr("src", "img/xiaoxue_cut_09.png")
+					    $scope.recorded = true;
+					    $scope.clicked = false;
 
-						        remoreAudioUrl = savedFilePath.split('/')[savedFilePath.split('/').length - 1];
-
-						        $scope.uploadAudio($scope.word.en, savedFilePath);
-
-						    }, function (msg) {
-						        // failed
-						        //alert('ko: ' + msg);
-						    });
-						}
+					    mediaRec.stopRecord();
+					    $scope.uploadAudio($scope.word.en);
 					}
 
 					if($scope.count > $scope.time_long) {
@@ -2003,26 +1993,32 @@ dcCtrl
 		// Play audio
 		//
 
-		$scope.uploadAudio = function(word,iosURL) {  
+		$scope.uploadAudio = function(word) {  
 
 			$scope.if_low_show = false;
 
 			$rootScope.LoadingShow();
 			var fileURL = cordova.file.externalRootDirectory + "audio.amr";
 
-			if (iosURL)
+			if ($rootScope.isIOS)
 			{
-			    fileURL = iosURL;
+			    fileURL = iosFileURL;
 			}
-                
 
 			var options = new FileUploadOptions();  
 			options.fileKey = "audio";  
 			options.fileName = fileURL.substr(fileURL.lastIndexOf('/') + 1);  
 			options.mimeType = "audio/x-amr";    //上传参数
+			if ($rootScope.isIOS)
+			{
+                options.mimeType = "audio/wav";
+			}
 			var params = {};  
 			params.text = word;
 			params.format = 'amr';
+			if ($rootScope.isIOS) {
+			    options.format = "wav";
+			}
 			options.params = params;   
 			var ft = new FileTransfer();   //上传地址
 			var SERVER = $rootScope.rootUrl + "/stt";
@@ -2088,19 +2084,9 @@ dcCtrl
 				$scope.seconds = 0;
 				$scope.count = 0;
 				$scope.playing = true;
-				if ($rootScope.isIOS) {
+				
+				mediaRec.play();
 
-				    //alert('http://xx.kaouyu.com/upload/test/'+remoreAudioUrl);
-
-				    var v = document.getElementById("audio");
-				    v.src = 'http://xx.kaouyu.com/upload/test/' + remoreAudioUrl;
-				    v.play();
-
-
-				}
-				else {
-				    mediaRec.play();
-				}
 				$("#read_play").attr("src", "img/play_gif.gif")
 				var timer2 = $interval(function() {
 					$scope.count++;
@@ -2110,12 +2096,10 @@ dcCtrl
 						$scope.seconds = $scope.count - 1;
 					}
 					$('.progress_bar').width(($scope.per_progress * $scope.seconds) + '%').css("backgroundColor", "#0c7cd6");
-					if($scope.seconds == $scope.time_long) {
-						$scope.playing = false;
-						if ($rootScope.isAndroid) {
-						    mediaRec.stop();
-						}
-						$("#read_play").attr("src", "img/xiaoxue_cut_07.png")
+					if ($scope.seconds == $scope.time_long) {
+					    $scope.playing = false;
+					    mediaRec.stop();
+					    $("#read_play").attr("src", "img/xiaoxue_cut_07.png")
 					}
 					if($scope.count > $scope.time_long) {
 						$interval.cancel(timer2); //停止并清除
