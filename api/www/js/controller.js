@@ -381,8 +381,8 @@ dcCtrl
 
 				    setTimeout(function () {
 
-				        $(".video-box2 video").attr("src",$rootScope.siteUrl+"/upload/word/mp4/" + $scope.word.video_brush);
-				        $('.video-box2 video').mediaelementplayer();
+				        $(".shuxieshiping video").attr("src",$rootScope.siteUrl+"/upload/word/mp4/" + $scope.word.video_brush);
+//				        $('.video-box2 video').mediaelementplayer();
 
 				        sketcher= new SimpleDrawingBoard(document.getElementById('brushBox'), {
 				            lineColor: '#000',
