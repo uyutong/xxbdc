@@ -224,7 +224,6 @@ dcCtrl
 				$scope.questions = [];
 				$scope.keys = [];
 				$scope.letters = [];
-
 				var has_submit = 0;
 
 				function sortNumber(a, b) {
@@ -376,11 +375,6 @@ dcCtrl
 					has_submit = has_submit + 1;
 					if(has_submit == $scope.keys.length) {
 						$scope.playExerciseWord($scope.word.audio_0);
-						if($rootScope.words[$scope.index].task3 != "1") {
-							$rootScope.jifenadd = $rootScope.jifenadd + 1;
-							$rootScope.words[$scope.index].task3 = "1";
-							$rootScope.userCompletedTask($rootScope.userinfo.id, $scope.word.book_id, $scope.word.unit_id, $scope.word.word_id, null, null, "1");
-						}
 					}
 				} else {
 					playAudio(false);
