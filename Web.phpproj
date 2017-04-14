@@ -487,6 +487,7 @@
     <Content Include="api\www\js\controller_api.js" />
     <Content Include="api\www\js\ionic.bundle.min.js" />
     <Content Include="api\www\js\jquery.bundle.js" />
+    <Content Include="api\www\js\simple-drawing-board.js" />
     <Content Include="api\www\player\background.png" />
     <Content Include="api\www\player\bigplay.fw.png" />
     <Content Include="api\www\player\bigplay.png" />

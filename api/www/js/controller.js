@@ -1,6 +1,5 @@
 ﻿var dcCtrl = angular.module('dachutimes.controllers', []);
 dcCtrl
-
 	//#region 扫描单词页
 	.controller('word_detailCtrl', function($rootScope, $ionicModal, $scope, $state, $http, $stateParams) {
 
@@ -16,7 +15,6 @@ dcCtrl
 
 		$http.post(url, data).success(function(response) {
 			$rootScope.LoadingHide();
-
 			if(response.error) {
 				$rootScope.Alert(response.msg);
 			} else {
@@ -39,15 +37,15 @@ dcCtrl
 		$scope.playDetailWord0 = function(audio) {
 			$rootScope.playWord(audio, $("#detail_paly_0"));
 		}
-		
-		$scope.goExercise = function(){
-			$state.go("word_exercise",{
-					"book_id": $stateParams.book_id,
-					"unit_id": $stateParams.unit_id,
-			        "word": $stateParams.word
-				})
+
+		$scope.goExercise = function() {
+			$state.go("word_exercise", {
+				"book_id": $stateParams.book_id,
+				"unit_id": $stateParams.unit_id,
+				"word": $stateParams.word
+			})
 		}
-		
+
 		//		$scope.play = function(audio) {
 		//			var v = document.getElementById("audio");
 		//			v.src = $rootScope.siteUrl + "/upload/word/mp3/" + audio;
@@ -193,6 +191,8 @@ dcCtrl
 
 	//#region 扫描练习页
 	.controller('word_exerciseCtrl', function($rootScope, $ionicModal, $scope, $state, $http, $stateParams, $ionicSlideBoxDelegate) {
+
+	    var sketcher = null;
 
 		$scope.playExerciseWord = function(audio) {
 			$rootScope.playWord(audio, $("#exercise_word_play"));
@@ -354,11 +354,32 @@ dcCtrl
 
 				})
 
-				setTitle("趣味练习 1/" + ($scope.word.exercises.length + 1));
+				if ($scope.word.en.length > 1) {
+				    setTitle("趣味练习 1/" + ($scope.word.exercises.length + 1));
 
-				setTimeout(function() {
-					$scope.playExerciseWord($scope.word.audio_0);
-				}, 500)
+				    setTimeout(function () {
+				        $scope.playExerciseWord($scope.word.audio_0);
+				    }, 500)
+				} else {
+				    setTitle("书写练习");
+
+				    setTimeout(function () {
+
+				        $(".video-box2 video").attr("src", "/upload/word/mp4/" + $scope.word.video_brush);
+				        $('.video-box2 video').mediaelementplayer();
+
+
+				        sketcher= new SimpleDrawingBoard(document.getElementById('brushBox'), {
+				            lineColor: '#000',
+				            lineSize: 5,
+				            boardColor: 'transparent',
+				            historyDepth: 10
+				        });
+
+				    }, 500)
+
+				    
+				}
 
 			}
 
@@ -378,11 +399,6 @@ dcCtrl
 					has_submit = has_submit + 1;
 					if(has_submit == $scope.keys.length) {
 						$scope.playExerciseWord($scope.word.audio_0);
-						if($rootScope.words[$scope.index].task3 != "1") {
-							$rootScope.jifenadd = $rootScope.jifenadd + 1;
-							$rootScope.words[$scope.index].task3 = "1";
-							$rootScope.userCompletedTask($rootScope.userinfo.id, $scope.word.book_id, $scope.word.unit_id, $scope.word.word_id, null, null, "1");
-						}
 					}
 				} else {
 					playAudio(false);
@@ -611,35 +627,63 @@ dcCtrl
 				$scope.exercise = $scope.word.exercises[$scope.now_page];
 				$scope.init();
 				$scope.now_page = $scope.now_page + 1;
-
 				$scope.slide_change($scope.now_page);
-
 				if($scope.exercise.type == 2) {
 					setTimeout(function() {
 						$scope.playExercise($scope.exercise.media)
 					}, 500)
 				}
-
 			}
+		}
+
+		$scope.clear = function () {
+
+		    sketcher.clear();
+
+		}
+
+		$scope.share = function () {
+		    //var Browser = new Object();
+		    //Browser.ios = /iphone/.test(Browser.userAgent); //判断ios系统 
+		    //var title = document.title;
+		    //var img = "";
+		    //var url = location.href;
+
+		    //alert(url);
+		    //if (Browser.ios) {
+		    //    ucbrowser.web_share(title, img, url, 'kWeixinFriend', '', '', '');
+		    //} else {
+		    //    ucweb.startRequest("shell.page_share", [title, img, url, 'WechatTimeline', '', '', '']);
+		    //};
+
+
+		    //if (typeof WeixinJSBridge == "undefined") {
+		    //    alert("请先通过微信搜索 wow36kr 添加36氪为好友，通过微信分享文章 ");
+		    //} else {
+		    //    WeixinJSBridge.invoke('shareTimeline', {
+		    //        "title": "36氪",
+		    //        "link": "http://www.36kr.com",
+		    //        "desc": "关注互联网创业",
+		    //        "img_url": "http://www.36kr.com/assets/images/apple-touch-icon.png"
+		    //    });
+		    //}
+
 		}
 
 	})
 	//#endregion
 
 	//#region 扫描练习页
-	.controller('word_listCtrl', function($rootScope, $ionicModal, $scope, $state, $http, $stateParams) {
+	.controller('wx_word_listCtrl', function($rootScope, $ionicModal, $scope, $state, $http, $stateParams) {
 		//type 0 课前 1 课后 
 		$scope.type = $stateParams.type;
-
 		$scope.getBook = function(user_id) {
 			var url = $rootScope.rootUrl + "/books";
 			var data = {
 				"user_id": user_id
 			};
-
 			$http.post(url, data).success(function(response) {
 				$rootScope.LoadingHide();
-
 				if(response.error) {
 					$rootScope.Alert(response.msg);
 				} else {
@@ -650,7 +694,7 @@ dcCtrl
 							break;
 						}
 					}
-					$scope.getUnits(user_id,$stateParams.book_id);
+					$scope.getUnits(user_id, $stateParams.book_id);
 				}
 
 			}).error(function(response, status) {
@@ -660,7 +704,7 @@ dcCtrl
 			});
 		}
 
-		$scope.getUnits = function(user_id,book_id) {
+		$scope.getUnits = function(user_id, book_id) {
 
 			$rootScope.LoadingShow();
 			var url = $rootScope.rootUrl + "/units";
@@ -681,7 +725,6 @@ dcCtrl
 						}
 					}
 					$scope.getWords($stateParams.unit_id);
-			         
 
 				}
 
@@ -705,7 +748,7 @@ dcCtrl
 					$rootScope.Alert(response.msg);
 				} else {
 					$scope.word_list = response;
-                    $scope.word_list[0].show = true; 
+					$scope.word_list[0].show = true;
 					setTimeout(function() {
 						for(var i = 0; i < $scope.word_list.length; i++) {
 							$(".video-box" + i + " video").attr("src", $rootScope.siteUrl + "/upload/word/mp4/" + $scope.word_list[i].video);
@@ -726,13 +769,13 @@ dcCtrl
 			$rootScope.playWord(audio, $("#detail_paly_0_" + index));
 		}
 
-        $scope.doExercise = function(word) {
-			$state.go("word_exercise",{"book_id":$stateParams.book_id,"unit_id":$stateParams.unit_id,"word":word})
+		$scope.doExercise = function(word) {
+			$state.go("word_exercise", { "book_id": $stateParams.book_id, "unit_id": $stateParams.unit_id, "word": word })
 		}
-        
-        $scope.ifShow=function(index){
-        	$scope.word_list[index].show = undefined ? false:!$scope.word_list[index].show;
-        }
+
+		$scope.ifShow = function(index) {
+			$scope.word_list[index].show = undefined ? false : !$scope.word_list[index].show;
+		}
 	})
 	.controller('more_appsCtrl', function($rootScope, $ionicModal, $scope, $state, $http, $ionicActionSheet) {
 		/**
@@ -751,11 +794,9 @@ dcCtrl
 					$rootScope.Alert(response.msg);
 				} else {
 					$scope.apps = response;
-					
-//					http://xx.kaouyu.com/upload/apk/3q5x.apk
 
-					
-					
+					//					http://xx.kaouyu.com/upload/apk/3q5x.apk
+
 				}
 			}).error(function(response, status) {
 				$rootScope.LoadingHide();
@@ -763,7 +804,7 @@ dcCtrl
 				return;
 			});
 		}
-//		$scope.versions(device.platform)
+		//		$scope.versions(device.platform)
 		$scope.versions("android")
 
 		$scope.downloadApk = function(index) {
@@ -779,5 +820,115 @@ dcCtrl
 				cordova.exec(success, fail, "OpenLink", "url", [$scope.apps[index].url]);
 			}
 		}
+	})
 
+	.controller('word_listCtrl', function($rootScope, $scope, $state, $stateParams, $http, $ionicActionSheet, $interval) {
+			
+	    var radios = [];
+		$rootScope.LoadingShow();
+		var url = $rootScope.rootUrl + "/words";
+		var data = {
+			"user_id": 21,
+			"unit_id": $stateParams.unit_id
+		};
+		
+		$http.post(url, data).success(function(response) {
+			$rootScope.LoadingHide();
+			if(response.error) {
+				$rootScope.Alert(response.msg);
+			} else {
+				$scope.word_list = response;
+
+				if(radios.length != $scope.word_list.length * 2) {
+					radios = [];
+					for(var i = 0; i < $scope.word_list.length; i++) {
+						radios.push({
+							"id": i,
+							"audio": $scope.word_list[i].audio_0,
+							"type": "0"
+						});
+						radios.push({
+							"id": i,
+							"audio": $scope.word_list[i].audio_1,
+							"type": "1"
+						});
+					}
+				}
+			}
+		}).error(function(response, status) {
+			$rootScope.LoadingHide();
+			$rootScope.Alert('连接失败！[' + response + status + ']');
+			return;
+		});
+
+		$scope.playing = false;
+		$scope.is_reading_num = -1;
+		$scope.read_button_name = "播放";
+		var timer;
+		
+		$scope.playAudio = function() {
+			if(!$scope.playing){
+				$scope.playing = true;
+				$scope.read_button_name = "停止";
+				var j = 0;
+				timer = $interval(function() {
+					if(j == radios.length) {
+						$scope.read_button_name = "播放";
+						$scope.is_reading_num = -1
+						$interval.cancel(timer); //停止并清除					
+					} else if(j < radios.length) {
+						$rootScope.playWebWord(radios[j].audio);
+						$scope.is_reading_num = radios[j].id;
+						j = j + 1;
+					}
+				}, 4000, radios.length + 1)
+			} else {
+				$scope.is_reading_num = -1;
+				$scope.read_button_name = "播放";
+				if(timer != undefined && $scope.playing) {
+				    $interval.cancel(timer); //停止并清除
+			    }
+				$scope.playing = false;
+		    }
+        }
+		
+		$scope.play=function(index){
+			if($scope.playing){
+				$scope.is_reading_num = -1;
+				$scope.read_button_name = "播放";
+				if(timer != undefined && $scope.playing) {
+				    $interval.cancel(timer); //停止并清除
+			    }
+				$scope.playing = false;
+			}
+			$rootScope.playWebWord($scope.word_list[index].audio_0);
+		}
+		
+		/**
+		 * 获取更多相关app
+		 * @param {Object} platform
+		 */
+		$scope.version = function(platform,book_id) {
+			$rootScope.LoadingShow();
+			var url = $rootScope.rootUrl + "/version";
+			var data = {
+				"platform": platform,
+				"book_id":book_id
+			};
+			$http.post(url, data).success(function(response) {
+				$rootScope.LoadingHide();
+				if(response.error) {
+					$rootScope.Alert(response.msg);
+				} else {
+					$scope.apps = response;
+					$scope.app = $scope.apps;
+				}
+			}).error(function(response, status) {
+				$rootScope.LoadingHide();
+				$rootScope.Alert('连接失败！[' + response + status + ']');
+				return;
+			});
+		}
+		$scope.version("android",$stateParams.book_id);
+		
 	})
