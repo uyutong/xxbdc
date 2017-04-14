@@ -142,7 +142,6 @@
 				templateUrl: 'templates/book_select.html',
 				controller: 'bookCtrl',
 				cache: false,
-
 			})
 			//#endregion
 			
@@ -186,7 +185,6 @@
 				templateUrl: 'templates/yx_main.html',
 				controller: 'yx_mainCtrl',
 				cache: false
-
 			})
 			//#endregion
 
@@ -307,7 +305,7 @@
 
         })
 		   
-		$urlRouterProvider.otherwise('/home');
+		$urlRouterProvider.otherwise('/login');
 
 	});
 
