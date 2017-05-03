@@ -503,9 +503,13 @@
     <Content Include="api\www\player\mediaelement-and-player.min.js" />
     <Content Include="api\www\player\mediaelementplayer.min.css" />
     <Content Include="api\www\player\skipback.png" />
+    <Content Include="api\www\templates\unit_list.html" />
     <Content Include="api\www\templates\dy_word_detail.html" />
     <Content Include="api\www\templates\dy_word_exercise.html" />
     <Content Include="api\stt_test.html" />
+    <Content Include="api\www\templates\more_apps.html" />
+    <Content Include="api\www\templates\word_list.html" />
+    <Content Include="api\www\templates\book_list.html" />
     <Content Include="api\www\templates\wx_word_list.html" />
     <Content Include="test\getUser.html" />
     <Content Include="test\index.html" />

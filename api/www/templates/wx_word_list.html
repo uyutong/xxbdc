@@ -30,13 +30,13 @@
 				</div>
 
 				<div style="text-align: center;margin-top: 10px;" ng-show="word.video">
-					<button class="bt_ssyxx" ng-click="word.showvideo=undefined?false:!word.showvideo">手势语学习</button>
+					<!--<button class="bt_ssyxx" ng-click="word.showvideo=undefined?false:!word.showvideo">手势语学习</button>-->
 
 					<button class="qwlx" ng-show="type=='1'" ng-click="doExercise(word.en)">趣味练习</button>
 
-					<div ng-show="word.showvideo" class="padding video-box{{$index}}" style="width: 90%; background: black;border-radius:5px ;margin: auto;overflow: hidden;">
+					<!--<div ng-show="word.showvideo" class="padding video-box{{$index}}" style="width: 90%; background: black;border-radius:5px ;margin: auto;overflow: hidden;">
 						<video type="video/mp4" poster="img/transparent.png" webkit-playsinline style="width: 100%; height: 100%;  background-image:url({{$root.siteUrl}}/upload/word/img/{{word.photo}});overflow: hidden;"></video>
-					</div>
+					</div>-->
 				</div>
 
 				<!--<div class="text-center" style="margin-top: 10px;margin-bottom:10px;" ng-if="type=='1'">
@@ -45,5 +45,9 @@
 
 			</div>
 		</div>
+
+        <div class="padding text-center">
+            <a href="#more_apps" class="button button-assertive">下载 APP</a>
+        </div>
 	</div>
 </ion-content>
