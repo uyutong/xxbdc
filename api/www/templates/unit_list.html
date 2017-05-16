@@ -1,0 +1,28 @@
+﻿
+<ion-content>
+<div class="list">
+    <div class="item item-avatar" ng-repeat="unit in units">
+        <img src="http://xx.kaouyu.com/upload/unit/{{unit.photo}}">
+        <h2>{{unit.name}}</h2>
+        <p ng-if="$index==0">
+            <a class="assertive" href="http://xx.kaouyu.com/www/#/wx_word_list/{{unit.book_id}}/{{unit.id}}/0">
+                课前预习
+            </a>
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            <a class="assertive" href="http://xx.kaouyu.com/www/#/wx_word_list/{{unit.book_id}}/{{unit.id}}/1">
+                课后复习
+            </a>
+        </p>
+
+        <p ng-if="$index>0">
+            <a class="dark" ng-click="Alert('请购买激活码');">
+                课前预习
+            </a>
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            <a class="dark" ng-click="Alert('请购买激活码');">
+                课后复习
+            </a>
+        </p>
+    </div>
+</div>
+</ion-content>

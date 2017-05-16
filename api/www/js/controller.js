@@ -947,3 +947,38 @@ dcCtrl
 		$scope.version("android",$stateParams.book_id);
 		
 	})
+
+.controller('book_listCtrl', function ($rootScope, $ionicModal, $scope, $state, $http, $stateParams) {
+    $scope.book_type = $stateParams.book_type;
+})
+
+.controller('unit_listCtrl', function ($rootScope, $ionicModal, $scope, $state, $http, $stateParams) {
+    $scope.book_id = $stateParams.book_id;
+
+    $scope.units = [];
+
+    $scope.getUnits = function (user_id, book_id) {
+
+        $rootScope.LoadingShow();
+        var url = $rootScope.rootUrl + "/units";
+        var data = {
+            "user_id": user_id,
+            "book_id": book_id
+        };
+        $http.post(url, data).success(function (response) {
+            $rootScope.LoadingHide();
+            if (response.error) {
+                $rootScope.Alert(response.msg);
+            } else {
+                $scope.units = response;
+            }
+
+        }).error(function (response, status) {
+            $rootScope.LoadingHide();
+            $rootScope.Alert('连接失败！[' + response + status + ']');
+            return;
+        });
+    }
+
+    $scope.getUnits(1, $scope.book_id);
+})

@@ -55,6 +55,18 @@
         controller: 'word_listCtrl'
     })
 
+    .state('book_list', {
+        url: '/book_list/:book_type',
+        templateUrl: 'templates/book_list.html',
+        controller: 'book_listCtrl'
+    })
+
+     .state('unit_list', {
+         url: '/unit_list/:book_id',
+         templateUrl: 'templates/unit_list.html',
+         controller: 'unit_listCtrl'
+     })
+
 
     //$urlRouterProvider.otherwise('/grade');
 });
