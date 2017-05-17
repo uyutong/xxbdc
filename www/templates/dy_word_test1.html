@@ -24,10 +24,10 @@
 			</div>
 			<div style="background: white;">
 				<div ng-if="exercise.media" class="text-center padding-bottom">
-					<div class="exercise-img exercise-img-center" style="background-image:url(upload/exercise/mp3/{{exercise.media}});width: 160px;height:130px;"></div>
+					<div class="exercise-img exercise-img-center" style="background-image:url({{$root.siteUrl}}/upload/exercise/mp3/{{exercise.media}});width: 160px;height:130px;"></div>
 				</div>
-				<div class="padding" style="font-size: 26px;line-height: 26px;" ng-show="exercise.myanswer!=exercise.answer">{{exercise.question_en}}</div>
-				<div class="padding type_1_html" style="font-size: 26px;line-height: 26px;" ng-show="exercise.myanswer==exercise.answer">
+				<div class="padding" style="font-size: 24px;line-height: 24px;" ng-show="exercise.myanswer!=exercise.answer">{{exercise.question_en}}</div>
+				<div class="padding type_1_html" style="font-size: 24px;line-height: 24px;" ng-show="exercise.myanswer==exercise.answer">
 				</div>
 				<div class="text-left padding" ng-if="exercise.myanswer==exercise.answer" style="color: green;font-weight: bold;">
 					{{exercise.question_zh}}
@@ -68,7 +68,7 @@
 					{{exercise.question_zh}}
 				</div>
 				<div class="text-center exercise-img-box">
-					<div ng-class="{'exercise-img':true,'exercise-img-error':exercise.answered && exercise.myanswer==$index && exercise.myanswer!=exercise.answer_index,'exercise-img-correct':exercise.answered && exercise.myanswer==$index && exercise.myanswer==exercise.answer_index}" class="exercise-img" style="background-image:url(upload/exercise/img/{{item}});" ng-repeat="item in exercise.items.split('\n')" ng-click="choose_2($index,$parent.$index ,exercise)"></div>
+					<div ng-class="{'exercise-img':true,'exercise-img-error':exercise.answered && exercise.myanswer==$index && exercise.myanswer!=exercise.answer_index,'exercise-img-correct':exercise.answered && exercise.myanswer==$index && exercise.myanswer==exercise.answer_index}" class="exercise-img" style="background-image:url({{$root.siteUrl}}/upload/exercise/img/{{item}});" ng-repeat="item in exercise.items.split('\n')" ng-click="choose_2($index,$parent.$index ,exercise)"></div>
 				</div>
 
 			</div>
@@ -182,7 +182,7 @@
 
 				<div class="row droppable">
 					<div class="col" ng-repeat="item in exercise.items.split('\n')">
-						<img style="height: 80px;" src="upload/exercise/img/{{item}}" />
+						<img style="height: 80px;" src="{{$root.siteUrl}}/upload/exercise/img/{{item}}" />
 						<div class="answer_box"></div>
 					</div>
 				</div>

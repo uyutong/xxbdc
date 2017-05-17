@@ -8,26 +8,24 @@ angular.module('dachutimes', ['ionic', 'dachutimes.controllers', 'ngCordova'])
 		$rootScope.siteUrl = "http://xx.kaouyu.com";
 		//$rootScope.rootUrl = "http://kuyxxword.ourapp.site:666/index.php/api";
 		$rootScope.rootUrl = "http://xx.kaouyu.com/index.php/api";
-		$rootScope.bookId = 4;
-		$rootScope.bookName = "三年级上册";
-		$rootScope.bookPublish = "（人教版 三年级起点）";
+		$rootScope.bookId = 12;
 		////正式数据
 		//$rootScope.rootUrl = "http://kuyxxword.ourapp.site:66/index.php/api";
 		$ionicPlatform.ready(function() {
 		    initCordova();
-
-		    cordova.getAppVersion.getVersionNumber(function (version) {
-		        $rootScope.currentVersion = version;
-		    });
-
-		    if ($rootScope.isIOS)
-		    {
-		        document.addEventListener('deviceready', function () {
-		            
-		            iniFileSystem();
-
-		        }, false);
-		    }
+//
+//		    cordova.getAppVersion.getVersionNumber(function (version) {
+//		        $rootScope.currentVersion = version;
+//		    });
+//
+//		    if ($rootScope.isIOS)
+//		    {
+//		        document.addEventListener('deviceready', function () {
+//		            
+//		            iniFileSystem();
+//
+//		        }, false);
+//		    }
 
 		});
 		
@@ -338,7 +336,7 @@ angular.module('dachutimes', ['ionic', 'dachutimes.controllers', 'ngCordova'])
 
         })
 		   
-		$urlRouterProvider.otherwise('/home');
+		$urlRouterProvider.otherwise('/login');
 
 	});
 

@@ -40,29 +40,29 @@ dcCtrl
 
 	.controller('loginCtrl', function($rootScope, $scope, $state, $http, $ionicActionSheet) {
 
-		//		var info = {
-		//			"id": "21",
-		//			"subscribe": null,
-		//			"openid": "oGh6gwCNOQpRsvnNf3pVJ1rK5N4k",
-		//			"nickname": "\u6d77\u9614\u5929\u7a7a",
-		//			"sex": "1",
-		//			"language": "zh_CN",
-		//			"city": "",
-		//			"province": "",
-		//			"country": "",
-		//			"headimgurl": "http:\/\/wx.qlogo.cn\/mmopen\/Q3auHgzwzM4I8ibXxonibqKs6AJmcToqka34cUoDiaClPbmN8Jh6ic3pIvt72F2oxrib0EficcT2o2VdOrS7KGYZ1F7Q\/0",
-		//			"subscribe_time": null,
-		//			"unionid": "ocffVt6ZE2o_Ybzs1_NbVTVsn5v4",
-		//			"remark": null,
-		//			"groupid": null,
-		//			"register_time": "2016-12-20 10:21:00",
-		//			"status": "7",
-		//			"book_id": "0"
-		//		};
-	    //
+//		var info = {
+//			"id": "21",
+//			"subscribe": null,
+//			"openid": "oGh6gwCNOQpRsvnNf3pVJ1rK5N4k",
+//			"nickname": "\u6d77\u9614\u5929\u7a7a",
+//			"sex": "1",
+//			"language": "zh_CN",
+//			"city": "",
+//			"province": "",
+//			"country": "",
+//			"headimgurl": "http:\/\/wx.qlogo.cn\/mmopen\/Q3auHgzwzM4I8ibXxonibqKs6AJmcToqka34cUoDiaClPbmN8Jh6ic3pIvt72F2oxrib0EficcT2o2VdOrS7KGYZ1F7Q\/0",
+//			"subscribe_time": null,
+//			"unionid": "ocffVt6ZE2o_Ybzs1_NbVTVsn5v4",
+//			"remark": null,
+//			"groupid": null,
+//			"register_time": "2016-12-20 10:21:00",
+//			"status": "7",
+//			"book_id": "0"
+//		};
+
 
 	    //#region 苹果审核人员用 勿删
-	    var info = { "id": "24", "subscribe": null, "openid": "oVl0IwD3qn9_3GHx2qOGXBJlxRUc", "nickname": "\u9a6c\u6d2a\u6d9b", "sex": "1", "language": "zh_CN", "city": "Mentougou", "province": "Beijing", "country": "CN", "headimgurl": "http:\/\/wx.qlogo.cn\/mmopen\/XiaYa0IAAlP8OZom5WMCCVl1icLibz9F6yE85NXOpZZ1NNsJ5G65nnkzgoN8fA07WibKM0hmpI56FviaafZk6MWbbPlDFfpFjTXxN\/0", "subscribe_time": null, "unionid": "ocffVt08HworeoxlzULVlOFdkYY4", "remark": null, "groupid": null, "register_time": "2017-02-22 21:43:59", "status": "0", "book_id": $rootScope.bookId };
+//	    var info = { "id": "24", "subscribe": null, "openid": "oVl0IwD3qn9_3GHx2qOGXBJlxRUc", "nickname": "\u9a6c\u6d2a\u6d9b", "sex": "1", "language": "zh_CN", "city": "Mentougou", "province": "Beijing", "country": "CN", "headimgurl": "http:\/\/wx.qlogo.cn\/mmopen\/XiaYa0IAAlP8OZom5WMCCVl1icLibz9F6yE85NXOpZZ1NNsJ5G65nnkzgoN8fA07WibKM0hmpI56FviaafZk6MWbbPlDFfpFjTXxN\/0", "subscribe_time": null, "unionid": "ocffVt08HworeoxlzULVlOFdkYY4", "remark": null, "groupid": null, "register_time": "2017-02-22 21:43:59", "status": "0", "book_id": $rootScope.bookId  };
 
 	    if ($rootScope.isIOS) {
 	        var url = $rootScope.rootUrl + "/version";
@@ -72,7 +72,6 @@ dcCtrl
 	        };
 	        $http.post(url, data).success(function (response) {
 	            if (response.error) {
-
 	            } else {
 
 	                setTimeout(function () {
@@ -89,10 +88,14 @@ dcCtrl
 	                            if ($rootScope.userinfo.book_id != $rootScope.bookId) {
 	                                $scope.setBook($rootScope.userinfo.id, $rootScope.bookId);
 	                            } else {
-	                                $scope.saveUserBook($rootScope.userinfo.id, $rootScope.userinfo.book_id);
+						            setTimeout(function() {
+										$state.go("tab.dy_home")
+									}, 2000)	                           
 	                            }
-	                        } else {
-	                            $scope.getBook(21, $rootScope.bookId);
+	                        } 
+	                       
+	                        else {
+	                            $scope.getBook($rootScope.bookId);
 	                        }
 	                    }
 	                }, 1000);
@@ -103,44 +106,8 @@ dcCtrl
 	    }
 	    //#endregion 苹果审核人员用 勿删
         
-
-		$scope.iflogin = false;
-		//		setStorage("userinfo", info);
-
-		$scope.saveUserBook = function(userId, bookId) {
-			if($rootScope.mybook) {
-				$rootScope.userinfo.mybook = $rootScope.mybook;
-				setTimeout(function() {
-					$state.go("tab.dy_home")
-				}, 2000)
-			} else {
-				$rootScope.LoadingShow();
-				//获取所有book/unit
-				var url = $rootScope.rootUrl + "/books";
-				var data = {
-					"user_id": userId,
-					"book_id": bookId
-				};
-
-				$http.post(url, data).success(function(response) {
-					$rootScope.LoadingHide();
-					if(response.error) {
-						$rootScope.Alert(response.msg);
-					} else {
-						if(response[0]) {
-							$rootScope.userinfo.mybook = response[0];
-							setTimeout(function() {
-								$state.go("tab.dy_home")
-							}, 2000)
-						}
-					}
-				}).error(function(response, status) {
-					$rootScope.LoadingHide();
-					$rootScope.Alert('连接失败！[' + response + status + ']');
-					return;
-				});
-			}
-		}
+		$scope.iflogin = true;
+//		setStorage("userinfo", info);
 
 		$scope.setBook = function(userId, bookId) {
 			$rootScope.LoadingShow();
@@ -157,7 +124,9 @@ dcCtrl
 				} else {
 					$rootScope.userinfo.book_id = bookId;
 					setStorage("userinfo", angular.copy($rootScope.userinfo));
-					$scope.saveUserBook(userId, bookId);
+					setTimeout(function() {
+					    $state.go("tab.dy_home")
+				    }, 2000)
 				}
 			}).error(function(response, status) {
 				$rootScope.LoadingHide();
@@ -166,12 +135,12 @@ dcCtrl
 			});
 		}
 
-		$scope.getBook = function(userId, bookId) {
+		$scope.getBook = function(bookId) {
 			$rootScope.LoadingShow();
 			//获取所有book/unit
 			var url = $rootScope.rootUrl + "/books";
 			var data = {
-				"user_id": userId, //没有登录时没有userId的暂拿着我的id21来获取book
+//				"user_id": userId, //没有登录时没有userId的暂拿着我的id21来获取book
 				"book_id": bookId
 			};
 
@@ -180,8 +149,22 @@ dcCtrl
 				if(response.error) {
 					$rootScope.Alert(response.msg);
 				} else {
-					if(response[0]) {
-						$rootScope.mybook = response[0];
+					if(response) {
+						$rootScope.mybook = response;
+			    		var userinfo = getStorage("userinfo");
+						if(userinfo.id) {
+							$scope.iflogin = true;
+							$rootScope.userinfo = userinfo;
+							if($rootScope.userinfo.book_id != $rootScope.bookId) {
+								$scope.setBook($rootScope.userinfo.id, $rootScope.bookId);
+							} else {
+								setTimeout(function() {
+									$state.go("tab.dy_home")
+								}, 2000)
+							}
+						}else{
+							$scope.iflogin = false;
+						}
 					}
 				}
 			}).error(function(response, status) {
@@ -191,19 +174,9 @@ dcCtrl
 			});
 		}
 
-		var userinfo = getStorage("userinfo");
-
-		if(userinfo.id) {
-			$scope.iflogin = true;
-			$rootScope.userinfo = userinfo;
-			if($rootScope.userinfo.book_id != $rootScope.bookId) {
-				$scope.setBook($rootScope.userinfo.id, $rootScope.bookId);
-			} else {
-				$scope.saveUserBook($rootScope.userinfo.id, $rootScope.userinfo.book_id);
-			}
-		} else {
-			$scope.getBook(21, $rootScope.bookId);
-		}
+        
+        $scope.getBook($rootScope.bookId);
+ 
 
 		$scope.wxLogin = function() {
 
@@ -212,7 +185,7 @@ dcCtrl
 				if(installed) {
 
 					Wechat.auth("snsapi_userinfo", function(response) {
-						//#region 通过code获取access_token
+						//#region 通过code获取access_token..     
 						var url = "https://api.weixin.qq.com/sns/oauth2/access_token?appid=" + $rootScope.mybook.wx_appid + "&secret=" + $rootScope.mybook.wx_appsecret + "&code=" + response.code + "&grant_type=authorization_code";
 
 						$http.get(url).success(function(response) {
@@ -242,11 +215,13 @@ dcCtrl
 
 									} else {
 										$rootScope.userinfo = response;
+										setStorage("userinfo", $rootScope.userinfo);
 										if($rootScope.userinfo.book_id != $rootScope.bookId) {
 											$scope.setBook($rootScope.userinfo.id, $rootScope.bookId);
 										} else {
-											setStorage("userinfo", $rootScope.userinfo);
-											$scope.saveUserBook($rootScope.userinfo.id, $rootScope.userinfo.book_id);
+											setTimeout(function() {
+												$state.go("tab.dy_home")
+											}, 2000)
 										}
 									}
 
@@ -347,7 +322,6 @@ dcCtrl
 						$rootScope.Alert(response.msg);
 					} else {
 						$rootScope.userinfo.book_id = $rootScope.mybook.id;
-						$rootScope.userinfo.mybook = $rootScope.mybook;
 						setStorage("userinfo", angular.copy($rootScope.userinfo));
 						$state.go("tab.dy_home");
 					}
@@ -399,9 +373,9 @@ dcCtrl
 		$scope.wordSum = 0;
 		$scope.learned = 0;
 
-		if(!$rootScope.mybook) {
-			$rootScope.mybook = $rootScope.userinfo.mybook;
-		}
+//		if(!$rootScope.mybook) {
+//			$rootScope.mybook = $rootScope.userinfo.mybook;
+//		}
 
 		$scope.getUnits = function(book_id) {
 			$rootScope.LoadingShow();
@@ -2028,8 +2002,8 @@ dcCtrl
 			options.params = params;   
 			var ft = new FileTransfer();   //上传地址
 			var SERVER = $rootScope.rootUrl + "/stt";
-                
-                
+                    
+                    
 			ft.upload(fileURL, encodeURI(SERVER), function(r) {     
 				$rootScope.LoadingHide();
 				var response = JSON.parse(r.response)

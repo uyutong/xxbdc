@@ -2,14 +2,14 @@
     <div class="ios20" ng-if="isIOS"></div>
 
 	<div class="text-center">
-		<img style="width: 85%; border-radius: 5px;margin: 5%;" src="img/book_pic.jpg" />
+		<img style="width: 85%; border-radius: 5px;margin: 5%;" src="{{$root.siteUrl}}/upload/book/{{mybook.photo}}" />
 		<!--		<div style="margin-bottom: 5px;font-size: 18px;font-weight: bold;">小学英语 同步背单词</div>
 -->
     
 
 		<div style="position: fixed;bottom: 30px;left: 0px;width: 100%;text-align: center;">
-			<div style="margin-bottom: 5px;font-size: 21px;font-weight: bold;">{{bookName}}</div>
-			<div style="margin-bottom: 5px;font-size: 18px;">{{bookPublish}}</div>
+			<div style="margin-bottom: 5px;font-size: 21px;font-weight: bold;">{{mybook.grade}}{{mybook.name}}{{mybook.semester}}</div>
+			<div style="margin-bottom: 5px;font-size: 18px;">{{mybook.publisher}}</div>
 			<button ng-if="!iflogin" style="background-color:#3eb94e;min-width: 120px;height: 40px;border-radius: 5px;color: white;border-style: none; //无边框outline: none;" ng-click="wxLogin()">微信登录
             </button>
 		</div>
