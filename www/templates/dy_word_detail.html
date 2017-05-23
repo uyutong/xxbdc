@@ -41,13 +41,13 @@
 			<div style="text-align: left;" ng-show="word.video!=''">
 				<div style="margin-top: 5px;margin-bottom: 5px;">手势语学习</div>
 				<div class="video-box" style="padding: 5px;">
-					<video type="video/mp4" poster="" webkit-playsinline playsinline style="width: 100%; height: 100%;  background-image:url(upload/word/img/{{word.photo}});"></video>
+					<video type="video/mp4" poster="" webkit-playsinline playsinline style="width: 100%; height: 100%;  background-image:url({{$root.siteUrl}}/upload/word/img/{{word.photo}});"></video>
 				</div>
 			</div>
 
 			<div style="text-align: center; margin-bottom: 100px;" ng-show="word.video==''">
 
-				<img width="240" src="upload/word/img/{{word.photo}}" />
+				<img width="240" src="{{$root.siteUrl}}/upload/word/img/{{word.photo}}" />
 
 			</div>
 

@@ -11,7 +11,7 @@
 	</div>
 
 	<ion-scroll style="width:100%;height:86%">
-		<div ng-if="showLeft" style="text-align: center;">
+		<div ng-if="showRight" style="text-align: center;">
 			<div class="text-left padding">购买新课标小学英语同步单词规范释析{{mybook.grade}}{{mybook.semester}}{{mybook.publisher}}</div>
 			<div class="text-center" style="padding: 5px;">
 				<button class="app_vcode_button" ng-click="openTaobao(mybook.book_url)">
@@ -31,14 +31,14 @@
 			<span style="margin: 1px;font-size: 16px;">同步背单词</span>-->
 			</div>
 
-			<div class="text-center" style="padding: 5px;">
+			<!--<div class="text-center" style="padding: 5px;">
 				<button class="app_vcode_button" ng-click="show2()">
 				 激活方式二
 			    </button>
-			</div>
+			</div>-->
 		</div>
 
-		<div ng-if="showRight">
+		<div ng-if="showLeft">
 
 			<div class="text-center" style="margin-top:10px;font-size:15px;background:white; padding:10px;border-top: 1px solid gainsboro;border-bottom: 1px solid gainsboro;" ng-click="hascode=!hascode">已有验证码</div>
 			<div style="background: #ffffff;padding: 10px;border-bottom: 1px solid gainsboro;" ng-show="hascode">
