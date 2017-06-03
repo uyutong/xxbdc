@@ -1,4 +1,4 @@
-﻿var audioRecord = "audio.m4a";
+﻿var audioRecord = "audio.wav";
 var iosFileURL = "";
 angular.module('dachutimes', ['ionic', 'dachutimes.controllers', 'ngCordova'])
 
@@ -8,24 +8,24 @@ angular.module('dachutimes', ['ionic', 'dachutimes.controllers', 'ngCordova'])
 		$rootScope.siteUrl = "http://xx.kaouyu.com";
 		//$rootScope.rootUrl = "http://kuyxxword.ourapp.site:666/index.php/api";
 		$rootScope.rootUrl = "http://xx.kaouyu.com/index.php/api";
-		$rootScope.bookId = 12;
+		$rootScope.bookId = 14;
 		////正式数据
-		//$rootScope.rootUrl = "http://kuyxxword.ourapp.site:66/index.php/api";
+	    //$rootScope.rootUrl = "http://kuyxxword.ourapp.site:66/index.php/api";
+
 		$ionicPlatform.ready(function() {
 		    initCordova();
-//
-//		    cordova.getAppVersion.getVersionNumber(function (version) {
-//		        $rootScope.currentVersion = version;
-//		    });
-//
-//		    if ($rootScope.isIOS)
-//		    {
-//		        document.addEventListener('deviceready', function () {
-//		            
-//		            iniFileSystem();
-//
-//		        }, false);
-//		    }
+
+		    if ($rootScope.isIOS) {
+		        document.addEventListener('deviceready', function () {
+
+		            cordova.getAppVersion.getVersionNumber(function (version) {
+		                $rootScope.currentVersion = version;
+		            });
+
+		            iniFileSystem();
+
+		        }, false);
+		    }
 
 		});
 		
@@ -629,8 +629,15 @@ function playJiayou() {
 function playWordAudio(audio) {
 	var v = document.getElementById("audio");
 	v.src = "upload/word/mp3/" + audio;
+	v.addEventListener('error', function (e) {
+	    if (e) {
+	        v.src = "http://xx.kaouyu.com/upload/word/mp3/" + audio;
+	        v.play();
+	    }
+	}, false)
 	v.play();
 }
+
 
 function showStarImgAnimate() {
 	setTimeout(function() {

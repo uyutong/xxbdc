@@ -40,31 +40,9 @@ dcCtrl
 
 	.controller('loginCtrl', function($rootScope, $scope, $state, $http, $ionicActionSheet) {
 
-//		var info = {
-//			"id": "21",
-//			"subscribe": null,
-//			"openid": "oGh6gwCNOQpRsvnNf3pVJ1rK5N4k",
-//			"nickname": "\u6d77\u9614\u5929\u7a7a",
-//			"sex": "1",
-//			"language": "zh_CN",
-//			"city": "",
-//			"province": "",
-//			"country": "",
-//			"headimgurl": "http:\/\/wx.qlogo.cn\/mmopen\/Q3auHgzwzM4I8ibXxonibqKs6AJmcToqka34cUoDiaClPbmN8Jh6ic3pIvt72F2oxrib0EficcT2o2VdOrS7KGYZ1F7Q\/0",
-//			"subscribe_time": null,
-//			"unionid": "ocffVt6ZE2o_Ybzs1_NbVTVsn5v4",
-//			"remark": null,
-//			"groupid": null,
-//			"register_time": "2016-12-20 10:21:00",
-//			"status": "7",
-//			"book_id": "0"
-//		};
-
-
 	    //#region 苹果审核人员用 勿删
-//	    var info = { "id": "24", "subscribe": null, "openid": "oVl0IwD3qn9_3GHx2qOGXBJlxRUc", "nickname": "\u9a6c\u6d2a\u6d9b", "sex": "1", "language": "zh_CN", "city": "Mentougou", "province": "Beijing", "country": "CN", "headimgurl": "http:\/\/wx.qlogo.cn\/mmopen\/XiaYa0IAAlP8OZom5WMCCVl1icLibz9F6yE85NXOpZZ1NNsJ5G65nnkzgoN8fA07WibKM0hmpI56FviaafZk6MWbbPlDFfpFjTXxN\/0", "subscribe_time": null, "unionid": "ocffVt08HworeoxlzULVlOFdkYY4", "remark": null, "groupid": null, "register_time": "2017-02-22 21:43:59", "status": "0", "book_id": $rootScope.bookId  };
-
 	    if ($rootScope.isIOS) {
+
 	        var url = $rootScope.rootUrl + "/version";
 	        var data = {
 	            "platform": "ios",
@@ -78,7 +56,8 @@ dcCtrl
 
 	                    if (response.status == 0 && response.version == $rootScope.currentVersion) {
 
-	                        setStorage("userinfo", info);
+
+	                        setStorage("userinfo", { "id": "24", "subscribe": null, "openid": "oVl0IwD3qn9_3GHx2qOGXBJlxRUc", "nickname": "\u9a6c\u6d2a\u6d9b", "sex": "1", "language": "zh_CN", "city": "Mentougou", "province": "Beijing", "country": "CN", "headimgurl": "http:\/\/wx.qlogo.cn\/mmopen\/XiaYa0IAAlP8OZom5WMCCVl1icLibz9F6yE85NXOpZZ1NNsJ5G65nnkzgoN8fA07WibKM0hmpI56FviaafZk6MWbbPlDFfpFjTXxN\/0", "subscribe_time": null, "unionid": "ocffVt08HworeoxlzULVlOFdkYY4", "remark": null, "groupid": null, "register_time": "2017-02-22 21:43:59", "status": "0", "book_id": $rootScope.bookId });
 
 	                        var userinfo = getStorage("userinfo");
 
@@ -88,7 +67,8 @@ dcCtrl
 	                            if ($rootScope.userinfo.book_id != $rootScope.bookId) {
 	                                $scope.setBook($rootScope.userinfo.id, $rootScope.bookId);
 	                            } else {
-						            setTimeout(function() {
+	                                setTimeout(function () {
+
 										$state.go("tab.dy_home")
 									}, 2000)	                           
 	                            }
@@ -124,7 +104,9 @@ dcCtrl
 				} else {
 					$rootScope.userinfo.book_id = bookId;
 					setStorage("userinfo", angular.copy($rootScope.userinfo));
-					setTimeout(function() {
+					setTimeout(function () {
+
+
 					    $state.go("tab.dy_home")
 				    }, 2000)
 				}
@@ -135,49 +117,67 @@ dcCtrl
 			});
 		}
 
-		$scope.getBook = function(bookId) {
-			$rootScope.LoadingShow();
-			//获取所有book/unit
-			var url = $rootScope.rootUrl + "/books";
-			var data = {
-//				"user_id": userId, //没有登录时没有userId的暂拿着我的id21来获取book
-				"book_id": bookId
-			};
+		$scope.getBook = function (bookId) {
 
-			$http.post(url, data).success(function(response) {
-				$rootScope.LoadingHide();
-				if(response.error) {
-					$rootScope.Alert(response.msg);
-				} else {
-					if(response) {
-						$rootScope.mybook = response;
-			    		var userinfo = getStorage("userinfo");
-						if(userinfo.id) {
-							$scope.iflogin = true;
-							$rootScope.userinfo = userinfo;
-							if($rootScope.userinfo.book_id != $rootScope.bookId) {
-								$scope.setBook($rootScope.userinfo.id, $rootScope.bookId);
-							} else {
-								setTimeout(function() {
-									$state.go("tab.dy_home")
-								}, 2000)
-							}
-						}else{
-							$scope.iflogin = false;
-						}
-					}
-				}
-			}).error(function(response, status) {
-				$rootScope.LoadingHide();
-				$rootScope.Alert('连接失败！[' + response + status + ']');
-				return;
-			});
+		    $rootScope.LoadingShow();
+		    //获取所有book/unit
+		    var url = $rootScope.rootUrl + "/books";
+		    var data = {
+		        //				"user_id": userId, //没有登录时没有userId的暂拿着我的id21来获取book
+		        "book_id": bookId
+		    };
+
+		    $http.post(url, data).success(function (response) {
+		        $rootScope.LoadingHide();
+		        if (response.error) {
+		            $rootScope.Alert(response.msg);
+		        } else {
+		            if (response) {
+		                $rootScope.mybook = response;
+		                var userinfo = getStorage("userinfo");
+		                if (userinfo.id) {
+		                    $scope.iflogin = true;
+		                    $rootScope.userinfo = userinfo;
+		                    if ($rootScope.userinfo.book_id != $rootScope.bookId) {
+		                        $scope.setBook($rootScope.userinfo.id, $rootScope.bookId);
+		                    } else {
+		                        setTimeout(function () {
+
+
+		                            $state.go("tab.dy_home")
+		                        }, 2000)
+		                    }
+		                } else {
+		                    $scope.iflogin = false;
+		                }
+		            }
+		        }
+		    }).error(function (response, status) {
+		        $rootScope.LoadingHide();
+		        $rootScope.Alert('连接失败！[' + response + status + ']', function () {
+
+		            //#region 勿删 ios第一次启动需要用户同意允许联网
+		            if ($rootScope.isIOS) {
+		                $rootScope.Alert('您的设备没有联网(或者设置中没有打开允许使用数据网络)，请联网后再试，谢谢！', function () {
+
+		                    location.reload();
+
+		                    return;
+
+		                });
+
+		                return;
+		            }
+		            //#endregion
+
+		        });
+
+		        return;
+		    });
 		}
-
         
         $scope.getBook($rootScope.bookId);
  
-
 		$scope.wxLogin = function() {
 
 			$rootScope.LoadingShow();
@@ -219,7 +219,9 @@ dcCtrl
 										if($rootScope.userinfo.book_id != $rootScope.bookId) {
 											$scope.setBook($rootScope.userinfo.id, $rootScope.bookId);
 										} else {
-											setTimeout(function() {
+										    setTimeout(function () {
+
+
 												$state.go("tab.dy_home")
 											}, 2000)
 										}
@@ -323,6 +325,8 @@ dcCtrl
 					} else {
 						$rootScope.userinfo.book_id = $rootScope.mybook.id;
 						setStorage("userinfo", angular.copy($rootScope.userinfo));
+
+
 						$state.go("tab.dy_home");
 					}
 				}).error(function(response, status) {
@@ -396,8 +400,11 @@ dcCtrl
 					})
 					//检查是否有新版本
 
-					if(device.platform === 'Android') {
-						$scope.version("android", book_id);
+					if (device.platform === 'Android') {
+					    $scope.version("android", book_id);
+					}
+					else {
+					    $scope.version("ios", book_id);
 					}
 				}
 
@@ -888,7 +895,8 @@ dcCtrl
 				);
 				//				}
 
-				// Record audio
+			    // Record audio
+			    //ios https://stackoverflow.com/questions/24731601/ios-how-to-play-alert-sound-in-speaker-when-recording
 				mediaRec.startRecord();
 				$scope.read_button_name = "停止带读";
 				$scope.is_canplay = false;
@@ -919,10 +927,10 @@ dcCtrl
 						$scope.recording = false;
 						$scope.is_canplay = true;
 						$interval.cancel(timer); //停止并清除					
-					} else if(j < radios.length) {
-						playWordAudio(radios[j].audio);
-						$scope.is_reading_num = radios[j].id;
-						j = j + 1;
+					} else if (j < radios.length) {
+					    playWordAudio(radios[j].audio);
+					    $scope.is_reading_num = radios[j].id;
+					    j = j + 1;
 					}
 
 				}, 3000, radios.length + 1)
@@ -994,6 +1002,8 @@ dcCtrl
 				$interval.cancel(timer2); //停止并清除
 				mediaRec.stop();
 			}
+
+
 			$state.go("tab.dy_home")
 		}
 
@@ -1833,7 +1843,9 @@ dcCtrl
 		//		$scope.$on('popover.removed', function() {
 		//			// 执行代码
 		//		});
-		$scope.studyWord = function() {
+		$scope.studyWord = function () {
+
+
 			$state.go("tab.dy_home")
 		}
 		$scope.startGame = function() {
