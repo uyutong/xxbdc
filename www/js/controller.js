@@ -40,6 +40,8 @@ dcCtrl
 
 	.controller('loginCtrl', function($rootScope, $scope, $state, $http, $ionicActionSheet) {
 
+	    $scope.iflogin = true;
+
 	    //#region 苹果审核人员用 勿删
 	    if ($rootScope.isIOS) {
 
@@ -51,44 +53,44 @@ dcCtrl
 	        $http.post(url, data).success(function (response) {
 	            if (response.error) {
 	            } else {
-
 	                setTimeout(function () {
 
-	                    if (response.status == 0 && response.version == $rootScope.currentVersion) {
-
-
+	                    if (response.status == 0 && response.version == $rootScope.currentVersion)
+	                    {
 	                        setStorage("userinfo", { "id": "24", "subscribe": null, "openid": "oVl0IwD3qn9_3GHx2qOGXBJlxRUc", "nickname": "\u9a6c\u6d2a\u6d9b", "sex": "1", "language": "zh_CN", "city": "Mentougou", "province": "Beijing", "country": "CN", "headimgurl": "http:\/\/wx.qlogo.cn\/mmopen\/XiaYa0IAAlP8OZom5WMCCVl1icLibz9F6yE85NXOpZZ1NNsJ5G65nnkzgoN8fA07WibKM0hmpI56FviaafZk6MWbbPlDFfpFjTXxN\/0", "subscribe_time": null, "unionid": "ocffVt08HworeoxlzULVlOFdkYY4", "remark": null, "groupid": null, "register_time": "2017-02-22 21:43:59", "status": "0", "book_id": $rootScope.bookId });
 
 	                        var userinfo = getStorage("userinfo");
-
-	                        if (userinfo.id) {
-	                            $scope.iflogin = true;
-	                            $rootScope.userinfo = userinfo;
-	                            if ($rootScope.userinfo.book_id != $rootScope.bookId) {
-	                                $scope.setBook($rootScope.userinfo.id, $rootScope.bookId);
-	                            } else {
-	                                setTimeout(function () {
-
-										$state.go("tab.dy_home")
-									}, 2000)	                           
-	                            }
-	                        } 
-	                       
-	                        else {
-	                            $scope.getBook($rootScope.bookId);
-	                        }
 	                    }
+
+	                    $scope.getBook($rootScope.bookId);
+
 	                }, 1000);
 	            }
 	        }).error(function (response, status) {
+
+               //#region 勿删 ios第一次启动需要用户同意允许联网
+
+	                    $rootScope.Alert('您的设备没有联网(或者设置中没有打开允许使用数据网络)，请联网后再试，谢谢！', function () {
+
+	                        location.reload();
+
+	                        return;
+
+	                    });
+
+
+	                //#endregion
+
 	            return;
 	        });
 	    }
+	    else {
+
+	        $scope.getBook($rootScope.bookId);
+
+	    }
 	    //#endregion 苹果审核人员用 勿删
         
-		$scope.iflogin = true;
-//		setStorage("userinfo", info);
-
 		$scope.setBook = function(userId, bookId) {
 			$rootScope.LoadingShow();
 			//获取所有book/unit
@@ -154,29 +156,11 @@ dcCtrl
 		        }
 		    }).error(function (response, status) {
 		        $rootScope.LoadingHide();
-		        $rootScope.Alert('连接失败！[' + response + status + ']', function () {
-
-		            //#region 勿删 ios第一次启动需要用户同意允许联网
-		            if ($rootScope.isIOS) {
-		                $rootScope.Alert('您的设备没有联网(或者设置中没有打开允许使用数据网络)，请联网后再试，谢谢！', function () {
-
-		                    location.reload();
-
-		                    return;
-
-		                });
-
-		                return;
-		            }
-		            //#endregion
-
-		        });
+		        $rootScope.Alert('连接失败！[' + response + status + ']');
 
 		        return;
 		    });
 		}
-        
-        $scope.getBook($rootScope.bookId);
  
 		$scope.wxLogin = function() {
 
@@ -529,7 +513,7 @@ dcCtrl
 
 				},
 				function(error) {
-					$rootScope.Alert("Scanning failed: " + error);
+					//$rootScope.Alert("Scanning failed: " + error);
 				}, {
 					"preferFrontCamera": false, // iOS and Android
 					"showFlipCameraButton": false, // iOS and Android
@@ -2727,7 +2711,7 @@ dcCtrl
 					}
 				},
 				function(error) {
-					$rootScope.Alert("Scanning failed: " + error);
+					//$rootScope.Alert("Scanning failed: " + error);
 				}, {
 					"preferFrontCamera": false, // iOS and Android
 					"showFlipCameraButton": false, // iOS and Android

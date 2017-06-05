@@ -7,13 +7,13 @@
 			<div class="me-home-top">
 				<span class="s1" ng-click="showPointTips()">积分:{{point}}</span>
 				<img src="{{userinfo.headimgurl}}" />
-				<span class="s2">{{userinfo.nickname}}</span>
+				<span class="s2" ng-if="userinfo.id!=24">{{userinfo.nickname}}</span>
 			</div>
 
 
 			<div class="me-home-list">
 
-				<div class="out row row-center" ng-click="appVcode()">
+				<div ng-if="userinfo.id!=24" class="out row row-center" ng-click="appVcode()">
 
 					<span class="col col-60">APP激活</span>
 
@@ -32,7 +32,7 @@
 					<div class="col col-10" style="text-align: right;"><img height="25px" style="display: inline-block;vertical-align: middle;" src="img/arrow11_04.png"></div>
 				</div>
 
-	            <div class="out row row-center" ng-click="myVcode()">
+	            <div ng-if="userinfo.id!=24" class="out row row-center" ng-click="myVcode()">
 
 					<span class="col col-60">我的验证码</span>
 
@@ -43,7 +43,7 @@
 				</div>
 
 
-				<div class="out row row-center" ng-click="myOrder()">
+				<div ng-if="userinfo.id!=24" class="out row row-center" ng-click="myOrder()">
 
 					<span class="col col-60">我的订单</span>
 
