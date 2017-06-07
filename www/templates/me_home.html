@@ -65,7 +65,7 @@
 				</div>
 				
 				
-				<div class="out row row-center" ng-click="wechatShareApk()">
+				<div ng-if="userinfo.id!=24" class="out row row-center" ng-click="wechatShareApk()">
 					
 					<span class="col col-60">分享给好友</span>
 					
@@ -93,7 +93,7 @@
 				</div>
 			</div>
 
-			<div class="text-center" style="margin-top: 50px;margin-bottom:60px;">
+			<div  ng-if="userinfo.id!=24" class="text-center" style="margin-top: 50px;margin-bottom:60px;">
 				<button style="background:none;min-width: 100px;height: 35px;border-radius: 5px;color: gray;border-style: none; //无边框outline: none;" ng-click="logout()">注&nbsp;&nbsp;&nbsp;&nbsp;销</button>
 			</div>
 			
