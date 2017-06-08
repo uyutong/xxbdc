@@ -1106,3 +1106,37 @@
 	height: 0px;
 	overflow: hidden;
 }
+
+
+
+.mainmenu:after { clear: both; content: " "; display: block; }
+ 
+    .mainmenu li{
+        float:left;       
+        margin-left: 2.5%;       
+        margin-top: 2.5%;       
+        width: 22%; 
+        border-radius:3px;
+        overflow:hidden; 
+   }
+ 
+    .mainmenu li a{ 
+    	display:block; 
+        color:#000000;
+        font-size:18px; 
+        text-align:center;
+        height:60px;
+        background-color:white ;
+        border-radius:5px ;
+        padding-top: 21px;
+    } 
+     
+    .mainmenu li a.activated{ 
+        background-color:gray ;
+    }  
+    
+        
+    /*.mainmenu li a b{
+        display:block; height:80px;
+    }*/
+      

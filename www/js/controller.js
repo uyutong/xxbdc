@@ -145,7 +145,6 @@ dcCtrl
 		                    } else {
 		                        setTimeout(function () {
 
-
 		                            $state.go("tab.dy_home")
 		                        }, 2000)
 		                    }

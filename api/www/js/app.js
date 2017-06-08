@@ -35,6 +35,12 @@
         controller: 'word_exerciseCtrl'
     })
     
+    .state('26_letter', {
+        url: '/26_letter',
+        templateUrl: 'templates/26_letter.html',
+        controller: '26_letterCtrl'
+    })
+    
     .state('wx_word_list', {
         url: '/wx_word_list/:book_id/:unit_id/:type',
         templateUrl: 'templates/wx_word_list.html',

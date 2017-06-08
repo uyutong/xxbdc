@@ -982,3 +982,38 @@ dcCtrl
 
     $scope.getUnits(1, $scope.book_id);
 })
+
+.controller('26_letterCtrl', function ($rootScope, $ionicModal, $scope, $state, $http, $stateParams) {
+   $scope.units = [];
+   $scope.getUnits = function (user_id, book_id) {
+        $rootScope.LoadingShow();
+        var url = $rootScope.rootUrl + "/units";
+        var data = {
+            "user_id": user_id,
+            "book_id": book_id
+        };
+        $http.post(url, data).success(function (response) {
+            $rootScope.LoadingHide();
+            if (response.error) {
+                $rootScope.Alert(response.msg);
+            } else {
+                $scope.units = response;
+            }
+
+        }).error(function (response, status) {
+            $rootScope.LoadingHide();
+            $rootScope.Alert('连接失败！[' + response + status + ']');
+            return;
+        });
+    }
+    $scope.getUnits(1,22);
+    
+    $scope.goExercise= function(index){
+    	$state.go("word_exercise", {
+				"book_id":$scope.units[index].book_id,
+				"unit_id":$scope.units[index].id,
+				"word":$scope.units[index].name
+		})
+    }
+    
+})
