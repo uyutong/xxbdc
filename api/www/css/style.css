@@ -324,7 +324,6 @@
 	position: relative;
 	text-align: center;
 	font-size: 18px;
-
 }
 
 .dy-home-sp-color1 {
@@ -482,7 +481,6 @@
 	margin: 8px 0px;
 	position: relative;
 	font-size: 18px;
-
 }
 
 .dy-word-list-list .out_div.activated {
@@ -517,9 +515,9 @@
 }
 
 .dy-word-test-explain .s1 {
-	font-size: 30px;
+	font-size: 40px;
 	color: #3a6ea5;
-	line-height: 30px;
+	line-height: 40px;
 	display: inline-block;
 	vertical-align: middle;
 }
@@ -530,7 +528,6 @@
 	vertical-align: middle;
 	height: 18px;
 }
-
 
 .dy-word-test-explain img {
 	width: 18px;
@@ -842,12 +839,12 @@
 	border-style: none; //无边框outline: none;
 }
 
-.qwlx.activated{
-    background: #c19c30;
+.qwlx.activated {
+	background: #c19c30;
 }
 
 .bt_ssyxx {
-	background:lightgray;
+	background: lightgray;
 	min-width: 100px;
 	height: 35px;
 	border-radius: 5px;
@@ -857,9 +854,9 @@
 }
 
 .bt_ssyxx.activated {
-  
-	background:gray;
+	background: gray;
 }
+
 .yx-home-top {
 	color: #8b6442;
 	font-size: 14px;
@@ -1107,36 +1104,74 @@
 	overflow: hidden;
 }
 
+.auto25:after {
+	clear: both;
+	content: " ";
+	display: block;
+}
+
+.auto25 li {
+	float: left;
+	margin: 1.5%;
+	width: 22%;
+	border-radius: 5px;
+	overflow: hidden;
+}
+
+.auto25 li a {
+	vertical-align: middle;
+	display: block;
+	color: #000000;
+	font-size: 18px;
+	text-align: center;
+	height: 70px;
+	line-height: 70px;
+	background-color: white;
+	border-radius: 5px;
+}
+
+.auto25 li a.activated {
+	background-color: gray;
+}
 
 
-.mainmenu:after { clear: both; content: " "; display: block; }
- 
-    .mainmenu li{
-        float:left;       
-        margin-left: 2.5%;       
-        margin-top: 2.5%;       
-        width: 22%; 
-        border-radius:3px;
-        overflow:hidden; 
-   }
- 
-    .mainmenu li a{ 
-    	display:block; 
-        color:#000000;
-        font-size:18px; 
-        text-align:center;
-        height:60px;
-        background-color:white ;
-        border-radius:5px ;
-        padding-top: 21px;
-    } 
-     
-    .mainmenu li a.activated{ 
-        background-color:gray ;
-    }  
-    
-        
-    /*.mainmenu li a b{
+
+
+
+.auto50:after {
+	clear: both;
+	content: " ";
+	display: block;
+}
+
+.auto50 li {
+	float: left;
+	margin: 2.5%;
+	width:45%;
+	border-radius: 5px;
+	overflow: hidden;
+}
+
+.auto50 li a {
+	display: block;
+	color: #000000;
+	font-size: 18px;
+	text-align: center;
+	height: 100px;
+	line-height: 100px;
+	background-color: white;
+	border-radius: 5px;
+}
+
+.auto50 li a activated {
+	background-color: gray;
+	-moz-box-shadow: 3px 3px 3px #999999;
+	-moz-webkit-shadow: 3px 3px 3px #999999;
+	box-shadow: 3px 3px 3px #999999;
+}
+
+
+
+/*.mainmenu li a b{
         display:block; height:80px;
     }*/
-      

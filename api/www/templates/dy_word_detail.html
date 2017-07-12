@@ -2,76 +2,141 @@
 	<!--<div class="dy-word-common-top">
         <span class="s1">小学英语同步背单词</span>
    </div>-->
-<ion-content class="padding" has-bouncing="false">
-    <ion-scroll has-bouncing="false" style="height:100%;" direction="y">
-    	
-		<div ng-if="book_id!='22'">
-			<div class="dy-word-test-explain">
-				<span class="s1">{{word.en}}</span><br>
-				<span class="s2">{{word.zh}}</span><br>
-			</div>
+	<ion-content class="padding" has-bouncing="false">
+		<ion-scroll has-bouncing="false" style="height:100%;" direction="y">
 
-			<div class="dy-word-test-audio">
-				<span>女声&nbsp;&nbsp;</span><img id="detail_paly_0" src="img/xiaoxue_cut_07.png" ng-click="playDetailWord0(word.audio_0)" />&nbsp;&nbsp;&nbsp;
-                <span>男声&nbsp;&nbsp;</span><img id="detail_paly_1" src="img/xiaoxue_cut_07.png" ng-click="playDetailWord1(word.audio_1)" />&nbsp;&nbsp;&nbsp;
-			</div>
-
-			<div style="text-align: center;margin-top: 10px;" ng-show="word.video!=''">
-				<div style="font-size: 20px;margin: 10px;">手势语学习</div>
-				<div class="padding video-box">
-					<video type="video/mp4" poster="img/transparent.png" webkit-playsinline style="width: 100%; height: 100%; background-size:100% 100%; background-image:url({{$root.siteUrl}}/upload/word/img/{{word.photo}});"></video>
+			<div ng-if="book_id<22">
+				<div class="dy-word-test-explain">
+					<span class="s1">{{word.en}}</span><br><br>
+					<span class="s2">{{word.zh}}</span><br>
 				</div>
+
+				<div class="dy-word-test-audio">
+					<span>女声&nbsp;&nbsp;</span><img id="detail_paly_0" src="img/xiaoxue_cut_07.png" ng-click="playDetailWord0(word.audio_0)" />&nbsp;&nbsp;&nbsp;
+					<span>男声&nbsp;&nbsp;</span><img id="detail_paly_1" src="img/xiaoxue_cut_07.png" ng-click="playDetailWord1(word.audio_1)" />&nbsp;&nbsp;&nbsp;
+				</div>
+
+				<div style="text-align: center;margin-top: 10px;" ng-show="word.video!=''">
+					<div style="font-size: 20px;margin: 10px;">手势语学习</div>
+					<div class="padding video-box">
+						<video type="video/mp4" poster="img/transparent.png" webkit-playsinline style="width: 100%; height: 100%; background-size:100% 100%; background-image:url({{$root.siteUrl}}/upload/word/img/{{word.photo}});"></video>
+					</div>
+				</div>
+
+				<div style="text-align: center; margin-bottom: 100px;" ng-show="word.video==''">
+					<img width="240" src="{{$root.siteUrl}}/upload/word/img/{{word.photo}}" />
+				</div>
+
+				<div class="text-center">
+					<button class="button button-balanced" ng-click="goExercise()">&#12288;趣味练习&#12288;</button>
+				</div>
+
 			</div>
 
-			<div style="text-align: center; margin-bottom: 100px;" ng-show="word.video==''">
-				<img width="240" src="{{$root.siteUrl}}/upload/word/img/{{word.photo}}" />
-			</div>
-			
-			<div ng-if="book_id!='22'" class="text-center">
-		        <button class="button button-balanced" ng-click="goExercise()">&#12288;趣味练习&#12288;</button>
-	        </div>
-
-		</div>
-
-		<div ng-if="book_id=='22'">
-			<div class="text-center" height="120px" style="margin:10px;">
-				<img width="180px" height="120px" style="vertical-align: middle;" src="{{$root.siteUrl}}/upload/word/img/{{word.photo}}" />
-				<span style="vertical-align: middle;font-size:90px;margin:auto;">{{word.phonetic}}<span>		
-		</div>
+			<div ng-if="book_id==22">
+				<div class="text-center" height="120px" style="margin:10px;">
+					<img width="180px" height="120px" style="vertical-align: middle;" src="{{$root.siteUrl}}/upload/word/img/{{word.photo}}" />
+					<span style="vertical-align: middle;font-size:90px;margin:auto;">{{word.phonetic}}<span>		
+		        </div>
 		
-		<div class="dy-word-test-audio">
-			<span>女声&nbsp;&nbsp;</span><img id="detail_paly_0" src="img/xiaoxue_cut_07.png" ng-click="playDetailWord0(word.audio_0)" />	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;			
-			<span>男声&nbsp;&nbsp;</span><img id="detail_paly_1" src="img/xiaoxue_cut_07.png" ng-click="playDetailWord1(word.audio_1)" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			<span>发音教学&nbsp;&nbsp;</span><img id="detail_paly_2" src="img/xiaoxue_cut_07.png" ng-click="playDetailWord2(word.audio_2)"/>
-			</div>
-
-			<div style="text-align: center;margin-top: 10px;" ng-show="word.video!=''">
-				<div class="row row-bottom"  style="font-size:20px;">
-					<div class="col-50 text-left"  style="padding-left: 10px;">学习手势语:</div>
+		        <div class="dy-word-test-audio">
+			        <span>女声&nbsp;&nbsp;</span><img id="detail_paly_0" src="img/xiaoxue_cut_07.png" ng-click="playDetailWord0(word.audio_0)" /> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<span>男声&nbsp;&nbsp;</span><img id="detail_paly_1" src="img/xiaoxue_cut_07.png" ng-click="playDetailWord1(word.audio_1)" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<span>发音教学&nbsp;&nbsp;</span><img id="detail_paly_2" src="img/xiaoxue_cut_07.png" ng-click="playDetailWord2(word.audio_2)" />
 				</div>
 
-				<div class="padding video-box">
-					<video type="video/mp4" poster="img/transparent.png" webkit-playsinline style="width: 100%; height: 100%; background-size:100% 100%; background-image:url({{$root.siteUrl}}/upload/word/img/{{word.photo}});"></video>
+				<div style="text-align: center;margin-top: 10px;" ng-show="word.video!=''">
+					<div class="row row-bottom" style="font-size:20px;">
+						<div class="col-50 text-left" style="padding-left: 10px;">学习手势语:</div>
+					</div>
+
+					<div class="padding video-box">
+						<video type="video/mp4" poster="img/transparent.png" webkit-playsinline style="width: 100%; height: 100%; background-size:100% 100%; background-image:url({{$root.siteUrl}}/upload/word/img/{{word.photo}});"></video>
+					</div>
 				</div>
+
 			</div>
 
+			<div ng-if="book_id==37">
+
+				<div style="padding: 20px;background-color:#E0E0E0 ;border-radius:10px;">
+					<div class="text-center" style="margin:10px;">
+						<img width="70%" style="background-color:#888888;border-radius: 5px;" src="{{$root.siteUrl}}/upload/word/img/{{word.photo}}" />
+					</div>
+					<br>
+					<div class="padding text-center" style="font-size:90px;color: #583000;height: 90px;">{{word.en}}</div>
+				</div>
+
+				<div class="row" style="background-color:#E0E0E0 ;border-radius:10px;margin-top: 10px;">
+					<div class="col col-66 text-center col-center" style="font-size:34px;">{{word.zh}}</div>
+					<div class="col col-34 text-center col-center"> <img id="detail_paly_0" width="50" style="margin: auto;" src="img/xiaoxue_cut_07.png" ng-click="playDetailWord0(word.audio_0)" /></div>
+				</div>
+
+			</div>
+
+			<div ng-if="book_id==40">
+
+				<div class="row" style="height: 100px;background-color:#E0E0E0 ;border-radius:10px;">
+
+					<div class="col col-50 text-center col-center" style="font-size:80px;color: #583000;">{{word.en}}</div>
+					<div class="col col-50 text-center col-center" style="font-size:50px;color: #583000;">what</div>
+
+				</div>
+
+				<div ng-if="word.video_brush" style="margin-top:10px;padding: 10px;background-color:#E0E0E0 ;border-radius:10px;">
+					<div class="text-left" style="">汉字书写视频</div>
+					<div class="padding shuxieshiping">
+						<video style="width: 95%;" src="" controls="controls">your browser does not support the video tag </video>
+					</div>
+				</div>
+
+				<div ng-if="word.video" style="margin-top:10px;padding: 10px;background-color:#E0E0E0 ;border-radius:10px;">
+					<div class="text-left" ng-click="show_history=!show_history">汉字演变视频</div>
+					<div class="padding history" ng-show="show_history">
+						<video style="width: 95%;" src="" controls="controls">your browser does not support the video tag </video>
+					</div>
+				</div>
+			</div>
+						
+			<div ng-if="book_id>41&&book_id<48">
+				<div class="dy-word-test-explain">
+					<span class="s1">{{word.en}}</span><br><br>
+					<span class="s2">{{word.zh}}</span><br>
+				</div>
+
+				<div class="dy-word-test-audio">
+					<span>女声&nbsp;&nbsp;</span><img id="detail_paly_0" src="img/xiaoxue_cut_07.png" ng-click="playDetailWord0(word.audio_0)" />&nbsp;&nbsp;&nbsp;
+					<span>男声&nbsp;&nbsp;</span><img id="detail_paly_1" src="img/xiaoxue_cut_07.png" ng-click="playDetailWord1(word.audio_1)" />&nbsp;&nbsp;&nbsp;
+				</div>
+
+				<div style="text-align: center;margin-top: 10px;" ng-show="word.video!=''">
+					<div style="font-size: 20px;margin: 10px;">手势语学习</div>
+					<div class="padding video-box">
+						<video type="video/mp4" poster="img/transparent.png" webkit-playsinline style="width: 100%; height: 100%; background-size:100% 100%; background-image:url({{$root.siteUrl}}/upload/word/img/{{word.photo}});"></video>
+					</div>
+				</div>
+
+				<div style="text-align: center; margin-bottom: 100px;" ng-show="word.video==''">
+					<img width="240" src="{{$root.siteUrl}}/upload/word/img/{{word.photo}}" />
+				</div>
+
+				<div class="text-center">
+					<button class="button button-balanced" ng-click="goExercise()">&#12288;趣味练习&#12288;</button>
+				</div>
+
+			</div>
 			
-		</div>
-	
-			
+			<br>
+	    	<br>
+	    	<br>
 		</ion-scroll>
-
 	</ion-content>
-	
 
-	
-	<div ng-if="book_id!='22'"  class="row row-center text-center" style="position: fixed;bottom: 0px;background:#0c7cd6;height:45px;color: white;font-size: 18px;">
-<!--		<div class="col" ng-click="goExercise()">趣味练习</div>
--->		<a class="col" style="text-decoration:none;color: white;" href="http://xx.kaouyu.com/www/#/more_apps">新课标小学英语单词APP下载</a>
-    </div>
-	
-	
-	<div ng-if="book_id=='22' class="text-center" style="width:100%;position: fixed;bottom: 10px;left: 0;">
+	<div ng-if="book_id<22" class="row row-center text-center" style="position: fixed;bottom: 0px;background:#0c7cd6;height:45px;color: white;font-size: 18px;">
+		<a class="col" style="text-decoration:none;color: white;" href="http://xx.kaouyu.com/www/#/more_apps">新课标小学英语单词APP下载</a>
+	</div>
+
+	<div ng-if="book_id==22" class="text-center" style="width:100%;position: fixed;bottom: 10px;left: 0;">
 		<button class="button button-balanced" ng-click="goExercise()">&#12288;书写练习&#12288;</button>
 	</div>
 </ion-view>

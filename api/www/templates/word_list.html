@@ -1,20 +1,42 @@
-﻿
-<ion-content class="padding backgroud-light" has-bouncing="false">
-    <ion-scroll has-bouncing="false" style="height:100%;" direction="y">
-    	
-	<div class="dy-word-list-list" style="margin-top:20px;margin-bottom:60px;">
-		<div ng-class="{'out_div':true, 'row':true, 'row-center':true,'activated':$index==is_reading_num}" ng-click="play($index)" ng-repeat="word in word_list">
-		    <div class="col">{{ word.en}}&nbsp;&nbsp;&nbsp;<span style="display: inline-block;color: gray;font-size:15px;">{{word.zh}}</span>
-	        </div>	
-	    </div>
-	</div>
+﻿<ion-content class="padding backgroud-light" has-bouncing="false">
+	<ion-scroll has-bouncing="false" style="height:100%;" direction="y">
+		<div ng-if="book_id<22" class="dy-word-list-list" style="margin-top:20px;margin-bottom:60px;">
+			<div ng-class="{'out_div':true, 'row':true, 'row-center':true,'activated':$index==is_reading_num}" ng-click="play($index)" ng-repeat="word in word_list">
+				<div class="col">{{word.en}}&nbsp;&nbsp;&nbsp;<span style="display: inline-block;color: gray;font-size:15px;">{{word.zh}}</span>
+				</div>
+			</div>
+		</div>
+
+		<ul ng-if="book_id==37" class="auto50" style="list-style: none outside none; margin:0; padding: 0;">
+			<li style="background-color:#fffff;"  ng-repeat="word in word_list">
+				<a style="color: #583000;font-size: 50px;" ng-click="goDetail($index)" >{{word.en}}</a>
+			</li>
+		</ul>
+
+	    <ul ng-if="book_id==40" class="auto25" style="list-style: none outside none; margin:0; padding: 0;">
+			<li style="background-color:#fffff;"  ng-repeat="word in word_list">
+				<a style="color: #583000;font-size: 25px;" ng-click="goDetail($index)">{{word.en}}</a>
+			</li>
+		</ul>
+
+	    <div ng-if="book_id>41 && book_id<48" class="dy-word-list-list" style="margin-top:20px;margin-bottom:60px;">
+			<div ng-class="{'out_div':true, 'row':true, 'row-center':true,'activated':$index==is_reading_num}" ng-click="play2($index)" ng-repeat="word in word_list">
+				<div class="col">{{word.en}}&nbsp;&nbsp;&nbsp;<span style="display: inline-block;color: gray;font-size:15px;">{{word.zh}}</span>
+				</div>
+			</div>
+		</div>
+		<br>
+		<br>
+		<br>
+		<br>	
 	</ion-scroll>
 </ion-content>
 
-<div class="row row-center text-center" style="position: fixed;bottom: 0px;background:#0c7cd6;height:45px;color: white;font-size: 18px;">
+<div ng-if="book_id<22" class="row row-center text-center" style="position: fixed;bottom: 0px;background:#0c7cd6;height:45px;color: white;font-size: 18px;">
 	<div class="col" ng-click="playAudio()">{{read_button_name}}</div>
 	<a class="col" style="text-decoration:none;color: white;" href="{{app.open_qq_url}}">下载APP跟读</a>
 </div>
 
-
-
+<div ng-if="book_id>41 && book_id<48" class="row row-center text-center" style="position: fixed;bottom: 0px;background:#0c7cd6;height:45px;color: white;font-size: 18px;">
+	<div class="col" ng-click="playAudio()">{{read_button_name}}</div>
+</div>
