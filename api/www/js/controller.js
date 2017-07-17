@@ -4,6 +4,8 @@ dcCtrl
 	.controller('word_detailCtrl', function($rootScope, $ionicModal, $scope, $state, $http, $stateParams) {
 
 		$scope.book_id = parseInt($stateParams.book_id);
+		$scope.unit_id = parseInt($stateParams.unit_id);
+
 		//#region 获取单词
 		$rootScope.LoadingShow();
 		var url = $rootScope.rootUrl + "/word";
@@ -20,12 +22,15 @@ dcCtrl
 				$rootScope.Alert(response.msg);
 			} else {
 				$scope.word = response;
+				if($scope.word.phonetic) {
+					$scope.fayins = $scope.word.phonetic.split(" ");
+				}
 
 				if($scope.book_id <= 22) {
 					$(".video-box video").attr("src", $rootScope.siteUrl + "/upload/word/mp4/" + $scope.word.video);
 					$('.video-box video').mediaelementplayer();
 
-				} else if($scope.book_id==40) {
+				} else if($scope.book_id == 40) {
 
 					setTimeout(function() {
 						$(".shuxieshiping video").attr("src", $rootScope.siteUrl + "/upload/word/mp4/" + $scope.word.video);
@@ -70,6 +75,62 @@ dcCtrl
 				"unit_id": $stateParams.unit_id,
 				"word": $stateParams.word
 			})
+		}
+
+		$scope.fayin37 = function(index) {
+			var v = document.getElementById("audio");
+			v.src = "http://xx.kaouyu.com/upload/pinyin/" + $scope.word.en + "/" + $scope.word.en + index + ".mp3";
+			v.play();
+		}
+
+		var fayin37_urls;
+		var j = 0;
+		var if_add_ended = false;
+		var is_reading = false;
+
+		$scope.fayin37_all = function(url) {
+			is_reading = true;
+			var v = document.getElementById("audio");
+			v.src = url;
+			//避免重复添加事件
+			if(!if_add_ended) {
+				v.addEventListener('ended', function() {
+					if(j < fayin37_urls.length - 1) {
+						setTimeout(function() {
+							j = j + 1;
+							v.src = fayin37_urls[j];
+							v.play();
+							$scope.is_reading_num = j;
+							$scope.$apply();
+						}, 1000)
+					} else {
+						is_reading = false;
+						$scope.is_reading_num = -1;
+						$scope.$apply();
+					}
+
+				}, false);
+
+				v.addEventListener('error', function(e) {
+					alert(e);
+				}, false)
+				if_add_ended = true;
+			}
+			v.play();
+			$scope.is_reading_num = 0;
+		}
+
+		$scope.fayin37_all_play = function() {
+			fayin37_urls = [
+				"http://xx.kaouyu.com/upload/pinyin/" + $scope.word.en + "/" + $scope.word.en + "1.mp3",
+				"http://xx.kaouyu.com/upload/pinyin/" + $scope.word.en + "/" + $scope.word.en + "2.mp3",
+				"http://xx.kaouyu.com/upload/pinyin/" + $scope.word.en + "/" + $scope.word.en + "3.mp3",
+				"http://xx.kaouyu.com/upload/pinyin/" + $scope.word.en + "/" + $scope.word.en + "4.mp3"
+			];
+			j = 0;
+			if(!is_reading) {
+				$scope.fayin37_all(fayin37_urls[j]);
+			}
 		}
 
 		//		$scope.play = function(audio) {
@@ -857,6 +918,7 @@ dcCtrl
 		var url = $rootScope.rootUrl + "/words";
 
 		$scope.book_id = parseInt($stateParams.book_id);
+		$scope.unit_id = parseInt($stateParams.unit_id);
 
 		var data = {
 			"user_id": 21,
@@ -934,7 +996,7 @@ dcCtrl
 			}
 			$rootScope.playWebWord($scope.word_list[index].audio_0);
 		}
-		
+
 		$scope.play2 = function(index) {
 			if($scope.playing) {
 				$scope.is_reading_num = -1;
@@ -951,7 +1013,6 @@ dcCtrl
 				"word": $scope.word_list[index].en
 			})
 		}
-
 
 		$scope.goDetail = function(index) {
 			if($scope.book_id == 37) {

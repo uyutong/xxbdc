@@ -1134,9 +1134,20 @@
 	background-color: gray;
 }
 
+.auto25 li img {
+	vertical-align: middle;
+	display: block;
+	color: #000000;
+	text-align: center;
+	height: 70px;
+	line-height: 70px;
+	background-color: white;
+	border-radius: 5px;
+}
 
-
-
+.auto25 li img.activated {
+	background-color: gray;
+}
 
 .auto50:after {
 	clear: both;
@@ -1147,7 +1158,7 @@
 .auto50 li {
 	float: left;
 	margin: 2.5%;
-	width:45%;
+	width: 45%;
 	border-radius: 5px;
 	overflow: hidden;
 }
@@ -1170,6 +1181,18 @@
 	box-shadow: 3px 3px 3px #999999;
 }
 
+.fanyin37 {
+	margin: 5px;
+	background-color: #E0E0E0;
+	border-radius: 5px;
+}
+.fanyin37.activated{
+	border: 2px solid green;
+}
+
+.fanyin37activated {
+	border: 2px solid green;
+}
 
 
 /*.mainmenu li a b{

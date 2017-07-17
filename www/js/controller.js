@@ -1,96 +1,190 @@
 var dcCtrl = angular.module('dachutimes.controllers', []);
 dcCtrl
-    .controller('homeCtrl', function ($rootScope, $scope, $state, $http, $ionicActionSheet) {
+	.controller('homeCtrl', function($rootScope, $scope, $state, $http, $ionicActionSheet) {
 
-        //#region 苹果审核人员用 勿删
-        var info = { "id": "24", "subscribe": null, "openid": "oVl0IwD3qn9_3GHx2qOGXBJlxRUc", "nickname": "\u9a6c\u6d2a\u6d9b", "sex": "1", "language": "zh_CN", "city": "Mentougou", "province": "Beijing", "country": "CN", "headimgurl": "http:\/\/wx.qlogo.cn\/mmopen\/XiaYa0IAAlP8OZom5WMCCVl1icLibz9F6yE85NXOpZZ1NNsJ5G65nnkzgoN8fA07WibKM0hmpI56FviaafZk6MWbbPlDFfpFjTXxN\/0", "subscribe_time": null, "unionid": "ocffVt08HworeoxlzULVlOFdkYY4", "remark": null, "groupid": null, "register_time": "2017-02-22 21:43:59", "status": "0", "book_id": $rootScope.bookId };
+		//#region 苹果审核人员用 勿删
+		var info = {
+			"id": "24",
+			"subscribe": null,
+			"openid": "oVl0IwD3qn9_3GHx2qOGXBJlxRUc",
+			"nickname": "\u9a6c\u6d2a\u6d9b",
+			"sex": "1",
+			"language": "zh_CN",
+			"city": "Mentougou",
+			"province": "Beijing",
+			"country": "CN",
+			"headimgurl": "http:\/\/wx.qlogo.cn\/mmopen\/XiaYa0IAAlP8OZom5WMCCVl1icLibz9F6yE85NXOpZZ1NNsJ5G65nnkzgoN8fA07WibKM0hmpI56FviaafZk6MWbbPlDFfpFjTXxN\/0",
+			"subscribe_time": null,
+			"unionid": "ocffVt08HworeoxlzULVlOFdkYY4",
+			"remark": null,
+			"groupid": null,
+			"register_time": "2017-02-22 21:43:59",
+			"status": "0",
+			"book_id": $rootScope.bookId
+		};
 
-        if ($rootScope.isIOS) {
-            var url = $rootScope.rootUrl + "/version";
-            var data = {
-                "platform": "ios",
-                "book_id": $rootScope.bookId
-            };
-            $http.post(url, data).success(function (response) {
-                if (response.error) {
+		if($rootScope.isIOS) {
+			var url = $rootScope.rootUrl + "/version";
+			var data = {
+				"platform": "ios",
+				"book_id": $rootScope.bookId
+			};
+			$http.post(url, data).success(function(response) {
+				if(response.error) {
 
-                } else {
+				} else {
 
-                    setTimeout(function () {
+					setTimeout(function() {
 
-                        if (response.status == 0 && response.version == $rootScope.currentVersion) {
+						if(response.status == 0 && response.version == $rootScope.currentVersion) {
 
-                            setStorage("userinfo", info);
-                        }
+							setStorage("userinfo", info);
+						}
 
-                        $state.go("login");
+						$state.go("login");
 
-                    }, 1000);
-                }
-            }).error(function (response, status) {
-                return;
-            });
-        }
-        else {
-            $state.go("login");
-        }
-        //#endregion 苹果审核人员用 勿删
+					}, 1000);
+				}
+			}).error(function(response, status) {
+				return;
+			});
+		} else {
+			$state.go("login");
+		}
+		//#endregion 苹果审核人员用 勿删
 
-    })
+	})
 
 	.controller('loginCtrl', function($rootScope, $scope, $state, $http, $ionicActionSheet) {
 
-	    $scope.iflogin = true;
+		$scope.iflogin = true;
+		
+		setStorage("userinfo", {
+								"id": "24",
+								"subscribe": null,
+								"openid": "oVl0IwD3qn9_3GHx2qOGXBJlxRUc",
+								"nickname": "\u9a6c\u6d2a\u6d9b",
+								"sex": "1",
+								"language": "zh_CN",
+								"city": "Mentougou",
+								"province": "Beijing",
+								"country": "CN",
+								"headimgurl": "http:\/\/wx.qlogo.cn\/mmopen\/XiaYa0IAAlP8OZom5WMCCVl1icLibz9F6yE85NXOpZZ1NNsJ5G65nnkzgoN8fA07WibKM0hmpI56FviaafZk6MWbbPlDFfpFjTXxN\/0",
+								"subscribe_time": null,
+								"unionid": "ocffVt08HworeoxlzULVlOFdkYY4",
+								"remark": null,
+								"groupid": null,
+								"register_time": "2017-02-22 21:43:59",
+								"status": "0",
+								"book_id": $rootScope.bookId
+							});
 
-	    //#region 苹果审核人员用 勿删
-	    if ($rootScope.isIOS) {
+		
+		$scope.getBook = function(bookId) {
 
-	        var url = $rootScope.rootUrl + "/version";
-	        var data = {
-	            "platform": "ios",
-	            "book_id": $rootScope.bookId
-	        };
-	        $http.post(url, data).success(function (response) {
-	            if (response.error) {
-	            } else {
-	                setTimeout(function () {
+			$rootScope.LoadingShow();
+			//获取所有book/unit
+			var url = $rootScope.rootUrl + "/books";
+			var data = {
+				//				"user_id": userId, //没有登录时没有userId的暂拿着我的id21来获取book
+				"book_id": bookId
+			};
 
-	                    if (response.status == 0 && response.version == $rootScope.currentVersion)
-	                    {
-	                        setStorage("userinfo", { "id": "24", "subscribe": null, "openid": "oVl0IwD3qn9_3GHx2qOGXBJlxRUc", "nickname": "\u9a6c\u6d2a\u6d9b", "sex": "1", "language": "zh_CN", "city": "Mentougou", "province": "Beijing", "country": "CN", "headimgurl": "http:\/\/wx.qlogo.cn\/mmopen\/XiaYa0IAAlP8OZom5WMCCVl1icLibz9F6yE85NXOpZZ1NNsJ5G65nnkzgoN8fA07WibKM0hmpI56FviaafZk6MWbbPlDFfpFjTXxN\/0", "subscribe_time": null, "unionid": "ocffVt08HworeoxlzULVlOFdkYY4", "remark": null, "groupid": null, "register_time": "2017-02-22 21:43:59", "status": "0", "book_id": $rootScope.bookId });
+			$http.post(url, data).success(function(response) {
+				$rootScope.LoadingHide();
+				if(response.error) {
+					$rootScope.Alert(response.msg);
+				} else {
+					if(response) {
+						$rootScope.mybook = response;
+						var userinfo = getStorage("userinfo");
+						if(userinfo.id) {
+							$scope.iflogin = true;
+							$rootScope.userinfo = userinfo;
+							if($rootScope.userinfo.book_id != $rootScope.bookId) {
+								$scope.setBook($rootScope.userinfo.id, $rootScope.bookId);
+							} else {
+								setTimeout(function() {
 
-	                        var userinfo = getStorage("userinfo");
-	                    }
+									$state.go("tab.dy_home")
+								}, 2000)
+							}
+						} else {
+							$scope.iflogin = false;
+						}
+					}
+				}
+			}).error(function(response, status) {
+				$rootScope.LoadingHide();
+				$rootScope.Alert('连接失败！[' + response + status + ']');
 
-	                    $scope.getBook($rootScope.bookId);
+				return;
+			});
+		}
 
-	                }, 1000);
-	            }
-	        }).error(function (response, status) {
+		//#region 苹果审核人员用 勿删
+		if($rootScope.isIOS) {
 
-               //#region 勿删 ios第一次启动需要用户同意允许联网
+			var url = $rootScope.rootUrl + "/version";
+			var data = {
+				"platform": "ios",
+				"book_id": $rootScope.bookId
+			};
+			$http.post(url, data).success(function(response) {
+				if(response.error) {} else {
+					setTimeout(function() {
 
-	                    $rootScope.Alert('您的设备没有联网(或者设置中没有打开允许使用数据网络)，请联网后再试，谢谢！', function () {
+						if(response.status == 0 && response.version == $rootScope.currentVersion) {
+							setStorage("userinfo", {
+								"id": "24",
+								"subscribe": null,
+								"openid": "oVl0IwD3qn9_3GHx2qOGXBJlxRUc",
+								"nickname": "\u9a6c\u6d2a\u6d9b",
+								"sex": "1",
+								"language": "zh_CN",
+								"city": "Mentougou",
+								"province": "Beijing",
+								"country": "CN",
+								"headimgurl": "http:\/\/wx.qlogo.cn\/mmopen\/XiaYa0IAAlP8OZom5WMCCVl1icLibz9F6yE85NXOpZZ1NNsJ5G65nnkzgoN8fA07WibKM0hmpI56FviaafZk6MWbbPlDFfpFjTXxN\/0",
+								"subscribe_time": null,
+								"unionid": "ocffVt08HworeoxlzULVlOFdkYY4",
+								"remark": null,
+								"groupid": null,
+								"register_time": "2017-02-22 21:43:59",
+								"status": "0",
+								"book_id": $rootScope.bookId
+							});
 
-	                        location.reload();
+							var userinfo = getStorage("userinfo");
+						}
 
-	                        return;
+						$scope.getBook($rootScope.bookId);
 
-	                    });
+					}, 1000);
+				}
+			}).error(function(response, status) {
 
+				//#region 勿删 ios第一次启动需要用户同意允许联网
 
-	                //#endregion
+				$rootScope.Alert('您的设备没有联网(或者设置中没有打开允许使用数据网络)，请联网后再试，谢谢！', function() {
 
-	            return;
-	        });
-	    }
-	    else {
+					location.reload();
 
-	        $scope.getBook($rootScope.bookId);
+					return;
 
-	    }
-	    //#endregion 苹果审核人员用 勿删
-        
+				});
+
+				//#endregion
+
+				return;
+			});
+		} else {
+
+			$scope.getBook($rootScope.bookId);
+
+		}
+		//#endregion 苹果审核人员用 勿删
+
 		$scope.setBook = function(userId, bookId) {
 			$rootScope.LoadingShow();
 			//获取所有book/unit
@@ -106,11 +200,10 @@ dcCtrl
 				} else {
 					$rootScope.userinfo.book_id = bookId;
 					setStorage("userinfo", angular.copy($rootScope.userinfo));
-					setTimeout(function () {
+					setTimeout(function() {
 
-
-					    $state.go("tab.dy_home")
-				    }, 2000)
+						$state.go("tab.dy_home")
+					}, 2000)
 				}
 			}).error(function(response, status) {
 				$rootScope.LoadingHide();
@@ -119,48 +212,6 @@ dcCtrl
 			});
 		}
 
-		$scope.getBook = function (bookId) {
-
-		    $rootScope.LoadingShow();
-		    //获取所有book/unit
-		    var url = $rootScope.rootUrl + "/books";
-		    var data = {
-		        //				"user_id": userId, //没有登录时没有userId的暂拿着我的id21来获取book
-		        "book_id": bookId
-		    };
-
-		    $http.post(url, data).success(function (response) {
-		        $rootScope.LoadingHide();
-		        if (response.error) {
-		            $rootScope.Alert(response.msg);
-		        } else {
-		            if (response) {
-		                $rootScope.mybook = response;
-		                var userinfo = getStorage("userinfo");
-		                if (userinfo.id) {
-		                    $scope.iflogin = true;
-		                    $rootScope.userinfo = userinfo;
-		                    if ($rootScope.userinfo.book_id != $rootScope.bookId) {
-		                        $scope.setBook($rootScope.userinfo.id, $rootScope.bookId);
-		                    } else {
-		                        setTimeout(function () {
-
-		                            $state.go("tab.dy_home")
-		                        }, 2000)
-		                    }
-		                } else {
-		                    $scope.iflogin = false;
-		                }
-		            }
-		        }
-		    }).error(function (response, status) {
-		        $rootScope.LoadingHide();
-		        $rootScope.Alert('连接失败！[' + response + status + ']');
-
-		        return;
-		    });
-		}
- 
 		$scope.wxLogin = function() {
 
 			$rootScope.LoadingShow();
@@ -202,8 +253,7 @@ dcCtrl
 										if($rootScope.userinfo.book_id != $rootScope.bookId) {
 											$scope.setBook($rootScope.userinfo.id, $rootScope.bookId);
 										} else {
-										    setTimeout(function () {
-
+											setTimeout(function() {
 
 												$state.go("tab.dy_home")
 											}, 2000)
@@ -309,7 +359,6 @@ dcCtrl
 						$rootScope.userinfo.book_id = $rootScope.mybook.id;
 						setStorage("userinfo", angular.copy($rootScope.userinfo));
 
-
 						$state.go("tab.dy_home");
 					}
 				}).error(function(response, status) {
@@ -322,47 +371,47 @@ dcCtrl
 			}
 		}
 	})
-    //
+	//
 	.controller('dy_homeCtrl', function($rootScope, $scope, $state, $http, $ionicActionSheet, $ionicPopup, $ionicLoading, $cordovaNetwork, $cordovaAppVersion, $cordovaFileTransfer, $cordovaFileOpener2) {
-                
-                ///////////////
-	    $scope.mstop = function () {
-	        window.plugins.audioRecorderAPI.stop(function (msg) {
-	            // success
-	            alert('ok: ' + msg);
-	        }, function (msg) {
-	            // failed
-	            alert('ko: ' + msg);
-	        });
-	    }
-	    $scope.mstart = function () {
-	        window.plugins.audioRecorderAPI.record(function (msg) {
-	            // complete
-	            alert('ok: ' + msg);
-	        }, function (msg) {
-	            // failed
-	            alert('ko: ' + msg);
-	        }, 30); // record 30 seconds
-	    }
-	    $scope.mplay = function () {
-	        window.plugins.audioRecorderAPI.playback(function (msg) {
-	            // complete
-	            alert('ok: ' + msg);
-	        }, function (msg) {
-	            // failed
-	            alert('ko: ' + msg);
-	        });
-	    }
-                ///////////////
+
+		///////////////
+		$scope.mstop = function() {
+			window.plugins.audioRecorderAPI.stop(function(msg) {
+				// success
+				alert('ok: ' + msg);
+			}, function(msg) {
+				// failed
+				alert('ko: ' + msg);
+			});
+		}
+		$scope.mstart = function() {
+			window.plugins.audioRecorderAPI.record(function(msg) {
+				// complete
+				alert('ok: ' + msg);
+			}, function(msg) {
+				// failed
+				alert('ko: ' + msg);
+			}, 30); // record 30 seconds
+		}
+		$scope.mplay = function() {
+			window.plugins.audioRecorderAPI.playback(function(msg) {
+				// complete
+				alert('ok: ' + msg);
+			}, function(msg) {
+				// failed
+				alert('ko: ' + msg);
+			});
+		}
+		///////////////
 
 		$scope.ifsearch = false;
 		$scope.units = [];
 		$scope.wordSum = 0;
 		$scope.learned = 0;
 
-//		if(!$rootScope.mybook) {
-//			$rootScope.mybook = $rootScope.userinfo.mybook;
-//		}
+		//		if(!$rootScope.mybook) {
+		//			$rootScope.mybook = $rootScope.userinfo.mybook;
+		//		}
 
 		$scope.getUnits = function(book_id) {
 			$rootScope.LoadingShow();
@@ -383,11 +432,10 @@ dcCtrl
 					})
 					//检查是否有新版本
 
-					if (device.platform === 'Android') {
-					    $scope.version("android", book_id);
-					}
-					else {
-					    $scope.version("ios", book_id);
+					if(device.platform === 'Android') {
+						$scope.version("android", book_id);
+					} else {
+						$scope.version("ios", book_id);
 					}
 				}
 
@@ -441,14 +489,14 @@ dcCtrl
 					//http://xx.kaouyu.com/www/#/word_detail/2/39/is
 					//http://xx.kaouyu.com/www/#/word_exercise/2/39/ear
 
-	                if(result.text.split("?").length == 2) {
+					if(result.text.split("?").length == 2) {
 						//			
 						var scan_arr = result.text.split("?")[1].split("&");
-												
-						if(scan_arr.length == 3 && scan_arr[2].indexOf("unit")==-1) {
+
+						if(scan_arr.length == 3 && scan_arr[2].indexOf("unit") == -1) {
 
 							var unit = scan_arr[1].substring(8, scan_arr[1].length);
-							
+
 							$rootScope.LoadingShow();
 							var url = $rootScope.rootUrl + "/words";
 							var data = {
@@ -496,19 +544,18 @@ dcCtrl
 								return;
 							});
 
-						}else{
-//							var unit_id = scan_arr[2].substring()
+						} else {
+							//							var unit_id = scan_arr[2].substring()
 							var unit = scan_arr[1].substring(8, scan_arr[1].length);
-							
-							for(var i=0;i<$scope.units.length;i++){
-								if($scope.units[i].id==unit){
-									$scope.unitSelect(unit,i);
+
+							for(var i = 0; i < $scope.units.length; i++) {
+								if($scope.units[i].id == unit) {
+									$scope.unitSelect(unit, i);
 								}
 							}
 						}
 
 					}
-
 
 				},
 				function(error) {
@@ -846,9 +893,8 @@ dcCtrl
 
 		var mediaRec;
 		var src = "follow.wav";
-		if ($rootScope.isIOS)
-		{
-		    src = audioRecord;
+		if($rootScope.isIOS) {
+			src = audioRecord;
 		}
 		$scope.playing = false;
 		$scope.recording = false;
@@ -878,8 +924,8 @@ dcCtrl
 				);
 				//				}
 
-			    // Record audio
-			    //ios https://stackoverflow.com/questions/24731601/ios-how-to-play-alert-sound-in-speaker-when-recording
+				// Record audio
+				//ios https://stackoverflow.com/questions/24731601/ios-how-to-play-alert-sound-in-speaker-when-recording
 				mediaRec.startRecord();
 				$scope.read_button_name = "停止带读";
 				$scope.is_canplay = false;
@@ -910,10 +956,10 @@ dcCtrl
 						$scope.recording = false;
 						$scope.is_canplay = true;
 						$interval.cancel(timer); //停止并清除					
-					} else if (j < radios.length) {
-					    playWordAudio(radios[j].audio);
-					    $scope.is_reading_num = radios[j].id;
-					    j = j + 1;
+					} else if(j < radios.length) {
+						playWordAudio(radios[j].audio);
+						$scope.is_reading_num = radios[j].id;
+						j = j + 1;
 					}
 
 				}, 3000, radios.length + 1)
@@ -986,7 +1032,6 @@ dcCtrl
 				mediaRec.stop();
 			}
 
-
 			$state.go("tab.dy_home")
 		}
 
@@ -1039,9 +1084,7 @@ dcCtrl
 
 		$(".video-box video").attr("src", $rootScope.siteUrl + "/upload/word/mp4/" + $scope.word.video);
 
-
 		$('.video-box video').mediaelementplayer();
-
 
 		setTimeout(function() {
 			$scope.playDetailWord1($scope.word.audio_1)
@@ -1826,8 +1869,7 @@ dcCtrl
 		//		$scope.$on('popover.removed', function() {
 		//			// 执行代码
 		//		});
-		$scope.studyWord = function () {
-
+		$scope.studyWord = function() {
 
 			$state.go("tab.dy_home")
 		}
@@ -1906,13 +1948,12 @@ dcCtrl
 		}
 		// Record audio
 		//mp3不支持
-        var remoreAudioUrl="";
+		var remoreAudioUrl = "";
 		var mediaRec;
 		var src = "audio.amr";
 
-		if ($rootScope.isIOS)
-		{
-		    src = audioRecord;
+		if($rootScope.isIOS) {
+			src = audioRecord;
 		}
 
 		$scope.clicked = false;
@@ -1925,17 +1966,16 @@ dcCtrl
 				$scope.seconds = 0;
 				$scope.count = 0;
 
-				    mediaRec = new Media(src,
-                        // success callback
-                        function () { },
-                        // error callback
-                        function (err) {
-                            $scope.clicked = false;
-                        }
-                    );
-				    // Record audio
-				    mediaRec.startRecord();
-				
+				mediaRec = new Media(src,
+					// success callback
+					function() {},
+					// error callback
+					function(err) {
+						$scope.clicked = false;
+					}
+				);
+				// Record audio
+				mediaRec.startRecord();
 
 				$("#read_record").attr("src", "img/record_gif.gif")
 				var timer = $interval(function() {
@@ -1947,14 +1987,14 @@ dcCtrl
 					}
 
 					$('.progress_bar').width(($scope.per_progress * $scope.seconds) + '%').css("backgroundColor", "#0c7cd6");
-					if ($scope.count == $scope.time_long + 1) {
+					if($scope.count == $scope.time_long + 1) {
 
-					    $("#read_record").attr("src", "img/xiaoxue_cut_09.png")
-					    $scope.recorded = true;
-					    $scope.clicked = false;
+						$("#read_record").attr("src", "img/xiaoxue_cut_09.png")
+						$scope.recorded = true;
+						$scope.clicked = false;
 
-					    mediaRec.stopRecord();
-					    $scope.uploadAudio($scope.word.en);
+						mediaRec.stopRecord();
+						$scope.uploadAudio($scope.word.en);
 					}
 
 					if($scope.count > $scope.time_long) {
@@ -1975,30 +2015,27 @@ dcCtrl
 			$rootScope.LoadingShow();
 			var fileURL = cordova.file.externalRootDirectory + "audio.amr";
 
-			if ($rootScope.isIOS)
-			{
-			    fileURL = iosFileURL;
+			if($rootScope.isIOS) {
+				fileURL = iosFileURL;
 			}
 
 			var options = new FileUploadOptions();  
 			options.fileKey = "audio";  
 			options.fileName = fileURL.substr(fileURL.lastIndexOf('/') + 1);  
 			options.mimeType = "audio/x-amr";    //上传参数
-			if ($rootScope.isIOS)
-			{
-                options.mimeType = "audio/wav";
+			if($rootScope.isIOS) {
+				options.mimeType = "audio/wav";
 			}
 			var params = {};  
 			params.text = word;
 			params.format = 'amr';
-			if ($rootScope.isIOS) {
-			    options.format = "wav";
+			if($rootScope.isIOS) {
+				options.format = "wav";
 			}
 			options.params = params;   
 			var ft = new FileTransfer();   //上传地址
 			var SERVER = $rootScope.rootUrl + "/stt";
-                    
-                    
+
 			ft.upload(fileURL, encodeURI(SERVER), function(r) {     
 				$rootScope.LoadingHide();
 				var response = JSON.parse(r.response)
@@ -2052,14 +2089,12 @@ dcCtrl
 		}
 
 		$scope.playRecordAudio = function() {
-                
-            
 
 			if(!$scope.playing) {
 				$scope.seconds = 0;
 				$scope.count = 0;
 				$scope.playing = true;
-				
+
 				mediaRec.play();
 
 				$("#read_play").attr("src", "img/play_gif.gif")
@@ -2071,10 +2106,10 @@ dcCtrl
 						$scope.seconds = $scope.count - 1;
 					}
 					$('.progress_bar').width(($scope.per_progress * $scope.seconds) + '%').css("backgroundColor", "#0c7cd6");
-					if ($scope.seconds == $scope.time_long) {
-					    $scope.playing = false;
-					    mediaRec.stop();
-					    $("#read_play").attr("src", "img/xiaoxue_cut_07.png")
+					if($scope.seconds == $scope.time_long) {
+						$scope.playing = false;
+						mediaRec.stop();
+						$("#read_play").attr("src", "img/xiaoxue_cut_07.png")
 					}
 					if($scope.count > $scope.time_long) {
 						$interval.cancel(timer2); //停止并清除
@@ -2133,7 +2168,7 @@ dcCtrl
 			$scope.wrong_times = 0;
 
 			function sortNumber() {
-			    return Math.random() - 0.5;
+				return Math.random() - 0.5;
 			}
 
 			if($scope.spell.indexOf(" ") == -1 && $scope.spell.indexOf("'") == -1 && $scope.spell.indexOf("-") == -1 && $scope.spell.indexOf(".") == -1 && $scope.spell.indexOf("…") == -1 && $scope.spell.indexOf("’")) {
@@ -2320,7 +2355,7 @@ dcCtrl
 				$rootScope.LoadingHide();
 
 				if(response.error) {
-					$rootScope.Alert(response.msg);
+//					$rootScope.Alert(response.msg);
 				} else {
 					$scope.game_completed_total = response.game_completed_total;
 					$scope.sort_order = response.sort_order;
@@ -2656,17 +2691,17 @@ dcCtrl
 					$rootScope.Alert(response.msg);
 				} else {
 					$scope.apps = response;
-//				    var temp_array = [];
-//				    angular.forEach($scope.apps,function(item){
-//				    	if(item.publisher.indexOf('三年级起点')>0 && $rootScope.bookPublish.indexOf('三年级起点')>0){
-//				    		temp_array.push(item);
-//				    	}else if(item.publisher.indexOf('一年级起点')>0 && $rootScope.bookPublish.indexOf('一年级起点')>0){
-////				    		if(parseInt(item.id)>=parseInt($rootScope.app.id)&&temp_array.length<8){
-//				    			temp_array.push(item);
-////				    		}
-//				    	}
-//				    })
-//				    $scope.apps = temp_array;
+					//				    var temp_array = [];
+					//				    angular.forEach($scope.apps,function(item){
+					//				    	if(item.publisher.indexOf('三年级起点')>0 && $rootScope.bookPublish.indexOf('三年级起点')>0){
+					//				    		temp_array.push(item);
+					//				    	}else if(item.publisher.indexOf('一年级起点')>0 && $rootScope.bookPublish.indexOf('一年级起点')>0){
+					////				    		if(parseInt(item.id)>=parseInt($rootScope.app.id)&&temp_array.length<8){
+					//				    			temp_array.push(item);
+					////				    		}
+					//				    	}
+					//				    })
+					//				    $scope.apps = temp_array;
 				}
 			}).error(function(response, status) {
 				$rootScope.LoadingHide();

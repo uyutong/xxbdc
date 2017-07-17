@@ -13,11 +13,18 @@
 			</li>
 		</ul>
 
-	    <ul ng-if="book_id==40" class="auto25" style="list-style: none outside none; margin:0; padding: 0;">
+	    <ul ng-if="book_id==40 && unit_id!=307" class="auto25" style="list-style: none outside none; margin:0; padding: 0;">
 			<li style="background-color:#fffff;"  ng-repeat="word in word_list">
 				<a style="color: #583000;font-size: 25px;" ng-click="goDetail($index)">{{word.en}}</a>
 			</li>
 		</ul>
+
+        <ul ng-if="book_id==40 && unit_id==307" class="auto25" style="list-style: none outside none; margin:0; padding: 0;">
+			<li style="background-color:#fffff;"  ng-repeat="word in word_list">
+				<img  src="{{$root.siteUrl}}/upload/word/img/{{word.photo}}"  style="margin: auto;"  ng-click="goDetail($index)" />
+			</li>
+		</ul>
+
 
 	    <div ng-if="book_id>41 && book_id<48" class="dy-word-list-list" style="margin-top:20px;margin-bottom:60px;">
 			<div ng-class="{'out_div':true, 'row':true, 'row-center':true,'activated':$index==is_reading_num}" ng-click="play2($index)" ng-repeat="word in word_list">

@@ -1,6 +1,6 @@
 <ion-view class="backgroud-light">
 
-    <div class="ios20 bg_yello" ng-if="isIOS"></div>
+	<div class="ios20 bg_yello" ng-if="isIOS"></div>
 
 	<div class="dy-home-top">
 		<span class="s1" ng-show="!ifsearch">{{mybook.grade}}英语 {{mybook.semester}}</span><br>
@@ -16,28 +16,26 @@
 
 	<div class="dy-home-list">
 
-		<div class="out_div"  ng-repeat="unit in units">
+		<div class="out_div" ng-repeat="unit in units">
 
 			<span class="sp dy-home-sp-color1" ng-click="unitSelect(unit.id,$index)">
 				<span class="sub_sp1" style="overflow:hidden;display: inline-block;height: 35px;">{{unit.name}}</span>
 			<span class="sub_sp2">{{unit.word_completed_total}}/{{unit.word_total}}</span>
 			</span>
-			<img class="dy-home-img-boder1" src="{{$root.siteUrl}}/upload/unit/{{unit.photo}}" />
+			<img class="dy-home-img-boder1" width="60px" style="background-color: white;" src="{{$root.siteUrl}}/upload/unit/{{unit.photo}}" />
 
-			<span ng-if="$index>0&&!userinfo.active"
-				 style="position: absolute;
+			<span ng-if="$index>0&&!userinfo.active" style="position: absolute;
 				 width:100%;left:0%;top:0%;
 				 border:30px solid rgba(0, 0, 0, .45);
 				 border-radius:40px;
 				 margin-top: 5px;" ng-click="unitSelect(unit.id,$index)">
 		    </span>
-		    
-		    <img ng-if="$index>0&&!userinfo.active" style="position: absolute;
+
+			<img ng-if="$index>0&&!userinfo.active" style="position: absolute;
 				 width:25px;height: 25px; left:50%;top:50%;transform: translate(-50%, -50%);" src="img/lock_03.png">
 		</div>
 	</div>
-
-<!--<a class="button" ng-click="mstart()">开始</a>-->
-<!--<a class="button" ng-click="mstop()">结束</a>-->
-<!--<a class="button" ng-click="mplay()">播放</a>-->
+	<!--<a class="button" ng-click="mstart()">开始</a>-->
+	<!--<a class="button" ng-click="mstop()">结束</a>-->
+	<!--<a class="button" ng-click="mplay()">播放</a>-->
 </ion-view>
