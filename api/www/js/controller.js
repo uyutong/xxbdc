@@ -115,6 +115,7 @@ dcCtrl
 					} else {
 						is_reading = false;
 						$scope.is_reading_num = -1;
+						$("#detail_paly_0").attr("src", "img/xiaoxue_cut_07.png");
 						$scope.$apply();
 					}
 
@@ -126,6 +127,7 @@ dcCtrl
 				if_add_ended = true;
 			}
 			v.play();
+			$("#detail_paly_0").attr("src", "img/play_gif.gif");
 			$scope.is_reading_num = 0;
 		}
 
