@@ -60,30 +60,28 @@
 			<div ng-if="book_id==37">
 
 				<div style="padding: 20px;background-color:#E0E0E0 ;border-radius:10px;margin: 10px;">
-					<div class="text-center" 	>
+					<div class="text-center">
 						<img width="60%" style="background-color:#888888;border-radius: 5px;" src="{{$root.siteUrl}}/upload/word/img/{{word.photo}}" />
 					</div>
 					<br>
 					<div class="text-center" style="font-size:90px;color: #583000;height: 90px;line-height: 90px;">{{word.en}}</div>
 				</div>
-				
-				
+
 				<div class="row" ng-if="word.phonetic">
-					
+
 					<div ng-class="{'col':true, 'text-center':true, 'fanyin37':true,'fanyin37activated':$index==is_reading_num}" ng-repeat="fayin in fayins" ng-click="fayin37($index+1)"><span style="display: block;height: 40px;line-height:40px;font-size: 36px;">{{fayin}}</span></div>
-					
+
 				</div>
 
 				<div class="row" ng-if="!word.phonetic" style="background-color:#E0E0E0 ;border-radius:10px;margin: 10px;width: 95%;">
 					<div class="col col-center" style="font-size:34px;">{{word.zh}}</div>
-					<div class="col text-right col-center" style="height: 60px;line-height: 60px;" > <img id="detail_paly_0" width="50" style="margin: auto;" src="img/xiaoxue_cut_07.png" ng-click="playDetailWord0(word.audio_0)" /></div>
+					<div class="col text-right col-center" style="height: 60px;line-height: 60px;"> <img id="detail_paly_0" width="50" style="margin: auto;" src="img/xiaoxue_cut_07.png" ng-click="playDetailWord0(word.audio_0)" /></div>
 				</div>
-				
+
 				<div class="row" ng-if="word.phonetic" style="background-color:#E0E0E0 ;border-radius:10px;margin: 10px;width: 95%;">
 					<div class="col col-center" style="font-size:34px;">{{word.zh}}</div>
-					<div class="col text-right col-center" style="height: 60px;line-height: 60px;" > <img id="detail_paly_0" width="50" style="margin: auto;" src="img/xiaoxue_cut_07.png" ng-click="fayin37_all_play()" /></div>
+					<div class="col text-right col-center" style="height: 60px;line-height: 60px;"> <img id="detail_paly_0" width="50" style="margin: auto;" src="img/xiaoxue_cut_07.png" ng-click="fayin37_all_play()" /></div>
 				</div>
-				
 
 			</div>
 
@@ -94,17 +92,20 @@
 					<div class="col col-50 text-center col-center" style="font-size:50px;color: #583000;">what</div>
 				</div>
 
-	           <div ng-if="unit_id==307" class="row" style="height: 100px;background-color:#E0E0E0 ;border-radius:10px;">
-	           		<div class="col col-25 text-center col-center"><img  style="background-color: #CCCCCC;border-radius:5px;" src="{{$root.siteUrl}}/upload/word/img/{{word.photo}}"></div>
+				<div ng-if="unit_id==307" class="row" style="height: 100px;background-color:#E0E0E0 ;border-radius:10px;">
+					<div class="col col-25 text-center col-center"><img style="background-color: #CCCCCC;border-radius:5px;" src="{{$root.siteUrl}}/upload/word/img/{{word.photo}}"></div>
 					<div class="col col-50 col-center" style="font-size:30px;color: #583000;">{{word.en}}</div>
 					<div class="col col-25 text-center col-center" style="font-size:30px;color: #583000;">{{word.zh}}</div>
-	           </div>
+				</div>
 
 				<div ng-if="word.video" style="margin-top:10px;padding: 10px;background-color:#E0E0E0 ;border-radius:10px;">
 					<div class="text-left" style="">汉字书写笔顺</div>
 					<div class="padding shuxieshiping">
 						<video style="width: 95%;" src="" controls="controls">your browser does not support the video tag </video>
 					</div>
+				</div>
+
+				<div class="padding text-center"> <button class="button button-balanced" ng-click="goWrite()">&#12288;书写练习&#12288;</button>
 				</div>
 
 				<div ng-if="word.video_brush" style="margin-top:10px;padding: 10px;background-color:#E0E0E0 ;border-radius:10px;">
@@ -114,7 +115,7 @@
 					</div>
 				</div>
 			</div>
-						
+
 			<div ng-if="book_id>41&&book_id<48">
 				<div class="dy-word-test-explain">
 					<span class="s1">{{word.en}}</span><br><br>
@@ -142,10 +143,10 @@
 				</div>
 
 			</div>
-			
+
 			<br>
-	    	<br>
-	    	<br>
+			<br>
+			<br>
 		</ion-scroll>
 	</ion-content>
 

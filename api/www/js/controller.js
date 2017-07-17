@@ -77,6 +77,15 @@ dcCtrl
 			})
 		}
 
+		$scope.goWrite = function(index) {
+
+			$state.go("word_exercise", {
+				"book_id": $stateParams.book_id,
+				"unit_id": $stateParams.unit_id,
+				"word": $stateParams.word
+			})
+		}
+
 		$scope.fayin37 = function(index) {
 			var v = document.getElementById("audio");
 			v.src = "http://xx.kaouyu.com/upload/pinyin/" + $scope.word.en + "/" + $scope.word.en + index + ".mp3";
@@ -310,158 +319,171 @@ dcCtrl
 				$rootScope.Alert(response.msg);
 			} else {
 				$scope.word = response;
+				if($scope.book_id != "22" && $scope.book_id != "40") {
 
-				$scope.spell = $scope.word.en;
-				$scope.questions = [];
-				$scope.keys = [];
-				$scope.letters = [];
-				var has_submit = 0;
+					$scope.spell = $scope.word.en;
+					$scope.questions = [];
+					$scope.keys = [];
+					$scope.letters = [];
+					var has_submit = 0;
 
-				function sortNumber(a, b) {
-					return a < b
-				}
-
-				if($scope.spell.indexOf(" ") == -1 && $scope.spell.indexOf("'") == -1) {
-					for(var i = 0; i < $scope.spell.length; i++) {
-						$scope.keys.push({
-							"id": i,
-							"s": $scope.spell[i]
-						});
-						$scope.questions.push("#");
-						if(!$scope.letters.contains($scope.spell.substring(i, i + 1))) {
-							$scope.letters.push($scope.spell.substring(i, i + 1));
-							$scope.letters = $scope.letters.sort(sortNumber);
-						}
+					function sortNumber(a, b) {
+						return a < b
 					}
-				} else {
-					for(var i = 0; i < $scope.spell.length; i++) {
-						if(i % 3 == 0 && $scope.spell[i] != "'" && $scope.spell[i] != " ") {
+
+					if($scope.spell.indexOf(" ") == -1 && $scope.spell.indexOf("'") == -1) {
+						for(var i = 0; i < $scope.spell.length; i++) {
 							$scope.keys.push({
 								"id": i,
 								"s": $scope.spell[i]
 							});
 							$scope.questions.push("#");
-						} else {
-							$scope.questions.push($scope.spell[i]);
-						}
-					}
-					for(var j = 0; j < $scope.keys.length; j++) {
-						if(!$scope.letters.contains($scope.keys[j].s)) {
-							$scope.letters.push($scope.keys[j].s);
-							$scope.letters = $scope.letters.sort(sortNumber);
-						}
-					}
-
-				}
-
-				angular.forEach($scope.word.exercises, function(exercise, idx) {
-					exercise.myanswer = -1;
-					//#region 习题处理
-
-					//#region 1. 看图选择题
-					if(exercise.type == 1) {
-						var s = exercise.question.split('^');
-
-						exercise.question_en = s[0];
-
-						if(s.length >= 2)
-							exercise.question_zh = s[1];
-					}
-					//#endregion
-
-					//#region 2. 选图填空
-					if(exercise.type == 2) {
-						var s = exercise.question.split('^');
-						exercise.question_en = s[0];
-						if(s.length >= 2)
-							exercise.question_zh = s[1];
-
-						s = exercise.answer.split('^');
-						exercise.answer_index = s[0];
-						if(s.length >= 2)
-							exercise.answer_word = s[1];
-					}
-					//#endregion
-
-					//#region 3 句子排序
-					if(exercise.type == 3) {
-						exercise.keys = exercise.answer.split('^');
-						exercise.options = exercise.answer.split('^');
-
-						function sortNumber(a, b) {
-							return a < b
-						}
-						exercise.options.sort(sortNumber);
-					}
-					//#endregion
-
-					//#region 5 
-					if(exercise.type == 5) {
-
-						exercise.question = exercise.answer.split("^").sort(function() {
-							return Math.random() - 0.5
-						});
-
-						var items_formats = [];
-
-						angular.forEach(exercise.items.split('\n'), function(data, index) {
-							var s = data.split('^');
-							var zh = [];
-							var zh0 = '';
-							var zh1 = '';
-							var en = '';
-
-							zh = s[0].split('____');
-							if(s.length >= 2) {
-								en = s[1];
+							if(!$scope.letters.contains($scope.spell.substring(i, i + 1))) {
+								$scope.letters.push($scope.spell.substring(i, i + 1));
+								$scope.letters = $scope.letters.sort(sortNumber);
 							}
-
-							zh0 = zh[0];
-							if(zh.length >= 2) {
-								zh1 = zh[1];
+						}
+					} else {
+						for(var i = 0; i < $scope.spell.length; i++) {
+							if(i % 3 == 0 && $scope.spell[i] != "'" && $scope.spell[i] != " ") {
+								$scope.keys.push({
+									"id": i,
+									"s": $scope.spell[i]
+								});
+								$scope.questions.push("#");
+							} else {
+								$scope.questions.push($scope.spell[i]);
 							}
+						}
+						for(var j = 0; j < $scope.keys.length; j++) {
+							if(!$scope.letters.contains($scope.keys[j].s)) {
+								$scope.letters.push($scope.keys[j].s);
+								$scope.letters = $scope.letters.sort(sortNumber);
+							}
+						}
 
-							items_formats.push({
-								zh0: zh0,
-								zh1: zh1,
-								en: en
+					}
+
+					angular.forEach($scope.word.exercises, function(exercise, idx) {
+						exercise.myanswer = -1;
+						//#region 习题处理
+
+						//#region 1. 看图选择题
+						if(exercise.type == 1) {
+							var s = exercise.question.split('^');
+
+							exercise.question_en = s[0];
+
+							if(s.length >= 2)
+								exercise.question_zh = s[1];
+						}
+						//#endregion
+
+						//#region 2. 选图填空
+						if(exercise.type == 2) {
+							var s = exercise.question.split('^');
+							exercise.question_en = s[0];
+							if(s.length >= 2)
+								exercise.question_zh = s[1];
+
+							s = exercise.answer.split('^');
+							exercise.answer_index = s[0];
+							if(s.length >= 2)
+								exercise.answer_word = s[1];
+						}
+						//#endregion
+
+						//#region 3 句子排序
+						if(exercise.type == 3) {
+							exercise.keys = exercise.answer.split('^');
+							exercise.options = exercise.answer.split('^');
+
+							function sortNumber(a, b) {
+								return a < b
+							}
+							exercise.options.sort(sortNumber);
+						}
+						//#endregion
+
+						//#region 5 
+						if(exercise.type == 5) {
+
+							exercise.question = exercise.answer.split("^").sort(function() {
+								return Math.random() - 0.5
 							});
 
-						});
-						exercise.items_formats = items_formats;
-					}
-					//#endregion
+							var items_formats = [];
 
-					//#region 6 
-					if(exercise.type == 6) {
-						exercise.question = exercise.answer.split("^").sort(function() {
-							return Math.random() - 0.5
-						});
-					}
-					//#endregion
+							angular.forEach(exercise.items.split('\n'), function(data, index) {
+								var s = data.split('^');
+								var zh = [];
+								var zh0 = '';
+								var zh1 = '';
+								var en = '';
 
-				})
+								zh = s[0].split('____');
+								if(s.length >= 2) {
+									en = s[1];
+								}
 
-				if($scope.book_id != "22") {
+								zh0 = zh[0];
+								if(zh.length >= 2) {
+									zh1 = zh[1];
+								}
+
+								items_formats.push({
+									zh0: zh0,
+									zh1: zh1,
+									en: en
+								});
+
+							});
+							exercise.items_formats = items_formats;
+						}
+						//#endregion
+
+						//#region 6 
+						if(exercise.type == 6) {
+							exercise.question = exercise.answer.split("^").sort(function() {
+								return Math.random() - 0.5
+							});
+						}
+						//#endregion
+
+					})
+
+				}
+				if($scope.book_id != "22" && $scope.book_id != "40") {
 					setTitle("趣味练习 1/" + ($scope.word.exercises.length + 1));
 
 					setTimeout(function() {
 						$scope.playExerciseWord($scope.word.audio_0);
 					}, 500)
 				} else {
-					setTitle("书写练习");
+					//					setTitle("书写练习");	
 
 					setTimeout(function() {
 
-						$(".shuxieshiping video").attr("src", $rootScope.siteUrl + "/upload/word/mp4/" + $scope.word.video_brush);
-						//				        $('.video-box2 video').mediaelementplayer();
+						if($scope.book_id == '40') {
+							$(".shuxieshiping video").attr("src", $rootScope.siteUrl + "/upload/word/mp4/" + $scope.word.video);
+							sketcher = new SimpleDrawingBoard(document.getElementById('brushBox2'), {
+								lineColor: '#000',
+								lineSize: 5,
+								boardColor: 'transparent',
+								historyDepth: 10
+							});
+						} else {
+							$(".shuxieshiping video").attr("src", $rootScope.siteUrl + "/upload/word/mp4/" + $scope.word.video_brush);
 
-						sketcher = new SimpleDrawingBoard(document.getElementById('brushBox'), {
-							lineColor: '#000',
-							lineSize: 5,
-							boardColor: 'transparent',
-							historyDepth: 10
-						});
+							sketcher = new SimpleDrawingBoard(document.getElementById('brushBox'), {
+								lineColor: '#000',
+								lineSize: 5,
+								boardColor: 'transparent',
+								historyDepth: 10
+							});
+						}
+
+						//				        $('.video-box2 video').mediaelementplayer();
 
 					}, 500)
 
