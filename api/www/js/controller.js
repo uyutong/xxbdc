@@ -891,6 +891,10 @@ dcCtrl
 		}
 	})
 	.controller('more_appsCtrl', function($rootScope, $ionicModal, $scope, $state, $http, $ionicActionSheet) {
+		
+		
+	    setTitle("新课标小学英语单词APP下载");
+		
 		/**
 		 * 获取更多相关app
 		 * @param {Object} platform
