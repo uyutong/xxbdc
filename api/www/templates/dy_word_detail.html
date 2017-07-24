@@ -121,6 +121,23 @@
 					</div>
 				</div>
 			</div>
+			
+			
+			
+			<div ng-if="book_id==41">
+
+				<div ng-if="word.video" style="margin-top:10px;padding: 10px;background-color:#E0E0E0 ;border-radius:10px;">
+					<div class="text-left" style="">数字认知视频</div>
+					<div class="padding shuxieshiping">
+						<video style="width: 95%;" src="" controls="controls">your browser does not support the video tag </video>
+					</div>
+				</div>
+
+				<div class="padding text-center"> <button class="button button-balanced" ng-click="goWrite()">&#12288;书写练习&#12288;</button>
+				</div>
+			
+			</div>
+
 
 			<div ng-if="book_id>41&&book_id<48">
 				<div class="dy-word-test-explain">

@@ -36,6 +36,11 @@ dcCtrl
 						$(".shuxieshiping video").attr("src", $rootScope.siteUrl + "/upload/word/mp4/" + $scope.word.video);
 						$(".history video").attr("src", $rootScope.siteUrl + "/upload/word/mp4/" + $scope.word.video_brush);
 					}, 500)
+				}else if($scope.book_id == 41) {
+
+					setTimeout(function() {
+						$(".shuxieshiping video").attr("src", $rootScope.siteUrl + "/upload/word/mp4/" + $scope.word.video);
+					}, 500)
 				}
 
 			}
@@ -465,25 +470,23 @@ dcCtrl
 					//					setTitle("书写练习");	
 
 					setTimeout(function() {
+						
+						var video_url="";
 
 						if($scope.book_id == '40') {
-							$(".shuxieshiping video").attr("src", $rootScope.siteUrl + "/upload/word/mp4/" + $scope.word.video);
-							sketcher = new SimpleDrawingBoard(document.getElementById('brushBox2'), {
-								lineColor: '#000',
-								lineSize: 5,
-								boardColor: 'transparent',
-								historyDepth: 10
-							});
+							video_url =  $rootScope.siteUrl + "/upload/word/mp4/" + $scope.word.video;
 						} else {
-							$(".shuxieshiping video").attr("src", $rootScope.siteUrl + "/upload/word/mp4/" + $scope.word.video_brush);
-
-							sketcher = new SimpleDrawingBoard(document.getElementById('brushBox'), {
-								lineColor: '#000',
-								lineSize: 5,
-								boardColor: 'transparent',
-								historyDepth: 10
-							});
+							video_url =  $rootScope.siteUrl + "/upload/word/mp4/" + $scope.word.video_brush;
+	
 						}
+						
+						$(".shuxieshiping video").attr("src",video_url);
+						sketcher = new SimpleDrawingBoard(document.getElementById('brushBox'), {
+							lineColor: '#000',
+							lineSize: 5,
+							boardColor: 'transparent',
+							historyDepth: 10
+						});
 
 						//				        $('.video-box2 video').mediaelementplayer();
 
