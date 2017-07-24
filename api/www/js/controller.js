@@ -326,7 +326,7 @@ dcCtrl
 				$rootScope.Alert(response.msg);
 			} else {
 				$scope.word = response;
-				if($scope.book_id != "22" && $scope.book_id != "40") {
+				if($scope.book_id != "22" && $scope.book_id != "40" && $scope.book_id != "41") {
 
 					$scope.spell = $scope.word.en;
 					$scope.questions = [];
@@ -460,7 +460,7 @@ dcCtrl
 					})
 
 				}
-				if($scope.book_id != "22" && $scope.book_id != "40") {
+				if($scope.book_id != "22" && $scope.book_id != "40" && $scope.book_id != "41") {
 					setTitle("趣味练习 1/" + ($scope.word.exercises.length + 1));
 
 					setTimeout(function() {
