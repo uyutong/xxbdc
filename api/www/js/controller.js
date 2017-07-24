@@ -1078,7 +1078,7 @@ dcCtrl
 				return;
 			});
 		}
-		if($scope.book_id < 22) {
+		if($scope.book_id < 22 || $scope.book_id == 30) {
 			$scope.version("android", $stateParams.book_id);
 		}
 	})
@@ -1143,9 +1143,9 @@ dcCtrl
 		}
 		$scope.getUnits(1, 22);
 
-		$scope.goExercise = function(index) {
-			$state.go("word_exercise", {
-				"book_id": $scope.units[index].book_id,
+		$scope.goDetail = function(index) {
+			$state.go("word_detail", {
+				"book_id": 22,
 				"unit_id": $scope.units[index].id,
 				"word": $scope.units[index].name
 			})

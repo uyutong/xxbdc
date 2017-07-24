@@ -26,12 +26,15 @@
 		</ul>
 
 
-	    <div ng-if="book_id>41 && book_id<48" class="dy-word-list-list" style="margin-top:20px;margin-bottom:60px;">
+	    <div ng-if="(book_id>41 && book_id<48)||(book_id>22 && book_id<37)" class="dy-word-list-list" style="margin-top:20px;margin-bottom:60px;">
 			<div ng-class="{'out_div':true, 'row':true, 'row-center':true,'activated':$index==is_reading_num}" ng-click="play2($index)" ng-repeat="word in word_list">
 				<div class="col">{{word.en}}&nbsp;&nbsp;&nbsp;<span style="display: inline-block;color: gray;font-size:15px;">{{word.zh}}</span>
 				</div>
 			</div>
 		</div>
+		
+		
+		
 		<br>
 		<br>
 		<br>
@@ -39,7 +42,7 @@
 	</ion-scroll>
 </ion-content>
 
-<div ng-if="book_id<22" class="row row-center text-center" style="position: fixed;bottom: 0px;background:#0c7cd6;height:45px;color: white;font-size: 18px;">
+<div ng-if="book_id<22 || book_id==30" class="row row-center text-center" style="position: fixed;bottom: 0px;background:#0c7cd6;height:45px;color: white;font-size: 18px;">
 	<div class="col" ng-click="playAudio()">{{read_button_name}}</div>
 	<a class="col" style="text-decoration:none;color: white;" href="{{app.open_qq_url}}">下载APP跟读</a>
 </div>
