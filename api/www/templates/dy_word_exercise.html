@@ -7,7 +7,7 @@
     <ion-scroll has-bouncing="false" style="height:100%;" direction="y">
     
    <!--书写练习-->
-    <div class="text-center" ng-if="book_id=='22' || book_id=='40' ||  book_id=='41'">
+    <div class="text-center" ng-if="book_id=='22' || book_id=='40' ||  book_id=='41' ||  book_id=='49'">
         
         <div style="background-color:#E0E0E0 ;border-radius:10px;padding: 10px;">
         	 <div class="text-left" style="margin-top:10px;margin-left: 10px;">书写视频教程：</div>        
@@ -27,7 +27,7 @@
 	        </div>
 	        
 	            
-	        <div class="text-center" ng-if="book_id=='40'||book_id=='41'" style="margin:auto;width: 200px;height: 200px; background-image:url(img/hanzipinxiebg.jpg); background-repeat:no-repeat; background-size:cover; background-position:10px 0px 0px 0px;">
+	        <div class="text-center" ng-if="book_id=='40'||book_id=='41'||book_id=='49'" style="margin:auto;width: 200px;height: 200px; background-image:url(img/hanzipinxiebg.jpg); background-repeat:no-repeat; background-size:cover; background-position:10px 0px 0px 0px;">
 	            <canvas id="brushBox" style="width:100%;height:100%;" />
 	        </div>
 
@@ -38,7 +38,7 @@
     </div>
     
     
-    <div ng-if="book_id!='22' && book_id!='40' && book_id!='41' ">
+    <div ng-if="book_id!='22' && book_id!='40' && book_id!='41'  && book_id!='49'">
 	<!--0. 单词拼写-->
 	<div class="question_type_3" ng-if="now_page==0">
 
@@ -247,7 +247,7 @@
 		<div class="dy-word-test-bottom" ng-click="nextTest()" ng-if="now_page<word.exercises.length && book_id!='22'">继续</div>
 
 	
-         <div ng-if="book_id=='22'||book_id=='40'||book_id=='41'" class="text-center" style="width:100%;position: fixed;bottom: 40px;left: 0; ">
+         <div ng-if="book_id=='22'||book_id=='40'||book_id=='41'||book_id=='49'" class="text-center" style="width:100%;position: fixed;bottom: 40px;left: 0; ">
             <button class="button button-balanced" ng-click="clear()">&#12288;清除&#12288;</button>
         </div>
 

@@ -8,7 +8,7 @@ angular.module('dachutimes', ['ionic', 'dachutimes.controllers', 'ngCordova'])
 		$rootScope.siteUrl = "http://xx.kaouyu.com";
 		//$rootScope.rootUrl = "http://kuyxxword.ourapp.site:666/index.php/api";
 		$rootScope.rootUrl = "http://xx.kaouyu.com/index.php/api";
-		$rootScope.bookId = 30;
+		$rootScope.bookId = 1;
 		////正式数据
 	    //$rootScope.rootUrl = "http://kuyxxword.ourapp.site:66/index.php/api";
 

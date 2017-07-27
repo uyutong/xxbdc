@@ -13,7 +13,7 @@
 			</li>
 		</ul>
 
-	    <ul ng-if="book_id==40 && unit_id!=307" class="auto25" style="list-style: none outside none; margin:0; padding: 0;">
+	    <ul ng-if="(book_id==40 && unit_id!=307)||book_id==49" class="auto25" style="list-style: none outside none; margin:0; padding: 0;">
 			<li style="background-color:#fffff;"  ng-repeat="word in word_list">
 				<a style="color: #583000;font-size: 25px;" ng-click="goDetail($index)">{{word.en}}</a>
 			</li>

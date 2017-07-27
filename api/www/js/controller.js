@@ -30,7 +30,7 @@ dcCtrl
 					$(".video-box video").attr("src", $rootScope.siteUrl + "/upload/word/mp4/" + $scope.word.video);
 					$('.video-box video').mediaelementplayer();
 
-				} else if($scope.book_id == 40) {
+				} else if($scope.book_id == 40 || $scope.book_id == 49) {
 
 					setTimeout(function() {
 						$(".shuxieshiping video").attr("src", $rootScope.siteUrl + "/upload/word/mp4/" + $scope.word.video);
@@ -460,7 +460,7 @@ dcCtrl
 					})
 
 				}
-				if($scope.book_id != "22" && $scope.book_id != "40" && $scope.book_id != "41") {
+				if($scope.book_id != "22" && $scope.book_id != "40" && $scope.book_id != "41"&& $scope.book_id != "49") {
 					setTitle("趣味练习 1/" + ($scope.word.exercises.length + 1));
 
 					setTimeout(function() {
@@ -473,7 +473,7 @@ dcCtrl
 						
 						var video_url="";
 
-						if($scope.book_id == '40') {
+						if($scope.book_id == '40'||$scope.book_id == '49') {
 							video_url =  $rootScope.siteUrl + "/upload/word/mp4/" + $scope.word.video;
 						} else {
 							video_url =  $rootScope.siteUrl + "/upload/word/mp4/" + $scope.word.video_brush;

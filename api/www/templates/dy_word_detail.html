@@ -94,8 +94,9 @@
 			<div ng-if="book_id==40">
 
 				<div ng-if="unit_id!=307" class="row" style="height: 100px;background-color:#E0E0E0 ;border-radius:10px;">
-					<div class="col col-50 text-center col-center" style="font-size:80px;color: #583000;">{{word.en}}</div>
+					<div class="col col-30 text-center col-center" style="font-size:80px;color: #583000;">{{word.en}}</div>
 					<div class="col col-50 text-center col-center" style="font-size:50px;color: #583000;">what</div>
+					<div class="col col-20 text-center col-center"><img id="detail_paly_0" width="50" src="img/xiaoxue_cut_07.png" ng-click="playDetailWord0(word.audio_0)" /></div>
 				</div>
 
 				<div ng-if="unit_id==307" class="row" style="height: 100px;background-color:#E0E0E0 ;border-radius:10px;">
@@ -122,6 +123,33 @@
 				</div>
 			</div>
 			
+			
+			<div ng-if="book_id==49">
+
+				<div  class="row" style="height: 100px;background-color:#E0E0E0 ;border-radius:10px;">
+					<div class="col col-30 text-center col-center" style="font-size:80px;color: #583000;">{{word.en}}</div>
+					<div class="col col-50 text-center col-center" style="font-size:50px;color: #583000;">what</div>
+					<div class="col col-20 text-center col-center"><img id="detail_paly_0" width="50" src="img/xiaoxue_cut_07.png" ng-click="playDetailWord0(word.audio_0)" /></div>
+				</div>
+
+			
+				<div ng-if="word.video" style="margin-top:10px;padding: 10px;background-color:#E0E0E0 ;border-radius:10px;">
+					<div class="text-left" style="">汉字书写笔顺</div>
+					<div class="padding shuxieshiping">
+						<video style="width: 95%;" src="" controls="controls">your browser does not support the video tag </video>
+					</div>
+				</div>
+
+				<div class="padding text-center"> <button class="button button-balanced" ng-click="goWrite()">&#12288;书写练习&#12288;</button>
+				</div>
+
+				<div ng-if="word.video_brush" style="margin-top:10px;padding: 10px;background-color:#E0E0E0 ;border-radius:10px;">
+					<div class="text-left">汉字演变视频</div>
+					<div class="padding history">
+						<video style="width: 95%;" src="" controls="controls">your browser does not support the video tag </video>
+					</div>
+				</div>
+			</div>
 			
 			
 			<div ng-if="book_id==41">
