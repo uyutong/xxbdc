@@ -302,7 +302,6 @@ dcCtrl
 		$scope.playExerciseWord = function(audio) {
 			$rootScope.playWord(audio, $("#exercise_word_play"));
 		}
-
 		$scope.playExercise = function(audio) {
 			$rootScope.playExercise(audio, $("#exercise_play"));
 		}
@@ -754,6 +753,15 @@ dcCtrl
 			sketcher.clear();
 
 		}
+		
+	    $scope.goUnit = function(){
+	    	
+	    	$state.go("word_list", {
+				"book_id": $stateParams.book_id,
+				"unit_id": $stateParams.unit_id,
+			})
+	    	
+	    }
 
 		$scope.share = function() {
 			//var Browser = new Object();

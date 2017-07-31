@@ -2,256 +2,261 @@
 
 	<!--<ion-slide-box delegate-handle="slide_exercise" on-slide-changed="slide_change($index)">
 		<ion-slide ng-repeat="exercise in word.exercises">-->
-   
-   <ion-content class="padding" has-bouncing="false">
-    <ion-scroll has-bouncing="false" style="height:100%;" direction="y">
-    
-   <!--书写练习-->
-    <div class="text-center" ng-if="book_id=='22' || book_id=='40' ||  book_id=='41' ||  book_id=='49'">
-        
-        <div style="background-color:#E0E0E0 ;border-radius:10px;padding: 10px;">
-        	 <div class="text-left" style="margin-top:10px;margin-left: 10px;">书写视频教程：</div>        
-             <div class="padding shuxieshiping">
-                 <video  style="width: 70%;" src=""  controls="controls">your browser does not support the video tag </video>
-             </div>
 
-        </div>
-       
-        <div style="background-color:#E0E0E0 ;border-radius:10px;padding: 10px;margin-top: 10px;">
+	<ion-content class="padding" has-bouncing="false">
+		<ion-scroll has-bouncing="false" style="height:100%;" direction="y">
 
-	        <div class="text-left" style="margin-top:10px;margin-left: 10px">写字板：</div>        
-	        
-	        
-	        <div ng-if="book_id=='22'" style="min-height:80px; margin-top:20px; background-image:url(img/{{word.en}}.jpg); background-repeat:no-repeat; background-size:cover; background-position:10px 0px 0px 0px;">
-	            <canvas id="brushBox" style="width:100%;height:100%;" />
-	        </div>
-	        
-	            
-	        <div class="text-center" ng-if="book_id=='40'||book_id=='41'||book_id=='49'" style="margin:auto;width: 200px;height: 200px; background-image:url(img/hanzipinxiebg.jpg); background-repeat:no-repeat; background-size:cover; background-position:10px 0px 0px 0px;">
-	            <canvas id="brushBox" style="width:100%;height:100%;" />
-	        </div>
+			<!--书写练习-->
+			<div class="text-center" ng-if="book_id=='22' || book_id=='40' ||  book_id=='41' ||  book_id=='49'">
 
+				<div style="background-color:#E0E0E0 ;border-radius:10px;padding: 10px;">
+					<div class="text-left" style="margin-top:10px;margin-left: 10px;">书写视频教程：</div>
+					<div class="padding shuxieshiping">
+						<video style="width: 70%;" src="" controls="controls">your browser does not support the video tag </video>
+					</div>
 
+				</div>
 
-         </div>  
-    
-    </div>
-    
-    
-    <div ng-if="book_id!='22' && book_id!='40' && book_id!='41'  && book_id!='49'">
-	<!--0. 单词拼写-->
-	<div class="question_type_3" ng-if="now_page==0">
+				<div style="background-color:#E0E0E0 ;border-radius:10px;padding: 10px;margin-top: 10px;">
 
-		<div class="dy-word-test-explain">
-			<span class="s1">
+					<div class="text-left" style="margin-top:10px;margin-left: 10px">写字板：</div>
+
+					<div ng-if="book_id=='22'" style="min-height:80px; margin-top:20px; background-image:url(img/{{word.en}}.jpg); background-repeat:no-repeat; background-size:cover; background-position:10px 0px 0px 0px;">
+						<canvas id="brushBox" style="width:100%;height:100%;" />
+					</div>
+
+					<div class="text-center" ng-if="book_id=='40'||book_id=='41'||book_id=='49'" style="margin:auto;width: 200px;height: 200px; background-image:url(img/hanzipinxiebg.jpg); background-repeat:no-repeat; background-size:cover; background-position:10px 0px 0px 0px;">
+						<canvas id="brushBox" style="width:100%;height:100%;" />
+					</div>
+
+				</div>
+
+				<p>&nbsp;</p>
+				<p>&nbsp;</p>
+				<p>&nbsp;</p>
+				<p>&nbsp;</p>
+
+				<p>&nbsp;</p>
+				<p>&nbsp;</p>
+				<p>&nbsp;</p>
+				<p>&nbsp;</p>
+			</div>
+
+			<div ng-if="book_id!='22' && book_id!='40' && book_id!='41'  && book_id!='49'">
+				<!--0. 单词拼写-->
+				<div class="question_type_3" ng-if="now_page==0">
+
+					<div class="dy-word-test-explain">
+						<span class="s1">
 			<span  id={{"spellw_"+$index}}  ng-repeat="item in questions track by $index">
 				<span class="sub" ng-if="item=='#'">&#12288;</span> <span ng-if="item==' '">&nbsp;&nbsp;</span> <span ng-if="item!='#'&&item!=' '">{{item}}</span>
-			</span>
-			</span>
-			<br>
-			<span class="s2" style="margin-top:30px">{{word.zh}}</span><br>
+						</span>
+						</span>
+						<br>
+						<span class="s2" style="margin-top:30px">{{word.zh}}</span><br>
 
-		</div>
+					</div>
 
-		<div class="dy-word-spell-option">
-			<button ng-repeat="item in letters" ng-click="chooseAnswer({{$index}})">{{item}}</button>
-		</div>
+					<div class="dy-word-spell-option">
+						<button ng-repeat="item in letters" ng-click="chooseAnswer({{$index}})">{{item}}</button>
+					</div>
 
-		<div class="dy-word-spell-reminder">
-			<img src="img/xiaoxue_cut_64.png" ng-click="showWord()" /><span ng-show="word_show">{{word.en}}</span>
-		</div>
-        
-		<div class="dy-word-test-radio">
-			<img src="img/xiaoxue_cut_07.png" id="exercise_word_play" ng-click="playExerciseWord(word.audio_0)"><br>
-		</div>
-		<p>&nbsp;</p>
-		<p>&nbsp;</p>
-		<p>&nbsp;</p>
-		<p>&nbsp;</p>
-	</div>
+					<div class="dy-word-spell-reminder">
+						<img src="img/xiaoxue_cut_64.png" ng-click="showWord()" /><span ng-show="word_show">{{word.en}}</span>
+					</div>
 
-	<!--1. 看图选择题-->
-	<div class="question_type_1" ng-if="exercise.type==1">
-		<div style="text-align: center;margin: 10px;">
-			<div ng-if="exercise.media">结合题干和图片选出正确的选项</div>
-			<div ng-if="!exercise.media">结合题干选出正确的选项</div>
-		</div>
-		<div class="padding" ng-show="exercise.myanswer!=exercise.answer" style="font-size: 28px;line-height: 40px;">{{exercise.question_en}}</div>
+					<div class="dy-word-test-radio">
+						<img src="img/xiaoxue_cut_07.png" id="exercise_word_play" ng-click="playExerciseWord(word.audio_0)"><br>
+					</div>
+					<p>&nbsp;</p>
+					<p>&nbsp;</p>
+					<p>&nbsp;</p>
+					<p>&nbsp;</p>
+				</div>
 
-		<div class="padding type_1_html" ng-show="exercise.myanswer==exercise.answer" style="font-size: 28px;line-height: 40px;">
+				<!--1. 看图选择题-->
+				<div class="question_type_1" ng-if="exercise.type==1">
+					<div style="text-align: center;margin: 10px;">
+						<div ng-if="exercise.media">结合题干和图片选出正确的选项</div>
+						<div ng-if="!exercise.media">结合题干选出正确的选项</div>
+					</div>
+					<div class="padding" ng-show="exercise.myanswer!=exercise.answer" style="font-size: 28px;line-height: 40px;">{{exercise.question_en}}</div>
 
-		</div>
+					<div class="padding type_1_html" ng-show="exercise.myanswer==exercise.answer" style="font-size: 28px;line-height: 40px;">
 
-		<div ng-if="exercise.media" class="text-center padding-bottom">
-			<div class="exercise-img exercise-img-center" style="background-image:url({{siteUrl}}/upload/exercise/mp3/{{exercise.media}});"></div>
-		</div>
+					</div>
 
-		<div class="text-center padding" ng-if="exercise.myanswer==exercise.answer">
-			翻译：{{exercise.question_zh}}
-		</div>
+					<div ng-if="exercise.media" class="text-center padding-bottom">
+						<div class="exercise-img exercise-img-center" style="background-image:url({{siteUrl}}/upload/exercise/mp3/{{exercise.media}});"></div>
+					</div>
 
-		<div class="dy-word-list-list">
+					<div class="text-center padding" ng-if="exercise.myanswer==exercise.answer">
+						翻译：{{exercise.question_zh}}
+					</div>
 
-			<div class="out_div row row-center" ng-repeat="item in exercise.items.split('\n')" ng-click="choose_1($index,$parent.$index ,exercise)">
-				<div class="col">{{'ABCDEFGHIJKLMN'.substr($index,1)}}. {{item}}</div>
-				<img src="img/correct.png" ng-show="exercise.answered && exercise.myanswer==$index && exercise.myanswer==exercise.answer">
-				<img error src="img/error.png" ng-show="exercise.answered && exercise.myanswer==$index && exercise.myanswer!=exercise.answer">
-			</div>
-		</div>
-		<p>&nbsp;</p>
-		<p>&nbsp;</p>
-		<p>&nbsp;</p>
-		<p>&nbsp;</p>
-	</div>
+					<div class="dy-word-list-list">
 
-	<!--2. 选图填空-->
-	<div class="question_type_2" ng-if="exercise.type==2">
-		<div class="padding"></div>
+						<div class="out_div row row-center" ng-repeat="item in exercise.items.split('\n')" ng-click="choose_1($index,$parent.$index ,exercise)">
+							<div class="col">{{'ABCDEFGHIJKLMN'.substr($index,1)}}. {{item}}</div>
+							<img src="img/correct.png" ng-show="exercise.answered && exercise.myanswer==$index && exercise.myanswer==exercise.answer">
+							<img error src="img/error.png" ng-show="exercise.answered && exercise.myanswer==$index && exercise.myanswer!=exercise.answer">
+						</div>
+					</div>
+					<p>&nbsp;</p>
+					<p>&nbsp;</p>
+					<p>&nbsp;</p>
+					<p>&nbsp;</p>
+				</div>
 
-		<div class="row row-center">
+				<!--2. 选图填空-->
+				<div class="question_type_2" ng-if="exercise.type==2">
+					<div class="padding"></div>
 
-			<div class="col col-20 text-right">
-				<img src="img/xiaoxue_cut_07.png" width="36" id="exercise_play" ng-click="playExercise(exercise.media)">
-			</div>
+					<div class="row row-center">
 
-			<div class="col col-80 text-left padding" style="font-size: 28px;line-height: 40px;" ng-show="exercise.myanswer!=exercise.answer_index">
-				{{exercise.question_en}}
-			</div>
+						<div class="col col-20 text-right">
+							<img src="img/xiaoxue_cut_07.png" width="36" id="exercise_play" ng-click="playExercise(exercise.media)">
+						</div>
 
-			<div class="col col-80 text-left padding type_2_html" style="font-size: 28px;line-height: 40px;" ng-show="exercise.myanswer==exercise.answer_index">
+						<div class="col col-80 text-left padding" style="font-size: 28px;line-height: 40px;" ng-show="exercise.myanswer!=exercise.answer_index">
+							{{exercise.question_en}}
+						</div>
 
-			</div>
+						<div class="col col-80 text-left padding type_2_html" style="font-size: 28px;line-height: 40px;" ng-show="exercise.myanswer==exercise.answer_index">
 
-		</div>
+						</div>
 
-		<div class="text-center">请选择正确的图片</div>
-		<div class="text-center exercise-img-box">
-			<div ng-class="{'exercise-img':true,'exercise-img-error':exercise.answered && exercise.myanswer==$index && exercise.myanswer!=exercise.answer_index,'exercise-img-correct':exercise.answered && exercise.myanswer==$index && exercise.myanswer==exercise.answer_index}" class="exercise-img" style="background-image:url({{siteUrl}}/upload/exercise/img/{{item}});" ng-repeat="item in exercise.items.split('\n')" ng-click="choose_2($index,$parent.$index ,exercise)"></div>
-		</div>
+					</div>
 
-		<div class="text-center" ng-if="exercise.myanswer==exercise.answer_index">
-			翻译：{{exercise.question_zh}}
-		</div>
-		<p>&nbsp;</p>
-		<p>&nbsp;</p>
-		<p>&nbsp;</p>
-		<p>&nbsp;</p>
-	</div>
+					<div class="text-center">请选择正确的图片</div>
+					<div class="text-center exercise-img-box">
+						<div ng-class="{'exercise-img':true,'exercise-img-error':exercise.answered && exercise.myanswer==$index && exercise.myanswer!=exercise.answer_index,'exercise-img-correct':exercise.answered && exercise.myanswer==$index && exercise.myanswer==exercise.answer_index}" class="exercise-img" style="background-image:url({{siteUrl}}/upload/exercise/img/{{item}});" ng-repeat="item in exercise.items.split('\n')" ng-click="choose_2($index,$parent.$index ,exercise)"></div>
+					</div>
 
-	<div class="question_type_4" ng-if="exercise.type==3">
+					<div class="text-center" ng-if="exercise.myanswer==exercise.answer_index">
+						翻译：{{exercise.question_zh}}
+					</div>
+					<p>&nbsp;</p>
+					<p>&nbsp;</p>
+					<p>&nbsp;</p>
+					<p>&nbsp;</p>
+				</div>
 
-		<div class="dy-word-sort-explain">
-			<span>译</span>&nbsp;&nbsp;{{exercise.question}}
-		</div>
+				<div class="question_type_4" ng-if="exercise.type==3">
 
-		<div class="dy-word-sort-kong">
+					<div class="dy-word-sort-explain">
+						<span>译</span>&nbsp;&nbsp;{{exercise.question}}
+					</div>
 
-			<span class="sub" id={{"key_"+$index}} ng-repeat="key in exercise.keys">&#12288;</span>
+					<div class="dy-word-sort-kong">
 
-		</div>
+						<span class="sub" id={{ "key_"+$index}} ng-repeat="key in exercise.keys">&#12288;</span>
 
-		<div class="dy-word-spell-option" style="margin-top: 50px;">
+					</div>
 
-			<button ng-repeat="option in exercise.options" ng-click="choose_3($index)">{{option}}</button>
+					<div class="dy-word-spell-option" style="margin-top: 50px;">
 
-		</div>
-		<!--
+						<button ng-repeat="option in exercise.options" ng-click="choose_3($index)">{{option}}</button>
+
+					</div>
+					<!--
 		<div class="dy-word-test-radio">
 			<img src="img/xiaoxue_cut_07.png"><br>
 		</div>-->
-		<p>&nbsp;</p>
-		<p>&nbsp;</p>
-		<p>&nbsp;</p>
-		<p>&nbsp;</p>
-	</div>
-
-	<!--5. 填空匹配-->
-	<div class="question_type_5 question_type_{{exercise.id}}" ng-if="exercise.type==5">
-		<div class="list dc-content">
-
-			<div class="draggable">
-				<label class="button button-light button-small" ng-repeat="item in exercise.question">{{item}}</label>
-			</div>
-
-			<div class="droppable">
-				<div class="item" ng-repeat="item in exercise.items_formats" style="white-space: normal">
-					<i ng-class="{'icon':true,'ion-ios-checkmark-empty balanced':exercise.result[$index],'ion-ios-close-empty assertive':!exercise.result[$index]}" ng-if="exercise.result"></i> {{$index+1}}. {{item.zh0}}
-					<br>
-					<span ng-class="{'answer_box':true,'correct':exercise.result&&exercise.result[$index],'error':exercise.result&&!exercise.result[$index]}"></span><span style="border:1px solid #6ED6B6; border-radius:2px; margin:0 3px;" class="correct" ng-if="exercise.result&&!exercise.result[$index]">{{exercise.answer.split('^')[$index]}}</span>{{item.zh1}}<br />
-					<span style="background-color:yellowgreen; color:#fff; padding:0px 2px; margin-right:3px; border-top:2px solid #FFF;" ng-if="exercise.result&&item.en" onclick="$(this).next().fadeToggle();">译</span><span style="background-color:yellowgreen; color:#fff; padding:0px 2px; display:none; border-top:2px solid #FFF;" onclick="$(this).fadeOut();">{{item.en}}</span>
+					<p>&nbsp;</p>
+					<p>&nbsp;</p>
+					<p>&nbsp;</p>
+					<p>&nbsp;</p>
 				</div>
-			</div>
 
-			<div class="text-center padding div50" ng-if="!exercise.result">
-				<button class="button button-green button-full" ng-click="choose_5($index,exercise);">提交</button>
-			</div>
-		</div>
+				<!--5. 填空匹配-->
+				<div class="question_type_5 question_type_{{exercise.id}}" ng-if="exercise.type==5">
+					<div class="list dc-content">
 
-		<p class="padding-horizontal gray">答题方法：拖拽单词到任一选项上即可；单击完成过的选项，可以进行修改。</p>
-	    <p>&nbsp;</p>
-        <p>&nbsp;</p>
-	    <p>&nbsp;</p>
-	    <p>&nbsp;</p>
-	</div>
+						<div class="draggable">
+							<label class="button button-light button-small" ng-repeat="item in exercise.question">{{item}}</label>
+						</div>
 
-	<!--6. 图片匹配-->
-	<div class="question_type_6 question_type_{{exercise.id}}" ng-if="exercise.type==6">
-		<div class="list dc-content">
+						<div class="droppable">
+							<div class="item" ng-repeat="item in exercise.items_formats" style="white-space: normal">
+								<i ng-class="{'icon':true,'ion-ios-checkmark-empty balanced':exercise.result[$index],'ion-ios-close-empty assertive':!exercise.result[$index]}" ng-if="exercise.result"></i> {{$index+1}}. {{item.zh0}}
+								<br>
+								<span ng-class="{'answer_box':true,'correct':exercise.result&&exercise.result[$index],'error':exercise.result&&!exercise.result[$index]}"></span><span style="border:1px solid #6ED6B6; border-radius:2px; margin:0 3px;" class="correct" ng-if="exercise.result&&!exercise.result[$index]">{{exercise.answer.split('^')[$index]}}</span>{{item.zh1}}<br />
+								<span style="background-color:yellowgreen; color:#fff; padding:0px 2px; margin-right:3px; border-top:2px solid #FFF;" ng-if="exercise.result&&item.en" onclick="$(this).next().fadeToggle();">译</span><span style="background-color:yellowgreen; color:#fff; padding:0px 2px; display:none; border-top:2px solid #FFF;" onclick="$(this).fadeOut();">{{item.en}}</span>
+							</div>
+						</div>
 
-			<div class="row" ng-if="exercise.result">
-				<div class="col" ng-repeat="item in exercise.result track by $index">
-					<label ng-class="{'button button-block button-small button-icon icon':true,'ion-ios-checkmark-empty balanced':item,'ion-ios-close-empty assertive':!item}"></label>
+						<div class="text-center padding div50" ng-if="!exercise.result">
+							<button class="button button-green button-full" ng-click="choose_5($index,exercise);">提交</button>
+						</div>
+					</div>
+
+					<p class="padding-horizontal gray">答题方法：拖拽单词到任一选项上即可；单击完成过的选项，可以进行修改。</p>
+					<p>&nbsp;</p>
+					<p>&nbsp;</p>
+					<p>&nbsp;</p>
+					<p>&nbsp;</p>
 				</div>
-			</div>
 
-			<div class="row draggable" ng-if="!exercise.result">
-				<div class="col" ng-repeat="item in exercise.question">
-					<label class="button button-light button-small button-block">{{item}}</label>
+				<!--6. 图片匹配-->
+				<div class="question_type_6 question_type_{{exercise.id}}" ng-if="exercise.type==6">
+					<div class="list dc-content">
+
+						<div class="row" ng-if="exercise.result">
+							<div class="col" ng-repeat="item in exercise.result track by $index">
+								<label ng-class="{'button button-block button-small button-icon icon':true,'ion-ios-checkmark-empty balanced':item,'ion-ios-close-empty assertive':!item}"></label>
+							</div>
+						</div>
+
+						<div class="row draggable" ng-if="!exercise.result">
+							<div class="col" ng-repeat="item in exercise.question">
+								<label class="button button-light button-small button-block">{{item}}</label>
+							</div>
+						</div>
+
+						<div class="row droppable">
+							<div class="col" ng-repeat="item in exercise.items.split('\n')">
+								<img src="{{siteUrl}}/upload/exercise/img/{{item}}" />
+								<div class="answer_box"></div>
+							</div>
+						</div>
+
+						<div class="text-center padding div50" ng-if="!exercise.result">
+							<!--				<button class="button button-light button-full" ng-click="choose_6($index,exercise);">提交</button>
+                         --><button class="button button-light button-full" style="background-color:#f9b90a;" ng-click="choose_6($index,exercise);">提交</button>
+
+						</div>
+
+						<div class="row result-answer" ng-if="exercise.result">
+							<div class="col text-center" ng-repeat="item in exercise.answer.split('^')">
+								<b class="balanced">{{exercise.result[$index]?'':item}}</b>
+							</div>
+						</div>
+
+					</div>
+					<p class="padding-horizontal gray">答题方法：拖拽单词到任一图片上即可；单击匹配过的图片，可以进行修改。</p>
+					<p>&nbsp;</p>
+					<p>&nbsp;</p>
+					<p>&nbsp;</p>
+					<p>&nbsp;</p>
 				</div>
+
 			</div>
 
-			<div class="row droppable">
-				<div class="col" ng-repeat="item in exercise.items.split('\n')">
-					<img src="{{siteUrl}}/upload/exercise/img/{{item}}" />
-					<div class="answer_box"></div>
-				</div>
-			</div>
-
-			<div class="text-center padding div50" ng-if="!exercise.result">
-<!--				<button class="button button-light button-full" ng-click="choose_6($index,exercise);">提交</button>
--->				<button class="button button-light button-full" style="background-color:#f9b90a;" ng-click="choose_6($index,exercise);">提交</button>
-				
-			</div>
-
-			<div class="row result-answer" ng-if="exercise.result">
-				<div class="col text-center" ng-repeat="item in exercise.answer.split('^')">
-					<b class="balanced">{{exercise.result[$index]?'':item}}</b>
-				</div>
-			</div>
-
-		</div>
-		<p class="padding-horizontal gray">答题方法：拖拽单词到任一图片上即可；单击匹配过的图片，可以进行修改。</p>
-	   <p>&nbsp;</p>
-       <p>&nbsp;</p>
-	   <p>&nbsp;</p>
-       <p>&nbsp;</p>
-	</div>
-
-
-    </div>
-    
-    	</ion-scroll>
+		</ion-scroll>
 
 	</ion-content>
-	
-		<div class="dy-word-test-bottom" ng-click="nextTest()" ng-if="now_page<word.exercises.length && book_id!='22'">继续</div>
 
-	
-         <div ng-if="book_id=='22'||book_id=='40'||book_id=='41'||book_id=='49'" class="text-center" style="width:100%;position: fixed;bottom: 40px;left: 0; ">
-            <button class="button button-balanced" ng-click="clear()">&#12288;清除&#12288;</button>
-        </div>
+	<div class="dy-word-test-bottom" ng-click="nextTest()" ng-if="now_page<word.exercises.length && book_id!='22' && book_id!='40' && book_id!='41'  && book_id!='49'">继续</div>
 
-    
+	<div class="dy-word-test-bottom" ng-click="goUnit()" ng-if="now_page==word.exercises.length">进入列表</div>
+
+	<div ng-if="book_id=='22'||book_id=='40'||book_id=='41'||book_id=='49'" class="text-center" style="width:100%;position: fixed;bottom: 40px;left: 0; ">
+		<button class="button button-balanced" ng-click="clear()">&#12288;清除&#12288;</button>
+	</div>
+
+	<div ng-if="book_id=='22'||book_id=='40'||book_id=='41'||book_id=='49'" class="dy-word-test-bottom" ng-click="goUnit()" ng-if="now_page==word.exercises.length">进入列表</div>
+
 	<!--</ion-slide>
 	</ion-slide-box>-->
 

@@ -1,12 +1,20 @@
 ﻿<!--<div class="bar bar-header dy-word-common-top3">
 	<span class="s1_3">新课标小学英语单词APP下载</span>
 </div>-->
-<ion-content class="has-header backgroud-light">
-	<div class="list">
-		<a class="item item-avatar" href="{{app.open_qq_url}}" ng-repeat="app in apps">
-			<img src="{{siteUrl}}/upload/book/{{app.photo}}" style="border-radius: 2px;">
-			<h2>{{app.grade}}{{app.name}}单词{{app.semester}}</h2>
-			<p>{{app.publisher}}</p>
-		</a>
-	</div>
+<ion-content class="backgroud-light" has-bouncing="false">
+	<ion-scroll has-bouncing="false" style="height:100%;" direction="y">
+
+		<div >
+			<a class="item item-avatar" href="{{app.open_qq_url}}" ng-repeat="app in apps">
+				<img src="{{siteUrl}}/upload/book/{{app.photo}}" style="border-radius: 2px;">
+				<h2>{{app.grade}}{{app.name}}单词{{app.semester}}</h2>
+				<p>{{app.publisher}}</p>
+			</a>
+		</div>
+
+		<br>
+		<br>
+		<br>
+		<br>
+	</ion-scroll>
 </ion-content>
