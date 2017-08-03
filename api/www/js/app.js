@@ -26,51 +26,59 @@
     .state('word_detail', {
         url: '/word_detail/:book_id/:unit_id/:word',
         templateUrl: 'templates/dy_word_detail.html',
-        controller: 'word_detailCtrl'
+        controller: 'word_detailCtrl',
+        cache: false
     })
 
     .state('word_exercise', {
         url: '/word_exercise/:book_id/:unit_id/:word',
         templateUrl: 'templates/dy_word_exercise.html',
-        controller: 'word_exerciseCtrl'
+        controller: 'word_exerciseCtrl',
+        cache: false
     })
     
     .state('26_letter', {
         url: '/26_letter',
         templateUrl: 'templates/26_letter.html',
-        controller: '26_letterCtrl'
+        controller: '26_letterCtrl',
+        cache: false
     })
     
     .state('wx_word_list', {
         url: '/wx_word_list/:book_id/:unit_id/:type',
         templateUrl: 'templates/wx_word_list.html',
-        controller: 'wx_word_listCtrl'
+        controller: 'wx_word_listCtrl',
+        cache: false
     })
 
     //#region
 	.state('more_apps', {
 		url: '/more_apps',
 		templateUrl: 'templates/more_apps.html',
-		controller: 'more_appsCtrl'
+		controller: 'more_appsCtrl',
+		cache: false
 	})
 	//#endregion	
 
     .state('word_list', {
         url: '/word_list/:book_id/:unit_id',
         templateUrl: 'templates/word_list.html',
-        controller: 'word_listCtrl'
+        controller: 'word_listCtrl',
+        cache: false
     })
 
     .state('book_list', {
         url: '/book_list/:book_type',
         templateUrl: 'templates/book_list.html',
-        controller: 'book_listCtrl'
+        controller: 'book_listCtrl',
+        cache: false
     })
 
      .state('unit_list', {
          url: '/unit_list/:book_id',
          templateUrl: 'templates/unit_list.html',
-         controller: 'unit_listCtrl'
+         controller: 'unit_listCtrl',
+         cache: false
      })
 
 

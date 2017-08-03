@@ -43,8 +43,10 @@ if(isset($code)&&isset($state))
     $unit_id=$in_params[1];
     $type=$in_params[2];
     $word=$in_params[3];
+    
+    $status = user_insert_update($openid,$unionid);
 
-    if($subscribe)
+    if($subscribe||$status<10)
     {
         //echo "已关注";
         //echo "<br>";
@@ -73,7 +75,6 @@ if(isset($code)&&isset($state))
 
         //echo json_encode($userinfo);
 
-        $status = user_insert_update($openid,$unionid);
 
         echo '<!DOCTYPE html>';
         echo '<html>';
@@ -89,24 +90,24 @@ if(isset($code)&&isset($state))
         echo '        <div class="list card">';
         echo '            <div class="item text-center">';
         echo '                <h2>您还未关注 新课标同步背单词</h2>';
-        echo '                <p>长按下面的二维码，识别后关注我们，精彩更多</p>';
+        echo '                <p style="color:red">长按下面的二维码，识别后关注我们，精彩更多</p>';
         echo '            </div>';
         echo '            <div class="item item-image">';
         echo '                <img src="'.get_qrcode($access_token, "QR_LIMIT_STR_SCENE",$state).'" />';
         echo '            </div>';
-        if($status<=3)
-        {
-            echo '            <div class="item">';
-            if($type=='exercise')
-            {
-                echo '                <a class="button button-block button-assertive" href="/www/#/word_exercise/'.$book_id.'/'.$unit_id.'/'.$word.'">不想关注，继续</a>';
-            }
-            if($type=='word')
-            {
-                echo '                <a class="button button-block button-assertive" href="/www/#/word_detail/'.$book_id.'/'.$unit_id.'/'.$word.'">不想关注，继续</a>';
-            }
-            echo '            </div>';
-        }
+//      if($status<=3)
+//      {
+//          echo '            <div class="item">';
+//          if($type=='exercise')
+//          {
+//              echo '                <a class="button button-block button-assertive" href="/www/#/word_exercise/'.$book_id.'/'.$unit_id.'/'.$word.'">不想关注，继续</a>';
+//          }
+//          if($type=='word')
+//          {
+//              echo '                <a class="button button-block button-assertive" href="/www/#/word_detail/'.$book_id.'/'.$unit_id.'/'.$word.'">不想关注，继续</a>';
+//          }
+//          echo '            </div>';
+//      }
         echo '        </div>';
         echo '    </div>';
         echo '</body>';

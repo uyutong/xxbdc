@@ -36,7 +36,7 @@ dcCtrl
 						$(".shuxieshiping video").attr("src", $rootScope.siteUrl + "/upload/word/mp4/" + $scope.word.video);
 						$(".history video").attr("src", $rootScope.siteUrl + "/upload/word/mp4/" + $scope.word.video_brush);
 					}, 500)
-				}else if($scope.book_id == 41) {
+				} else if($scope.book_id == 41) {
 
 					setTimeout(function() {
 						$(".shuxieshiping video").attr("src", $rootScope.siteUrl + "/upload/word/mp4/" + $scope.word.video);
@@ -459,7 +459,7 @@ dcCtrl
 					})
 
 				}
-				if($scope.book_id != "22" && $scope.book_id != "40" && $scope.book_id != "41"&& $scope.book_id != "49") {
+				if($scope.book_id != "22" && $scope.book_id != "40" && $scope.book_id != "41" && $scope.book_id != "49") {
 					setTitle("趣味练习 1/" + ($scope.word.exercises.length + 1));
 
 					setTimeout(function() {
@@ -468,18 +468,18 @@ dcCtrl
 				} else {
 					//					setTitle("书写练习");	
 
-					setTimeout(function() {
-						
-						var video_url="";
+					var video_url = "";
 
-						if($scope.book_id == '40'||$scope.book_id == '49') {
-							video_url =  $rootScope.siteUrl + "/upload/word/mp4/" + $scope.word.video;
-						} else {
-							video_url =  $rootScope.siteUrl + "/upload/word/mp4/" + $scope.word.video_brush;
-	
-						}
-						
-						$(".shuxieshiping video").attr("src",video_url);
+					if($scope.book_id == '40' || $scope.book_id == '49') {
+						video_url = $rootScope.siteUrl + "/upload/word/mp4/" + $scope.word.video;
+					} else {
+						video_url = $rootScope.siteUrl + "/upload/word/mp4/" + $scope.word.video_brush;
+					}
+
+					$(".shuxieshiping2 video").attr("src", video_url);
+					$('.shuxieshiping2 video').mediaelementplayer();
+					
+					setTimeout(function() {
 						sketcher = new SimpleDrawingBoard(document.getElementById('brushBox'), {
 							lineColor: '#000',
 							lineSize: 5,
@@ -753,15 +753,15 @@ dcCtrl
 			sketcher.clear();
 
 		}
-		
-	    $scope.goUnit = function(){
-	    	
-	    	$state.go("word_list", {
+
+		$scope.goUnit = function() {
+
+			$state.go("word_list", {
 				"book_id": $stateParams.book_id,
 				"unit_id": $stateParams.unit_id,
 			})
-	    	
-	    }
+
+		}
 
 		$scope.share = function() {
 			//var Browser = new Object();
@@ -902,10 +902,9 @@ dcCtrl
 		}
 	})
 	.controller('more_appsCtrl', function($rootScope, $ionicModal, $scope, $state, $http, $ionicActionSheet) {
-		
-		
-	    setTitle("新课标小学英语单词APP下载");
-		
+
+		setTitle("新课标小学英语单词APP下载");
+
 		/**
 		 * 获取更多相关app
 		 * @param {Object} platform
