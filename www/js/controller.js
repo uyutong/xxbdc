@@ -59,25 +59,25 @@ dcCtrl
 
 		$scope.iflogin = true;
 		
-		setStorage("userinfo", {
-								"id": "24",
-								"subscribe": null,
-								"openid": "oVl0IwD3qn9_3GHx2qOGXBJlxRUc",
-								"nickname": "\u9a6c\u6d2a\u6d9b",
-								"sex": "1",
-								"language": "zh_CN",
-								"city": "Mentougou",
-								"province": "Beijing",
-								"country": "CN",
-								"headimgurl": "http:\/\/wx.qlogo.cn\/mmopen\/XiaYa0IAAlP8OZom5WMCCVl1icLibz9F6yE85NXOpZZ1NNsJ5G65nnkzgoN8fA07WibKM0hmpI56FviaafZk6MWbbPlDFfpFjTXxN\/0",
-								"subscribe_time": null,
-								"unionid": "ocffVt08HworeoxlzULVlOFdkYY4",
-								"remark": null,
-								"groupid": null,
-								"register_time": "2017-02-22 21:43:59",
-								"status": "0",
-								"book_id": $rootScope.bookId
-							});
+//		setStorage("userinfo", {
+//								"id": "24",
+//								"subscribe": null,
+//								"openid": "oVl0IwD3qn9_3GHx2qOGXBJlxRUc",
+//								"nickname": "\u9a6c\u6d2a\u6d9b",
+//								"sex": "1",
+//								"language": "zh_CN",
+//								"city": "Mentougou",
+//								"province": "Beijing",
+//								"country": "CN",
+//								"headimgurl": "http:\/\/wx.qlogo.cn\/mmopen\/XiaYa0IAAlP8OZom5WMCCVl1icLibz9F6yE85NXOpZZ1NNsJ5G65nnkzgoN8fA07WibKM0hmpI56FviaafZk6MWbbPlDFfpFjTXxN\/0",
+//								"subscribe_time": null,
+//								"unionid": "ocffVt08HworeoxlzULVlOFdkYY4",
+//								"remark": null,
+//								"groupid": null,
+//								"register_time": "2017-02-22 21:43:59",
+//								"status": "0",
+//								"book_id": $rootScope.bookId
+//							});
 
 		
 		$scope.getBook = function(bookId) {
@@ -2867,6 +2867,35 @@ dcCtrl
 				return;
 			});
 		}
+		
+		
+		$scope.orderPayedValidate = function() {
+			
+			$rootScope.LoadingShow();
+			var url = $rootScope.rootUrl + "/queryorder";
+			var data = {
+				"user_id": userId,
+				"book_id": bookId,
+				"out_trade_no": out_trade_no
+			};
+			$http.post(url, data).success(function(response) {
+				$rootScope.LoadingHide();
+				if(response.return_code == 'SUCCESS') {
+					$rootScope.userinfo.active = true;
+					$rootScope.Alert("支付成功并激活成功");
+					//					setTimeout(function(){
+					//			            $state.go("my_order")
+					//					},2000)
+				} else {
+					$rootScope.Alert(response.return_msg);
+				}
+			}).error(function(response, status) {
+				$rootScope.LoadingHide();
+				$rootScope.Alert('连接失败！[' + response + status + ']');
+				return;
+			});
+		}
+		
 
 		$scope.showLeft = true;
 		$scope.showRight = false;
