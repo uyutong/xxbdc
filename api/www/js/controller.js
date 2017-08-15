@@ -755,12 +755,14 @@ dcCtrl
 		}
 
 		$scope.goUnit = function() {
-
-			$state.go("word_list", {
-				"book_id": $stateParams.book_id,
-				"unit_id": $stateParams.unit_id,
-			})
-
+			if($scope.book_id==22){
+				$state.go("26_letter")
+			}else{
+				$state.go("word_list", {
+					"book_id": $stateParams.book_id,
+					"unit_id": $stateParams.unit_id,
+			    })
+			}
 		}
 
 		$scope.share = function() {
