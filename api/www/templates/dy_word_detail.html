@@ -5,15 +5,15 @@
 	<ion-content class="padding" has-bouncing="false">
 		<ion-scroll has-bouncing="false" style="height:100%;" direction="y">
 
-			<div ng-if="book_id<22 || (book_id>22 && book_id<37) || book_id>76">
+			<div ng-if="book_id<22 || (book_id>22 && book_id<37) || book_id>51">
 				<div class="dy-word-test-explain">
 					<span class="s1">{{word.en}}</span><br><br>
 					<span class="s2">{{word.zh}}</span><br>
 				</div>
 
 				<div class="dy-word-test-audio">
-					<span>女声&nbsp;&nbsp;</span><img id="detail_paly_0" src="img/xiaoxue_cut_07.png" ng-click="playDetailWord0(word.audio_0)" />&nbsp;&nbsp;&nbsp;
-					<span>男声&nbsp;&nbsp;</span><img id="detail_paly_1" src="img/xiaoxue_cut_07.png" ng-click="playDetailWord1(word.audio_1)" />&nbsp;&nbsp;&nbsp;
+					<span>女声&nbsp;&nbsp;</span><img id="detail_paly_0" src="img/xiaoxue_cut_07.png" ng-click="playDetailWord0(word.audio_0)" />
+					<span ng-if="word.audio_1">男声&nbsp;&nbsp;</span><img ng-if="word.audio_1" id="detail_paly_1" src="img/xiaoxue_cut_07.png" ng-click="playDetailWord1(word.audio_1)" />
 				</div>
 
 				<div style="text-align: center;margin-top: 10px;" ng-show="word.video!=''">

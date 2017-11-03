@@ -26,21 +26,24 @@ dcCtrl
 					$scope.fayins = $scope.word.phonetic.split(" ");
 				}
 
-				if($scope.book_id <= 22) {
-					$(".video-box video").attr("src", $rootScope.siteUrl + "/upload/word/mp4/" + $scope.word.video);
-					$('.video-box video').mediaelementplayer();
-
-				} else if($scope.book_id == 40 || $scope.book_id == 49) {
+				if($scope.book_id == 40 || $scope.book_id == 49) {
 
 					setTimeout(function() {
 						$(".shuxieshiping video").attr("src", $rootScope.siteUrl + "/upload/word/mp4/" + $scope.word.video);
 						$(".history video").attr("src", $rootScope.siteUrl + "/upload/word/mp4/" + $scope.word.video_brush);
 					}, 500)
+					
 				} else if($scope.book_id == 41) {
 
 					setTimeout(function() {
 						$(".shuxieshiping video").attr("src", $rootScope.siteUrl + "/upload/word/mp4/" + $scope.word.video);
 					}, 500)
+			
+				}else{
+					
+					$(".video-box video").attr("src", $rootScope.siteUrl + "/upload/word/mp4/" + $scope.word.video);
+					$('.video-box video').mediaelementplayer();
+				
 				}
 
 			}
@@ -404,10 +407,20 @@ dcCtrl
 							exercise.keys = exercise.answer.split('^');
 							exercise.options = exercise.answer.split('^');
 
-							function sortNumber(a, b) {
-								return a < b
-							}
-							exercise.options.sort(sortNumber);
+//							function sortNumber(a, b) {
+//								return a < b
+//							}
+							exercise.options.sort(
+											function(a, b) {
+												if(a> b) {
+													return 1;
+												} else if(a < b) {
+													return -1;
+												} else {
+													return 0;
+												}
+											});
+//							exercise.options.sort(sortNumber);
 						}
 						//#endregion
 
@@ -539,7 +552,7 @@ dcCtrl
 			if(item.myanswer == item.answer) {
 
 				//正确
-				playAudio(true);
+				playAudio2(true);
 
 				//			if(exerciseIndex < $scope.word.exercises.length - 1) {
 				//				setTimeout(function() {
@@ -548,7 +561,7 @@ dcCtrl
 				//			}
 			} else {
 				//错误
-				playAudio(false);
+				playAudio2(false);
 			}
 
 		}
@@ -564,7 +577,7 @@ dcCtrl
 			if(item.myanswer == item.answer_index) {
 
 				//正确
-				playAudio(true);
+				playAudio2(true);
 
 				//				if(exerciseIndex < $scope.word.exercises.length - 1) {
 				//					setTimeout(function() {
@@ -573,7 +586,7 @@ dcCtrl
 				//				}
 			} else {
 				//错误
-				playAudio(false);
+				playAudio2(false);
 			}
 
 		}
@@ -583,11 +596,11 @@ dcCtrl
 
 			if(has_submit < $scope.exercise.keys.length) {
 				if($scope.exercise.options[index] == $scope.exercise.keys[has_submit]) {
-					playAudio(true);
+					playAudio2(true);
 					$('#key_' + has_submit).html($scope.exercise.keys[has_submit]);
 					has_submit = has_submit + 1;
 				} else {
-					playAudio(false);
+					playAudio2(false);
 				}
 			}
 
@@ -600,6 +613,7 @@ dcCtrl
 
 			if(item.myanswer.length != item.answer.length) {
 				$rootScope.Alert("请完成所有单词和选项的匹配。");
+				
 				item.myanswer = -1;
 			} else {
 				var myanswers = item.myanswer.split('^');
@@ -609,6 +623,17 @@ dcCtrl
 					item.result[i] = (myanswers[i] == answers[i]);
 				}
 				$scope.answered++;
+				
+				var if_right = true;
+				for(i = 0; i < item.result.length; i++) {
+					if(!item.result[i]){
+						if_right = false;
+						break;
+					}
+				}
+				playAudio2(if_right);
+				
+				
 			}
 		}
 
@@ -632,12 +657,24 @@ dcCtrl
 				}
 
 				$scope.answered++;
+				
+				var if_right = true;
+				for(i = 0; i < item.result.length; i++) {
+					if(!item.result[i]){
+						if_right = false;
+						break;
+					}
+				}
+				playAudio2(if_right);
+				
 
 			}
 		}
 
 		$scope.slide_change = function(i) {
+			
 			setTitle("趣味练习 " + (i + 1) + "/" + ($scope.word.exercises.length + 1));
+			
 		}
 
 		$scope.init = function() {
@@ -734,6 +771,13 @@ dcCtrl
 		}
 
 		$scope.nextTest = function() {
+					//解决多个排序题内容不刷新问题
+			if($scope.exercise && $scope.exercise.type == 3) {
+				$('span[id^="key_"]').each(function() {
+					$(this).html("&#12288;");
+				});
+			}
+			
 			if($scope.now_page < $scope.word.exercises.length) {
 				has_submit = 0; //单词拼写真确了几个
 				$scope.exercise = $scope.word.exercises[$scope.now_page];
@@ -749,9 +793,7 @@ dcCtrl
 		}
 
 		$scope.clear = function() {
-
 			sketcher.clear();
-
 		}
 
 		$scope.goUnit = function() {
@@ -791,7 +833,6 @@ dcCtrl
 			//}
 
 		}
-
 	})
 	//#endregion
 
@@ -902,6 +943,7 @@ dcCtrl
 		$scope.ifShow = function(index) {
 			$scope.word_list[index].show = undefined ? false : !$scope.word_list[index].show;
 		}
+		
 	})
 	.controller('more_appsCtrl', function($rootScope, $ionicModal, $scope, $state, $http, $ionicActionSheet) {
 
@@ -923,9 +965,7 @@ dcCtrl
 					$rootScope.Alert(response.msg);
 				} else {
 					$scope.apps = response;
-
 					//					http://xx.kaouyu.com/upload/apk/3q5x.apk
-
 				}
 			}).error(function(response, status) {
 				$rootScope.LoadingHide();
@@ -953,18 +993,17 @@ dcCtrl
 
 	.controller('word_listCtrl', function($rootScope, $scope, $state, $stateParams, $http, $ionicActionSheet, $interval) {
 
+		
+		setTitle("单元单词列表");
 		var radios = [];
 		$rootScope.LoadingShow();
 		var url = $rootScope.rootUrl + "/words";
-
 		$scope.book_id = parseInt($stateParams.book_id);
 		$scope.unit_id = parseInt($stateParams.unit_id);
-
 		var data = {
 			"user_id": 21,
 			"unit_id": $stateParams.unit_id
 		};
-
 		$http.post(url, data).success(function(response) {
 			$rootScope.LoadingHide();
 			if(response.error) {
@@ -975,16 +1014,22 @@ dcCtrl
 				if(radios.length != $scope.word_list.length * 2) {
 					radios = [];
 					for(var i = 0; i < $scope.word_list.length; i++) {
-						radios.push({
-							"id": i,
-							"audio": $scope.word_list[i].audio_0,
-							"type": "0"
-						});
-						radios.push({
-							"id": i,
-							"audio": $scope.word_list[i].audio_1,
-							"type": "1"
-						});
+						
+					    if($scope.word_list[i].audio_0){
+							radios.push({
+								"id": i,
+								"audio": $scope.word_list[i].audio_0,
+								"type": "0"
+							});
+					    }
+
+                        if($scope.word_list[i].audio_0){
+							radios.push({
+								"id": i,
+								"audio": $scope.word_list[i].audio_1,
+								"type": "1"
+							});
+						}
 					}
 				}
 			}
@@ -993,12 +1038,10 @@ dcCtrl
 			$rootScope.Alert('连接失败！[' + response + status + ']');
 			return;
 		});
-
 		$scope.playing = false;
 		$scope.is_reading_num = -1;
 		$scope.read_button_name = "播放";
 		var timer;
-
 		$scope.playAudio = function() {
 			if(!$scope.playing) {
 				$scope.playing = true;

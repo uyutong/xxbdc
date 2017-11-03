@@ -1,8 +1,9 @@
 ﻿<ion-content class="padding backgroud-light" has-bouncing="false">
 	<ion-scroll has-bouncing="false" style="height:100%;" direction="y">
-		<div ng-if="book_id<22 || book_id>76" class="dy-word-list-list" style="margin-top:20px;margin-bottom:60px;">
+		<div ng-if="book_id<22 || book_id>75" class="dy-word-list-list" style="margin-top:20px;margin-bottom:60px;">
 			<div ng-class="{'out_div':true, 'row':true, 'row-center':true,'activated':$index==is_reading_num}" ng-click="play2($index)" ng-repeat="word in word_list">
-				<div class="col">{{word.en}}&nbsp;&nbsp;&nbsp;<span style="display: inline-block;color: gray;font-size:15px;">{{word.zh}}</span>
+				<div class="col">{{word.en}}&nbsp;&nbsp;&nbsp;
+					<span style="display: inline-block;color: gray;font-size:15px;">{{word.zh}}</span>
 				</div>
 			</div>
 		</div>

@@ -659,7 +659,6 @@ dcCtrl
 
 				// 1.0.0 => 10000
 				//			var AppVersionCode = '10001'; // 获取的服务器版本
-
 				//获取本地APP版本
 				$cordovaAppVersion.getVersionNumber().then(function(version) {
 					// 0.0.1 => 00001 => 1
@@ -1800,13 +1799,12 @@ dcCtrl
 				$scope.initGrade(); //设置用户积分情况即星星获取情况
 
 			} else {
-
+				
 				if($scope.index < $rootScope.words.length - 1) {
 					$scope.index = $scope.index + 1;
 					$scope.cupcount();
 				} else {
 					$scope.cupcount2();
-
 					if($scope.ifShowJifen) {
 						var jifen_sum = 0;
 						for(var i = 0; i < $rootScope.words.length; i++) {
@@ -2821,7 +2819,9 @@ dcCtrl
 				if(response.error) {
 					$rootScope.Alert(response.msg);
 				} else {
-					//					{"appid":"wx83797cbb8b3ed830","partnerid":"1445757902","prepayid":"wx201703271007183fe1a941870532825354","package":"Sign=WXPay","noncestr":"7fcf20f3baee206808e7076f9df63e55","timestamp":1490580438,"sign":"10492DE2690F195B3E2588D06E11BD97","out_trade_no":"170327100718b14u1"}
+					setStorage("out_trade_no", response.out_trade_no,true);
+
+					//{"appid":"wx83797cbb8b3ed830","partnerid":"1445757902","prepayid":"wx201703271007183fe1a941870532825354","package":"Sign=WXPay","noncestr":"7fcf20f3baee206808e7076f9df63e55","timestamp":1490580438,"sign":"10492DE2690F195B3E2588D06E11BD97","out_trade_no":"170327100718b14u1"}
 					var params = {
 						mch_id: response.partnerid, // merchant id
 						prepay_id: response.prepayid, // prepay id returned from server
@@ -2869,14 +2869,14 @@ dcCtrl
 		}
 		
 		
+		
 		$scope.orderPayedValidate = function() {
-			
 			$rootScope.LoadingShow();
 			var url = $rootScope.rootUrl + "/queryorder";
 			var data = {
-				"user_id": userId,
-				"book_id": bookId,
-				"out_trade_no": out_trade_no
+				"user_id": $rootScope.userinfo.id,
+				"book_id": $rootScope.mybook.id,
+				"out_trade_no": getStorage("out_trade_no",true)
 			};
 			$http.post(url, data).success(function(response) {
 				$rootScope.LoadingHide();
@@ -2887,7 +2887,7 @@ dcCtrl
 					//			            $state.go("my_order")
 					//					},2000)
 				} else {
-					$rootScope.Alert(response.return_msg);
+					$rootScope.Alert("支付成功即刻激活!");
 				}
 			}).error(function(response, status) {
 				$rootScope.LoadingHide();
@@ -2895,6 +2895,14 @@ dcCtrl
 				return;
 			});
 		}
+		
+        if(!$rootScope.userinfo.active){
+			if(getStorage("out_trade_no",true).length>0)
+			{
+				$scope.orderPayedValidate();
+			}
+		}
+		
 		
 
 		$scope.showLeft = true;

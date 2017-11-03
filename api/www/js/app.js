@@ -342,6 +342,14 @@ function playAudio(f) {
     v.play();
 }
 
+
+function playAudio2(f) {
+    var v = document.getElementById("audio");
+
+    v.src = (f ? "audio/right.mp3" : "audio/wrong.mp3");
+    v.play();
+}
+
 function setTitle(title) {
     var body = document.getElementsByTagName('body')[0];
     document.title = title;
